@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>登录</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/sm.min.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/login/welcome.css">
+</head>
+<body class="mHome">
+
+    <!--    加载层    -->
+    <div id="loader"><div class="loader_inner"><img src="/public/static/image/wap/login/ajax-loader.gif" alt=""><p class="loader_text">正在加载</p></div></div>
+
+    <!--    页面    -->
+    <div class="page_box">
+        <!--     login头部     -->
+        <div class="login_header">
+            <!--     logo      -->
+            <img class="dib" src="/public/static/image/wap/login/logo.png" alt="">
+            <div class="login_text"><span>欢迎来到致晟游戏平台</span></div>
+        </div>
+        <form action="/wap/login" method="post">
+            <!--      手机号      -->
+            <div class="input_box iphone pr"><i></i><p></p><input type="number" name="account" placeholder="请输入手机号！" oninput="if(value.length>11)value=value.slice(0,11)"></div>
+            <!--      密码      -->
+            <div class="input_box pwd pr"><i></i><p></p><input type="password" name="password" placeholder="请输入密码！"  maxlength="20"></div>
+            <!--      登录      -->
+            <div class="login_btn"><input type="submit" value="登录"></div>
+        </form>
+        <!--     link     -->
+        <div class="link_box"><a href="/wap/forget.html">忘记密码</a> & <a href="/wap/register.html">注册账号</a></div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/login/welcome.js"></script>
+</body>
+</html>

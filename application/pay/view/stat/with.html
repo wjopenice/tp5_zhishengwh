@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>提现统计</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/index/welcome.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/dataCount/cashCount.css">
+</head>
+<body>
+    <div class="contentFull">
+        <!-- 搜索引擎部分   -->
+        <div class="content_navBar cf">
+            <p class="fl">我的位置：</p>
+            <p class="fl">数据统计&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+            <p class="fl col-red">提现统计</p>
+        </div>
+        <!-- pc -->
+        <div class="banner">扫码提现</div>
+        <!--   总提现（PC）   -->
+        <div class="todayBoxWrap flex">
+            <!--   总提现   -->
+            <div class="subTodayBox todayOrder flexBox cf">
+                <div class="tit">总提现</div>
+                <div class="conTotal cf">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现完成：">提现完成：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.complete_data.0.money|default=0.00}元">{$class.complete_data.0.money|default=0.00}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现待审核：">提现待审核：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.wait_data.0.money|default=0.00}元">{$class.wait_data.0.money|default=0.00}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现打款中：">提现打款中：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.making_data.0.money|default=0.00}元">{$class.making_data.0.money|default=0.00}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现审核不通过：">提现审核不通过：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.no_pass_data.0.money|default=0.00}元">{$class.no_pass_data.0.money|default=0.00}元</span></div>
+                    </div>                  
+                </div>
+            </div>
+            <!--   当日提现     -->
+            <div class="subTodayBox todayOrder flexBox cf">
+                <div class="tit">当日提现</div>
+                <div class="conTotal cf">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现完成：">提现完成：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.complete_data.0.money|default=0.00}元">{$today_class.complete_data.0.money|default=0.00}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现待审核：">提现待审核：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.wait_data.0.money|default=0.00}元">{$today_class.wait_data.0.money|default=0.00}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现打款中：">提现打款中：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.making_data.0.money|default=0.00}元">{$today_class.making_data.0.money|default=0.00}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现审核不通过：">提现审核不通过：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.no_pass_data.0.money|default=0.00}元">{$today_class.no_pass_data.0.money|default=0.00}元</span></div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- h5 -->
+        <div class="banner">H5提现</div>
+        <!--   总提现（H5）  -->
+        <div class="todayBoxWrap flex">
+            <!--   总提现   -->
+            <div class="subTodayBox todayOrder flexBox cf">
+                <div class="tit">总提现</div>
+                <div class="conTotal cf">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现完成：">提现完成：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.complete_data.1.money+$class.complete_data.2.money}元">{$class.complete_data.1.money+$class.complete_data.2.money}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现待审核：">提现待审核：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.wait_data.1.money+$class.wait_data.2.money}元">{$class.wait_data.1.money+$class.wait_data.2.money}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现打款中：">提现打款中：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.making_data.1.money+$class.making_data.2.money}元">{$class.making_data.1.money+$class.making_data.2.money}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现审核不通过：">提现审核不通过：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$class.no_pass_data.1.money+$class.no_pass_data.2.money}元">{$class.no_pass_data.1.money+$class.no_pass_data.2.money}元</span></div>
+                    </div>  
+                </div>
+            </div>
+            <!--   当日提现     -->
+            <div class="subTodayBox todayOrder flexBox cf">
+                <div class="tit">当日提现</div>
+                <div class="conTotal cf">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现完成：">提现完成：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.complete_data.1.money+$today_class.complete_data.2.money}元">{$today_class.complete_data.1.money+$today_class.complete_data.2.money}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现待审核：">提现待审核：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.wait_data.1.money+$today_class.wait_data.2.money}元">{$today_class.wait_data.1.money+$today_class.wait_data.2.money}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现打款中：">提现打款中：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.making_data.1.money+$today_class.making_data.2.money}元">{$today_class.making_data.1.money+$today_class.making_data.2.money}元</span></div>
+                    </div>
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="提现审核不通过：">提现审核不通过：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_class.no_pass_data.1.money+$today_class.no_pass_data.2.money}元">{$today_class.no_pass_data.1.money+$today_class.no_pass_data.2.money}元</span></div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+</body>
+</html>

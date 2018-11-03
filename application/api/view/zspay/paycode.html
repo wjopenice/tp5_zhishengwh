@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>二维码扫码支付</title>
+    <meta name="description" content="致晟游戏科技">
+    <style>
+        *{padding: 0;margin: 0;}
+        .ui-icon-dialog-arrow{position: absolute;background-position: -2px -13px;_background-position: -3px -13px;height: 16px;left: -6px;margin-top: 12px;text-indent: -999px;top: 0;width: 9px;z-index: 1;background: url(../../../public/static/image/index/pay/or.png) -1px -14px no-repeat;}
+        .exp_box{display: none;}
+        .expain:hover .exp_box{display: block;}
+    </style>
+</head>
+<body style="background: #eff0f1;">
+    <div style="height: 60px;background-color: #fff;border-bottom: 1px solid #d9d9d9;margin-top: 0px;">
+        <div style="width: 950px;margin: 0 auto;overflow: hidden;">
+            <img style="margin-top: 10px;float: left;" src="../../../public/static/image/index/pay/paylogo.png" width="114" height="40" alt="">
+            <span style="font-size: 16px;border-left: 1px solid #676d70;color: #676d70;height: 20px;float: left;margin-top: 15px;margin-left: 10px;padding-top: 10px;padding-left: 10px;">我的收银台</span>
+        </div>
+    </div>
+    <div style="position: absolute;top: 50%;margin-top: -330px;left: 50%;margin-left: -475px;">
+        <div style="font-size: 12px;color: #000;margin: 0 20px 10px;position: relative;">
+            <span>正在使用即时到账交易</span>
+            <span class="expain" style="cursor: pointer;color: #08c;">[?]<div class="exp_box" style="top: -10px;left: 144px;position: relative;position: absolute;">
+                <div style="width: 360px;background-color: #fff;margin: 2px;border: solid 1px #B3B3B3;z-index: 1;">
+                    <div style="padding: 10px 12px 0;position: relative;color: #4D4D4D;font-size: 14px;"><span style="font-weight: 700;">付款后资金直接进入对方账户</span></div>
+                    <div style="padding: 5px 12px 10px;font-size: 12px;color: #4D4D4D;"><span>若发生退款需联系收款方协商，如付款给陌生人，请谨慎操作。</span></div>
+                </div>
+                <div class="ui-icon-dialog-arrow"></div>
+            </div></span>
+        </div>
+        <div style="font-size: 12px;color: #000;margin: 0 20px 20px;"><span>收款方：</span><span>深圳致晟文化创新有限公司</span></div>
+        <div style="width: 950px;height: 500px;background: #fff;display: inline-block;border-bottom: 3px solid #bbb;border-top: 3px solid #bbb;">
+            <div style="overflow: hidden;display: inline-block;margin-left: 271px;margin-top: 85px;">
+                <div style="float: left;text-align: center;">
+                    <p style="font-size: 12px;color: #4D4D4D;">扫一扫付款（元）</p>
+                    <p class="num" style="font-size: 26px;font-weight: 700;color: #f60;padding: 4px 0;">{$price}</p>
+                    <div style="width: 182px;height: 220px;border: 1px solid #d3d3d3;margin-top: 16px;position: relative;box-shadow: 1px 1px 1px #ccc;">
+                        <img src="/public/qrcode/{$timex}.png" width="168" height="168" alt="">
+                        <div style="overflow: hidden;position: absolute;bottom: 10px;left: 50%;margin-left: -61px;">
+                            <img style="float: left;margin-top: 2px;margin-right: 10px;" src="../../../public/static/image/index/pay/sao.png" width="28" height="28" alt="">
+                            <div style="float: left;font-size: 12px;color: #4D4D4D;">
+                                <p>打开手机支付宝</p>
+                                <p>扫一扫继续付款</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a style="font-size: 12px;color:#a6a6a6;text-decoration: underline;margin-top: 16px;display: inline-block;" href="https://mobile.alipay.com/index.htm">首次使用请下载手机支付宝</a>
+                </div>
+                <div style="float: left;margin-left: 20px;"><img src="../../../public/static/image/index/pay/art.png" width="204" height="183" alt=""></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../../../public/static/js/index/common/jquery.js"></script>
+    <script>
+        var num = $(".num").text();
+        var index = parseFloat(num).toFixed(2);
+        $(".num").text(index)
+
+        function send() {
+            var tradeNo = "<?=$tradeNo?>";
+            $.get("/api/Respay/index",{t:tradeNo},function (msg) {
+                  if(msg.code == 1){
+                     window.location.href = msg.urlx;
+                     return false;
+                  }
+            },"json");
+        }
+
+        window.setInterval("send()",2000)
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>重置密码</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl col-red">重置密码</p>
+    </div>
+    <!--  标题   -->
+    <div class="cont_btnLine cf">
+        <p class="fl">重置密码</p>
+    </div>
+    <form class="addProContent cf">
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>原密码：</dt>
+            <dd class="fl"><input placeholder="请填写原密码" type="password" id="old_pass" name="old_pass" value="" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>新密码：</dt>
+            <dd class="fl"><input placeholder="请填写新密码" type="password" id="new_pass" name="new_pass" value="" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>确认密码：</dt>
+            <dd class="fl"><input placeholder="请填写确认密码" type="password" name="auth_pass" id="auth_pass" value="" class="fl"></dd>
+        </dl>
+    </form>
+    <a class="confirmBtn" href="javascript:void(0)" id="add" name="submit">确定</a>
+</div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+
+
+<script type="text/javascript">
+    $(document).on("click",'#add',function(){
+
+        var old_pass = $("#old_pass").val();
+        var new_pass = $('#new_pass').val();
+        var auth_pass = $("#auth_pass").val();
+
+        if(old_pass == ""){
+            bombBox.bombBoxError('', '请填写原密码');
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            });
+            return false;
+        }
+        if(new_pass == ""){
+            bombBox.bombBoxError('', '请填写新密码');
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            });
+            return false;
+        }
+
+        if(new_pass != auth_pass){
+            bombBox.bombBoxError('', '两次密码输入不一致!');
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            });
+            return false;
+        }
+        $.ajax({
+            type:'post',
+            url:'/pay/adminupass',
+            data:{old_pass:old_pass,new_pass:new_pass,auth_pass:auth_pass},
+            dataType:'json',
+            success:function(result){
+                bombBox.bombBoxError('', result.msg);
+                $("#confirm").on("click",function(){
+                    bombBox.bombBoxColse($(".pub_bBox"));
+                    if(result.code == 1){
+                       window.location.href = "/pay/login";
+                    }
+                });
+            }
+        })
+        return false;
+    });
+
+</script>
+</body>
+</html>

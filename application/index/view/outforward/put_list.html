@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>提现记录</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/put_forward.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header"></header>
+
+    <!--    中间主页    -->
+    <div class="content_box">
+        <div class="uc_wrap container cf">
+            <div class="title_box cf">
+                <p class="tit_name fl">提现系统</p>
+                <p class="sign_out fr" onclick="window.location.href='/put_logout.html'">安全退出</p>
+            </div>
+            <div class="info_box_left fl">
+                <ul>
+                    <li id="essen"><a class="put_forward" href="/forward.html"><i class="dib"></i><span>提现</span></a></li>
+                    <?php $type = empty($_GET['type'])?'list':$_GET['type']; ?>
+                    <?php if($type == 'list'): ?>
+                    <li id="put" class="active"><a class="transaction" href="/forward/list.html?type=list"><i class="dib"></i><span>提现申请记录</span></a></li>
+                    <li id="put2"><a class="transaction" href="/forward/success.html?type=success"><i class="dib"></i><span>提现成功记录</span></a></li>
+                    <?php else:?>
+                    <li id="put" ><a class="transaction" href="/forward/list.html?type=list"><i class="dib"></i><span>提现申请记录</span></a></li>
+                    <li id="put2" class="active"><a class="transaction" href="/forward/success.html?type=success"><i class="dib"></i><span>提现成功记录</span></a></li>
+                    <?php endif; ?>
+                    <li id="put3"><a class="transaction" href="/forward/put_recharge.html"><i class="dib"></i><span>充值记录</span></a></li>
+                    <li id="trans"><a class="select" href="/select.html"><i class="dib"></i><span>订单查询</span></a></li>
+                </ul>
+            </div>
+            <div class="info_content fl">
+                <div id="query_box" class="query_box info_box active pr">
+                    <div class="record_operation_bar">
+                        <p class="fl recharge_time">充值时间：</p>
+                        <input type="date" class="fl start_time" max="" placeholder="开始时间">
+                        <p class="fl time_interval"> -- </p>
+                        <input type="date" class="fl end_time" min="" placeholder="结束时间">
+                        <a href="javascript:void(0)" class="fl btn_search" style="margin-left: 10px;">搜索</a>
+                    </div>
+                    <div class="form cf">
+                        <ul class="each_line cf fl recharge_ul">
+                            <li class="re_li1 fl">序号</li>
+                            <li class="re_li2 fl">提现金额（元）</li>
+                            <li class="re_li3 fl">提现用户</li>
+                            <li class="re_li4 fl">提现银行</li>
+                            <li class="re_li5 fl">提现卡号</li>
+                            <li class="re_li6 fl">提现时间</li>
+                            <li class="re_li7 fl">提现状态</li>
+                        </ul>
+                        <foreach name="bank" item="vo">
+                        <ul class="each_line cf fl recharge_ul">
+                            <li class="re_li1 fl ofh" title="{$vo.id}">{$vo.id}</li>
+                            <li class="re_li2 fl ofh" title="{$vo.forward_price}">{$vo.forward_price}</li>
+                            <li class="re_li3 fl ofh" title="{$vo.bank_name}">{$vo.bank_name}</li>
+                            <li class="re_li4 fl ofh" title="{$vo.bank_account}">{$vo.bank_account}</li>
+                            <li class="re_li5 fl ofh" title="{$vo.bank_id}">{$vo.bank_id}</li>
+                            <li class="re_li6 fl ofh" title="{$vo.forward_time|date='Y年m月d日',###}">{$vo.forward_time|date="Y年m月d日",###}</li>
+                            <li class="re_li7 fl ofh">
+                                <?php if($vo['forward_status'] == 0){echo "<span style='color:#ff6b63;'>提现申请中</span>";}else{echo "<span style='color: #48f396;'>提现成功</span>";}?>
+                            </li>
+                        </ul>
+                        </foreach>
+                    </div>
+                    <div class="paging">分页</div>
+                </div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer"></div>
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script>
+        $(function(){
+            $(".start_time").change(function(){
+                var start_time = $(".start_time").val();
+                $(".end_time").attr('min',start_time);
+            });
+
+            $(".end_time").change(function(){
+                var end_time = $(".end_time").val();
+                $(".start_time").attr('max',end_time);
+            });
+        });
+    </script>
+</body>
+</html>

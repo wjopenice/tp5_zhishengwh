@@ -1,0 +1,41 @@
+<include file="inc/header" title="我的资金" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/customer/my_capital.css">
+
+    <div class="page-group">
+        <!--   消费记录   -->
+        <div class="record"><a href="/wap/record.html">消费记录</a></div>
+        <!--   我的资金   -->
+        <div class="my_capital">
+            <img class="dib" src="/public/static/image/wap/customer/capital_icon.png" alt="">
+        </div>
+        <div class="my_text"><p>我的资金</p></div>
+        <div class="my_text">$<span id="money_num">100000</span></div>
+        <a class="recharge" href="/wap/recharge.html">充值</a>
+        <div class="problem_box"><a class="problem" href="/wap/problem.html?type=2">常见问题</a><span class="icon icon-right"></span></div>
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/customer/my_capital.js"></script>
+    <script>
+        //监听微信、支付宝等及浏览器的返回到具体页面
+        $(function(){
+            pushHistory();
+            window.addEventListener("popstate", function(e) {
+                window.location.href = '/wap/customer.html?type=4';//根据自己的需求实现自己的功能
+            }, false);
+            function pushHistory() {
+                var state = {
+                    title: "title",
+                    url: "#"
+                };
+                window.history.pushState(state, "title", "#");
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" style="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{$site['title']}</title>
+    <meta name="keywords" content="{$site['kewords']}">
+    <meta name="description" content="{$site['description']}">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <script>
+        var u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+            window.location.href='/wap.html';
+        } else if (u.indexOf('iPhone') > -1 || u.indexOf('MZBrowser') > -1) {
+            window.location.href='/wap.html';
+        } else if (u.indexOf('Windows Phone') > -1) {
+            window.location.href='/wap.html';
+        }
+    </script>
+    <foreach name="zswh_adv" item="z_a">
+        <if condition="$z_a['position'] eq 1">
+            <link rel="icon" href="/uploads/{$z_a['pic_url']}">
+        </if>
+    </foreach>
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--  中间主页   -->
+    <div class="content_box">
+
+        <!--  banner   -->
+        <!--<div class="banner"><img src="<?=IMG_PATH?>/index/common/banner/banner.png" alt=""></div>-->
+
+        <!--   轮播图   -->
+        <div class="pr">
+            <div class="s_banner slide-box pr">
+                <ul class="slide-content">
+                    <foreach name="zswh_adv" item="z_a">
+                        <if condition="$z_a['position'] eq 10">
+                            <li style="background: url(/uploads/{$z_a['pic_url']}) 50% 0 no-repeat"><a href="{$z_a['addr']}" target="_blank" title="{$z_a['name']}"></a></li>
+                        </if>
+                    </foreach>
+                </ul>
+                <ol class="slide-triggers">
+                    <foreach name="zswh_adv" item="z_a">
+                        <if condition="$z_a['position'] eq 10">
+                            <li></li>
+                        </if>
+                    </foreach>
+                </ol>
+            </div>
+        </div>
+
+        <!--    资讯公告    -->
+        <div class="notices_box container cf">
+            <p class="notices_text fl">资讯公告</p>
+            <foreach name="news" item="newx">
+            <div class="notices_modular fl cf"><i class="fl">●</i><a href="/newsinfo?id={$newx.id}" target="_blank" class="notices_title fl ofh" title="{$newx.title} <?php echo date('Y-m-d',$newx['create_time']); ?>">{$newx.title}</a><span class="label_new"></span></div>
+            </foreach>
+            <a class="notices_more fr" href="/news?type=news">查看更多<i></i></a>
+        </div>
+
+        <!--   推荐游戏   -->
+        <div class="recommend_wrap container">
+            <div class="title_box cf">
+                <p class="tit_name fl">推荐游戏</p>
+                <a class="more_link fr" href="javascript:void(0);" onclick="window.location.reload();"><span>换一组</span><i class="dib"></i></a>
+            </div>
+            <ul class="recommend_ul cf">
+                <foreach name="host" item="vo3">
+                <li class="recommend_li fl pr">
+                    <img class="recommend_img" src="/uploads/{$vo3.pic}" alt="{$vo3.title}">
+                    <div class="recommend_name">
+                        <p class="recommend_t ofh">{$vo3.title}</p>
+                        <p class="recommend_t ofh">领专属豪礼</p>
+                    </div>
+                    <div class="recommend_n hide">
+                        <div class="recommend_name">
+                            <p class="recommend_t ofh">{$vo3.title}</p>
+                            <p class="recommend_t ofh">领专属豪礼</p>
+                        </div>
+                        <div class="recommend_down">
+                            <a href="javascript:void(0)" onclick="gift();" class="btn_download">礼包</a>
+                            <a href="{$vo3.addr_code}" class="btn_download">下载</a>
+                        </div>
+                    </div>
+                </li>
+                </foreach>
+            </ul>
+        </div>
+
+        <!--   游戏排行和热门游戏   -->
+        <div class="rank_hot_wrap container cf">
+            <div class="rank_game fl">
+                <div class="title_box cf">
+                    <p class="tit_name fl">游戏排行</p>
+                    <a class="more_link fr" href="javascript:void(0);"><span>更多&gt;&gt;</span></a>
+                </div>
+                <ul class="rank_ul cf">
+                    <foreach name="randData" item="vo2" key="k">
+                    <li class="sub_rank_li cf">
+                        <div class="sub_rank_num <?php if($k+1 == 1 || $k+1 == 2 || $k+1 == 3){ echo 'rank_front'; } ?>  fl"><?=$k+1?></div>
+                        <div class="sub_rank_name ofh fl">{$vo2.title}</div>
+                        <div class="rank_info fl cf hide">
+                            <img src="/uploads/{$vo2.icon}" class="rank_img fl" />
+                            <div class="rank_right fl">
+                                <p class="rank_name ofh">{$vo2.info}</p>
+                                <p class="cf rank_operate"><a href="{$vo2.addr_code}" class="fl btn_rank_down">下载</a><a href="javascript:void(0)" onclick="gift();" class="fl">礼包</a></p>
+                            </div>
+                        </div>
+                        <div class="sub_rank_type ofh fr">{$vo2.type}</div>
+                    </li>
+                    </foreach>
+                </ul>
+            </div>
+            <div class="hot_game fl">
+                <div class="title_box cf">
+                    <p class="tit_name fl">热门游戏</p>
+                    <a class="more_link fr" href="javascript:void(0);"><span>更多&gt;&gt;</span></a>
+                </div>
+                <ul class="hot_ul cf">
+                    <foreach name="apk" item="vo">
+                    <li class="sub_hot_game cf">
+                        <div class="game_img fl"><img src="/uploads/{$vo.icon}" onclick="location.href='/detail?type=center&id={$vo.id}#1'"></div>
+                        <div class="hot_content fl">
+                            <p class="sub_hot_name ofh" onclick="location.href='/detail?type=center&id={$vo.id}#1'">{$vo.title}</p>
+                            <p class="sub_hot_type_box ofh"><span class="sub_hot_type">{$vo.type}</span><span>|</span><span class="sub_hot_big"><?=rand("10","99")?>.<?=rand("00","99")?>MB</span></p>
+                            <p class="operate_btn_box cf">
+                                <a href="{$vo.addr_code}"  class="btn_down_hot fl">下载</a>
+                                <a href="javascript:void(0)" onclick="gift();" class="fl">礼包</a>
+                            </p>
+                        </div>
+                    </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+
+        <!--    热门礼包    -->
+        <div class="hot_gift_wrap container">
+            <div class="title_box cf">
+                <p class="tit_name fl">热门礼包</p>
+                <a class="more_link fr" href="javascript:void(0);"><span>更多&gt;&gt;</span></a>
+            </div>
+            <ul class="hot_ul cf">
+                <foreach name="apk1" item="vo1">
+                <li class="sub_hot_gift cf">
+                    <div class="game_img fl"><img src="/uploads/{$vo1.icon}" onclick="location.href='/detail?type=center&id={$vo1.id}#2'"></div>
+                    <div class="hot_content fl">
+                        <p class="sub_gift_name ofh" onclick="location.href='/detail?type=center&id={$vo1.id}#2'">{$vo1.title}</p>
+                        <p class="sub_hot_gift_box ofh">新手礼包</p>
+                        <p class="operate_btn_box cf">
+                            <a href="{$vo1.addr_code}"  class="get_gift_btn"><i></i><span>领取</span></a>
+                        </p>
+                    </div>
+                </li>
+                </foreach>
+            </ul>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/jquery.ext.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+
+    <script>
+        $(function(){
+            //轮播图
+            //banner
+            $(".slide-box").hbySlide();
+            /*var myApi = new Myapi();
+            myApi.JSON.lagout($('.s_banner'),4000,20);*/
+        });
+        function gift() {
+            alert('暂无礼包');
+        }
+        function downapk() {
+            alert('暂无下载');
+        }
+
+    </script>
+</body>
+</html>
+<script>(function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?fd2172bb5380362ac886caaa6cd8f92b":"https://jspassport.ssl.qhimg.com/11.0.1.js?fd2172bb5380362ac886caaa6cd8f92b";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>

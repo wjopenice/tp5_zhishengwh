@@ -1,0 +1,32 @@
+<include file="inc/header" title="消息通知" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/customer/msg.css">
+
+<div class="page-group">
+
+    <!--    消息通知列表    -->
+
+    <ul class="msg_ul">
+        <foreach name="news" item="newsx">
+        <li>
+            <p class="time"><span class="today">{$newsx.create_time|date='Y-m-d',###}</span></p>
+            <div class="msg_content">
+                <p class="msg_title ofh">{$newsx.title}</p>
+                <a class="look_btn cf" href="/newsinfo?id={$newsx.id}">
+                    <span class="fl">查看详情</span>
+                    <span class="icon icon-right fr"></span>
+                </a>
+            </div>
+        </li>
+        </foreach>
+    </ul>
+
+</div>
+
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+<script src="<?=JS_PATH?>/wap/customer/msg.js"></script>
+
+</body>
+</html>

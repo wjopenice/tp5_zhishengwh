@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>佣金提现</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/laydate/skins/default/laydate.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+    <!--  内容的整体部分    -->
+    <div class="contentFull">
+        <!-- 搜索引擎部分   -->
+        <div class="content_navBar cf">
+            <p class="fl">我的位置：</p>
+            <p class="fl">提现管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+            <p class="fl col-red">佣金提现</p>
+        </div>
+
+        <div class="content_tag cf">
+        <span class="tag_green fl" title="当前已提现总金额：{$all_with}">当前已提现总金额：{$all_with}</span>
+        <span class="tag_cyan fl" title="今日提现金额：{$with}">今日提现金额：{$with}</span>
+        <span class="tag_red fl" title="佣金总额：{$commission}">佣金总额：{$commission}</span>
+        <span class="tag_blue fl" title="提现中金额：{$is_with}">提现中金额：{$is_with}</span>
+    </div>
+        <!--  条件筛选   -->
+        <form id="" >
+            <div class="content_search cf ">
+                <div class="cont_btnLine cf">
+                    <p class="fl">查询问题</p>
+                </div>
+                <div class="cf search_all">
+                    <div class="search_line fl cf">
+                        <div class="fl each_search cf">
+                            <p class="fl search_name">开始日：</p>
+                            <input id="start_time"  name="start_time" type="text" placeholder="请输入开始日" readonly class="laydate-icon comInp">
+                        </div>
+                        <div class="fl each_search cf">
+                            <p class="fl search_name">截止日：</p>
+                            <input id="last_time" name="first_time" type="text" placeholder="请输入截止日" readonly class="laydate-icon comInp">
+                        </div>
+                        <div class="fl each_search cf">
+                            <p class="fl search_name">商户号：</p>
+                            <input class="comInp" name="account" type="text" placeholder="请输入商户号">
+                        </div>
+                        <div class="fl each_search cf">
+                            <p class="fl search_name">提现状态：</p>
+                            <select name="status" class="search_sel">
+                                <option value="" selected>请选择提现状态</option>
+                                <option value="0">待审核</option>
+                                <option value="1">审核不通过</option>
+                                <option value="2">审核通过</option>
+                                <option value="3">打款中</option>
+                                <option value="4">提现完成</option>
+                            </select>
+                        </div>
+                        <div class="fl each_search cf">
+                            <input class="search_btn fl" type="button" id="search" value="查询">
+                            <input class="search_btn reset-btn fl" type="reset"  value="重置">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- 表格部分  -->
+        <div id="side_con">
+            <div class="cont_btnLine cf">
+                <p class="fl">佣金提现列表</p>
+                <a class="fr btn_orange " href="javascript:void(0);" id="export">导出</a>
+            </div>
+            <!--   表格   -->
+            <div id="sheet" class="comfirm_pro"></div>
+        </div>
+    </div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerDateEditor.js"></script>
+<script src="<?=JS_PATH?>/pay/common/laydate/laydate.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+<script src="<?=JS_PATH?>/pay/withdraw/cash.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分润明细</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/index/welcome.css">
+</head>
+<body>
+<!--  导航   -->
+<div class="topBarWrap flex">
+    <div class="subTopBar flexBox cf rechargeBar">
+        <i></i>
+        <p class="barNum ofh" title="{$recharge_all_data}">{$recharge_all_data}</p>
+        <p class="barName" title="平台总充值额">平台总充值额</p>
+    </div>
+    <div class="subTopBar flexBox cf cashBar">
+        <i></i>
+        <p class="barNum ofh" title="{$withdraw_all_data}">{$withdraw_all_data}</p>
+        <p class="barName" title="平台总提现额">平台总提现额</p>
+    </div>
+    <div class="subTopBar flexBox cf accountBar">
+        <i></i>
+        <p class="barNum ofh" title="763258.02">763258.02</p>
+        <p class="barName" title="平台分润额">平台分润额</p>
+    </div>
+    <div class="subTopBar flexBox cf bussNumBar">
+        <i></i>
+        <p class="barNum ofh" title="{$pay_count}">{$pay_count}</p>
+        <p class="barName" title="支付平台">支付平台</p>
+    </div>
+</div>
+<select name="" id="" class="choseTime">
+    <option value="">本月</option>
+    <option value="">本年</option>
+    <option value="">下年</option>
+</select>
+
+<div class="todayBoxWrap flex">
+    <div class="subTodayBox  flexBox">
+        <div class="tit">快接支付</div>
+        <div class="con flex">
+            <div class="subCon flexBox"><p class="conName" title="总充值额">总充值额</p><p class="conNum ofh" title="80000">80000</p></div>
+            <div class="subCon flexBox"><p class="conName" title="代理费率">代理费率</p><p class="conNum ofh" title="1.3%">1.3%</p></div>
+            <div class="subCon flexBox"><p class="conName" title="商户费率">商户费率</p><p class="conNum ofh" title="2.5%">2.5%</p></div>
+            <div class="subCon flexBox"><p class="conName" title="实收分润率">实收分润率</p><p class="conNum ofh" title="1.2%">1.2%</p></div>
+            <div class="subCon flexBox"><p class="conName" title="实收分润额">实收分润额</p><p class="conNum ofh" title="10000">10000</p></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?php $type = !empty($_GET['type'])? $_GET['type'] : "1" ; ?>
+<nav class="bar bar-tab">
+    <a class="tab-item external foot-tap-index <?php if(1 == $type){ echo 'active'; }?>" href="/wap.html?type=1">
+        <span class="icon"></span>
+        <span class="tab-label">首页</span>
+    </a>
+    <a class="tab-item external foot-tap-gift <?php if(2 == $type){ echo 'active'; }?>" href="/wap/gift.html?type=2">
+        <span class="icon"></span>
+        <span class="tab-label">礼包</span>
+    </a>
+    <a class="tab-item external foot-tap-classify <?php if(3 == $type){ echo 'active'; }?>" href="/wap/gmct.html?type=3">
+        <span class="icon"></span>
+        <span class="tab-label">分类</span>
+    </a>
+    <a class="tab-item external foot-tap-center <?php if(4 == $type){ echo 'active'; }?>" href="/wap/customer.html?type=4">
+        <span class="icon"></span>
+        <span class="tab-label">我的</span>
+    </a>
+</nav>
+
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+
+</body>
+</html>

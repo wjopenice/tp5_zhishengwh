@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+	<link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?=CSS_PATH?>/admin/index.css">
+	<script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/ch-ui.admin.js"></script>
+	<script type="text/javascript" src="<?=JS_PATH?>/admin/index.js"></script>
+</head>
+<body>
+	<!--头部 开始-->
+	<div class="top_box">
+		<div class="top_left">
+			<div class="logo"><img src="/public/static/image/admin/logo.png" alt=""></div>
+			<ul>
+				<li class="active" data-url="Index/info"><a href="/admin/Index"><i class="fa fa-home"></i> 首页</a></li>
+				<li data-url="Site/basc"><a href="javascript:void(0);"><i class="fa fa-desktop"></i> 站点</a></li>
+				<li data-url="Article/welcome"><a href="javascript:void(0);"><i class="fa fa-book"></i> 文章</a></li>
+				<li data-url="User/userx"><a href="javascript:void(0);"><i class="fa fa-fw fa-user"></i> 用户</a></li>
+				<li data-url="Game/apk"><a href="javascript:void(0);"><i class="fa fa-gamepad"></i> 游戏</a></li>
+				<li data-url="Promote/mercode"><a href="javascript:void(0);"><i class="fa fa-road"></i> 渠道</a></li>
+				<li data-url="Stat/welcome"><a href="javascript:void(0);"><i class="fa fa-line-chart"></i> 统计</a></li>
+				<li data-url="Setting/links"><a href="javascript:void(0);"><i class="fa fa-cog"></i> 系统</a></li>
+				<li data-url="Addons/welcome"><a href="javascript:void(0);"><i class="fa fa-external-link"></i> 拓展</a></li>
+				<li data-url="App/product_list"><a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i> 兑换后台管理</a></li>
+			</ul>
+		</div>
+		<div class="top_right">
+			<ul>
+				<li>管理员：{$account.account}</li>
+				<li><a href="/admin/Index/pass.html" target="main">修改密码</a></li>
+				<li><a href="/admin/logout">退出</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--头部 结束-->
+
+	<!--左侧导航 开始-->
+	<div class="menu_box menu_box1 active">
+		<ul>
+            <li>
+            	<h3><i class="fa fa-bars"></i>首页</h3>
+                <ul class="sub_menu">
+					<li><a href="/admin/Index/info" target="main" class="welcome_index">欢迎页</a></li>
+                </ul>
+            </li>
+        </ul>
+	</div>
+	<!--站点-->
+	<include file="inc/site" />
+	<!--文章-->
+	<include file="inc/article" />
+	<!--用户-->
+	<include file="inc/user" />
+	<!--游戏-->
+	<include file="inc/game" />
+	<!--渠道-->
+	<include file="inc/promote" />
+	<!--统计-->
+	<include file="inc/stat" />
+	<!--系统-->
+	<include file="inc/setting" />
+	<!--扩展-->
+	<include file="inc/addons" />
+	<!--APP管理-->
+	<include file="inc/app" />
+	<!--左侧导航 结束-->
+
+	<!--主体部分 开始-->
+	<div class="main_box">
+		<iframe src="/admin/Index/info" width="100%" height="100%" name="main" ></iframe>
+	</div>
+	<!--主体部分 结束-->
+
+	<!--底部 开始-->
+	<div class="bottom_box">
+		CopyRight © 2018. Powered By <a href="http://www.zhishengwh.com" target="_blank">http://www.zhishengwh.com</a>.
+	</div>
+	<!--底部 结束-->
+</body>
+</html>

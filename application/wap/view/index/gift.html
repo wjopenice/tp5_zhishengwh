@@ -1,0 +1,116 @@
+<include file="inc/header" title="礼包中心" />
+
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/swiper-4.3.3.min.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/gift/index.css">
+    <!--    页面    -->
+    <div class="page-group">
+        <div class="page_box">
+            <div class="header_box">
+
+                <!--   搜索框   -->
+                <div class="search_box cf">
+                    <i class="scan_box fl pr"><input class="camera" type="file" accept="image/*" capture="camera"></i>
+                    <div class="searchbar fl">
+                        <div class="search-input">
+                            <label id="btn" class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' name="d" placeholder='请输入关键字搜索...'/>
+                        </div>
+                    </div>
+                    <a class="down_box fr" href="/wap/down.html"></a>
+                </div>
+
+                <!--   轮播图   -->
+                <div class="slide-box swiper-container">
+                    <div class="swiper-wrapper">
+                        <foreach name="zswh_adv" item="z_a">
+                            <if condition="$z_a['position'] eq 13">
+                                <div class="swiper-slide"><img src="/uploads/{$z_a['pic_url']}" alt="{$z_a['name']}"></div>
+                            </if>
+                        </foreach>
+                    </div>
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                <!--   时下最热门礼包   -->
+                <div class="text_hot"><img class="dib" src="<?=IMG_PATH?>/wap/gift/text.png" alt=""></div>
+                <!--    礼包列表    -->
+                <ul class="gift_header_ul cf">
+                    <foreach name="apk1" item="vo2">
+                    <li class="fl">
+                        <img src="/uploads/{$vo2.icon}" alt="" onclick="location.href='/wap/info?id={$vo2.id}'">
+                        <p class="ofh">{$vo2.title}最新礼包</p>
+                        <a href="{$vo2.addr_code}">下载</a>
+                    </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+
+        <!--   热门礼包   -->
+        <div class="gift_box gift_bottom">
+            <div class="gift_title cf">
+                <h4 class="fl">大兄弟，这礼包只有我们有</h4>
+            </div>
+            <ul class="gift_ul">
+                <foreach name="apk3" item="vo4">
+                <li class="cf" onclick="location.href='/wap/gift_info?id={$vo4.id}'">
+                    <div class="gift_header fl"><img src="/uploads/{$vo4.icon}" alt=""></div>
+                    <div class="gift_name fl">
+                        <p class="gift_text ofh">{$vo4.title}</p>
+                        <p class="gift_bag ofh">{$vo4.info}</p>
+                    </div>
+                    <a class="receive_btn fr" href="/wap/gift_info?id={$vo4.id}">领取</a>
+                </li>
+                </foreach>
+            </ul>
+        </div>
+
+    </div>
+
+    <!--   底部导航栏   -->
+    <include file="inc/footer" />
+    <!--<nav class="bar bar-tab">-->
+        <!--<a class="tab-item external foot-tap-index" href="/wap.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">首页</span>-->
+        <!--</a>-->
+        <!--<a class="tab-item external foot-tap-gift active" href="/wap/gift.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">礼包</span>-->
+        <!--</a>-->
+        <!--<a class="tab-item external foot-tap-classify" href="/wap/gmct.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">分类</span>-->
+        <!--</a>-->
+        <!--<a class="tab-item external foot-tap-center" href="/wap/customer.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">我的</span>-->
+        <!--</a>-->
+    <!--</nav>-->
+
+    <!--<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>-->
+    <!--<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>-->
+    <script src="<?=JS_PATH?>/wap/common/swiper-4.3.3.min.js"></script>
+    <!--<script src="<?=JS_PATH?>/wap/common/public.js"></script>-->
+    <script src="<?=JS_PATH?>/wap/gift/index.js"></script>
+    <script>
+        $(document).ready(function () {
+            enter();
+        });
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal',
+            autoplay: {
+                delay: 3000,//秒
+                disableOnInteraction: false,//滑动不会失效
+            },
+            loop: true,
+
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+            }
+        })
+    </script>
+<!--</body>-->
+<!--</html>-->

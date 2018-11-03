@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加公告</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+    <style>
+        .content{margin: 20px;}
+        .title_text{padding: 9px 15px;width: 80px;line-height: 20px;text-align: right;}
+        .title_input{width: 30%;height: 36px;padding-left: 10px;border: 1px solid #E0E0E0;}
+        .title{margin-bottom: 15px;}
+        .btn_box{margin-left: 110px;}
+        .noticeCon{;width: 50.6%;height: 320px;}
+        .submit{height: 38px;line-height: 38px;padding: 0 18px;border: none;cursor: pointer;border-radius: 2px;color: #fff;background-color: #0099e5;}
+        .reset{height: 38px;line-height: 38px;padding: 0 18px;margin-left: 16px;border: 1px solid #C9C9C9;cursor: pointer;border-radius: 2px;color: #555;background-color: #fff;}
+        .reset:hover{border: 1px solid #0099e5;}
+    </style>
+</head>
+<body>
+    <!--  内容的整体部分    -->
+    <div class="contentFull">
+        <!-- 搜索引擎部分   -->
+        <div class="content_navBar cf">
+            <p class="fl">我的位置：</p>
+            <p class="fl">公告列表&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+            <p class="fl col-red">新增公告</p>
+        </div>
+        <div id="side_con">
+            <div class="cont_btnLine cf">
+                <p class="fl">新增公告</p>
+            </div>
+            <!--   内容   -->
+            <form action="" class="content">
+                <input type="hidden" id="id" value="{$find.id}" name="id">
+                <div class="cf title">
+                    <p class="fl title_text">标题：</p>
+                    <input class="title_input" id="title" name="title" value="{$find.title}" type="text" placeholder="标题">
+                </div>
+                <div class="cf title">
+                    <p class="fl title_text">公告内容：</p>
+                    <div class="fl noticeCon">
+                        <textarea class="layui-textarea" id="LAY_demo1" style="display: none">{$find.content}</textarea>
+                    </div>
+                </div>
+                <div class="btn_box cf">
+                    <input type="submit" class="submit fl" id="add" value="立即提交">
+                    <input type="reset" class="reset fl" value="重置">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/layui/layui.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script>
+        layui.use('layedit', function(){
+            var layedit = layui.layedit
+                ,$ = layui.jquery;
+            layedit.set({
+                uploadImage: {
+                    url: '/pay/Notice/uploadimages' //接口url
+                    ,type: 'post' //默认post
+                }
+            });
+            //构建一个默认的编辑器
+            var index = layedit.build('LAY_demo1');
+            $("#add").on('click',function(){
+                var id = $("#id").val();
+                var title=$("#title").val();
+                var content = layedit.getContent(index);
+                if(!title){
+                    bombBox.bombBoxError('', '请输入标题');
+                    $("#confirm").on("click",function(){
+                        bombBox.bombBoxColse($(".pub_bBox"));
+                    });
+                    return false;
+                }
+                if(!content){
+                    bombBox.bombBoxError('', '请输入内容');
+                    $("#confirm").on("click",function(){
+                        bombBox.bombBoxColse($(".pub_bBox"));
+                    });
+                    return false;
+                }
+                $.ajax({
+                    type:'post',
+                    url:'/pay/Notice/edit',
+                    data:{id:id,title:title,content:content},
+                    dataType:'json',
+                    success:function(reslut){
+                        bombBox.bombBoxError('', reslut.msg);
+                        $("#confirm").on("click",function(){
+                            bombBox.bombBoxColse($(".pub_bBox"));
+                            if(reslut.code == 1){
+                                window.location.href='/notice';
+                            }
+                        });
+                    }
+                })
+                return false;
+            })
+        });
+    </script>
+</body>
+</html>

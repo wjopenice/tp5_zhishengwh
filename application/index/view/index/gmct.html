@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>游戏中心</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/gmct/index.css">
+    <style>
+        .gmct_wrap{height: 400px;margin-top: 40px;margin-bottom: 40px;overflow: hidden;}
+        .gmct_wrap > ul{width: 100%;overflow: hidden;}
+        .gmct_wrap > ul > li{width: 100px;height: 400px;cursor: pointer;overflow: hidden;}
+        .gmct_wrap > ul > li:last-child{ width: 900px;}
+    </style>
+</head>
+<body class="homeMain">
+
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <div class="content_box">
+        <!--   轮播  -->
+        <div class="container gmct_wrap">
+            <ul class="cf">
+                <foreach name="zswh_adv" item="z_a">
+                    <if condition="$z_a['position'] eq 11">
+                        <li class="fl" style="background: url('/uploads/{$z_a['pic_url']}') no-repeat center center;"></li>
+                    </if>
+                </foreach>
+            </ul>
+        </div>
+
+        <!--   游戏排行和热门游戏   -->
+        <div class="rank_hot_wrap container cf">
+            <div class="type_name fl cf">
+                <div class="type_box fl">
+                    <div class="title_box cf">
+                        <p class="tit_name fl">游戏类型</p>
+                    </div>
+                    <ul class="type_ul cf" id="type_ul">
+                        <li class="type_li fl active"><a href="javascript:void(0);">不限</a></li>
+                        <volist name="typex" id="voy">
+                        <li class="type_li fl"><a href="javascript:void(0);"><?= mb_substr($voy['type'],0,2) ?></a></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="fl">
+                    <div class="title_box cf">
+                        <p class="tit_name fl">游戏排行</p>
+                    </div>
+                    <ul class="rank_ul cf">
+                        <foreach name="randData" item="vo2" key="k">
+                            <li class="sub_rank_li cf">
+                                <div class="sub_rank_num <?php if($k+1 == 1 || $k+1 == 2 || $k+1 == 3){ echo 'rank_front'; } ?>  fl"><?=$k+1?></div>
+                                <div class="sub_rank_name ofh fl">{$vo2.title}</div>
+                                <div class="rank_info fl cf hide">
+                                    <img src="/uploads/{$vo2.icon}" class="rank_img fl"/>
+                                    <div class="rank_right fl">
+                                        <p class="rank_name ofh">{$vo2.info}</p>
+                                        <p class="cf rank_operate"><a href="{$vo2.addr_code}"  class="fl btn_rank_down">下载</a><a href="javascript:void(0)" onclick="gift();" class="fl">礼包</a></p>
+                                    </div>
+                                </div>
+                                <div class="sub_rank_type ofh fr">{$vo2.type}</div>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+            <div class="type_hot_game fl pr">
+                <div class="title_box cf">
+                    <p class="tit_name fl">热门游戏</p>
+                </div>
+                <ul class="hot_ul cf">
+                    <foreach name="apk" item="vo">
+                    <li class="sub_hot_game cf">
+                        <div class="game_img fl"><img src="/uploads/{$vo.icon}" onclick="location.href='/detail?type=center&id={$vo.id}'"></div>
+                        <div class="hot_content fl">
+                            <p class="sub_hot_name ofh" onclick="location.href='/detail?type=center&id={$vo.id}'">{$vo.title}</p>
+                            <p class="sub_hot_type_box ofh"><span class="sub_hot_type">{$vo.type}</span><span>|</span><span class="sub_hot_big"><?=rand("10","99")?>.<?=rand("00","99")?>MB</span></p>
+                            <p class="operate_btn_box cf">
+                                <a href="{$vo.addr_code}" class="btn_down_hot fl">下载</a>
+                                <a href="javascript:void(0);" onclick="gift();" class="fl">礼包</a>
+                            </p>
+                        </div>
+                    </li>
+                    </foreach>
+                </ul>
+                <div class="paging">{$page != null ? $page : ""}</div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>
+
+<script>
+$(function () {
+
+    //游戏中心轮播
+    $('.gmct_wrap li').mouseover(function(){
+        if(!$(this).hasClass('curr')){
+            $('.gmct_wrap li').removeClass('curr');
+            $(this).addClass('curr');
+
+            $('.curr').stop().animate({
+                width: 900
+            }, 500, 'linear');
+            $('.gmct_wrap li').not('.curr').stop().animate({
+                width: 100
+            }, 500, 'linear');
+        }
+    });
+
+    $("#type_ul li").click(function () {
+        var data = $(this).text();
+        $.post("/centerajax",{d:data},function (msg) {
+            $(".type_hot_game").empty();
+            var xmlstr = "<div class='title_box cf'>";
+            xmlstr +="<p class='tit_name fl'>热门游戏</p>";
+            xmlstr +="</div>";
+            xmlstr +="<ul class='hot_ul cf'>";
+            for(var i=0;i<msg.datastr.data.length;i++){
+                xmlstr +="<li class='sub_hot_game cf' onclick='window.location.href=\"/detail?type=center&id="+msg.datastr.data[i].id+"\"'>";
+                xmlstr +="<div class='game_img fl'><img src='/uploads/"+msg.datastr.data[i].icon+"'></div>";
+                xmlstr +="<div class='hot_content fl'>";
+                xmlstr +="<p class='sub_hot_name ofh'>"+msg.datastr.data[i].title+"</p>";
+                xmlstr +="<p class='sub_hot_type_box ofh'><span class='sub_hot_type'>"+msg.datastr.data[i].type+"</span><span>|</span><span class='sub_hot_big'>"+Math.floor(Math.random()*100)+"."+Math.floor(Math.random()*100)+"MB</span></p>";
+                xmlstr +="<p class='operate_btn_box cf'>";
+                xmlstr +="<a href='"+msg.datastr.data[i].addr_code+"'  class='btn_down_hot fl'>下载</a>";
+                xmlstr +="<a href='javascript:void(0);' onclick='gift();' class='fl'>礼包</a>";
+                xmlstr +="</p>";
+                xmlstr +="</div>";
+                xmlstr +="</li>";
+            }
+            xmlstr +="</ul>";
+            if(msg.page != null){ xmlstr +="<div class='paging'>"+msg.page+"</div>"; }
+            $(xmlstr).appendTo($(".type_hot_game"));
+        },"json");
+    });
+
+});
+</script>
+<script type="text/javascript">
+    (function (w, d, s, i, v, j, b) {
+        w[i] = w[i] || function () {
+            (w[i].v = w[i].v || []).push(arguments)
+        };
+        j = d.createElement(s),
+            b = d.getElementsByTagName(s)[0];
+        j.async = true;
+        j.charset = "UTF-8";
+        j.src = "https://www.v5kf.com/158566/v5kf.js";
+        b.parentNode.insertBefore(j, b);
+    })(window, document, "script", "V5CHAT");
+</script>
+

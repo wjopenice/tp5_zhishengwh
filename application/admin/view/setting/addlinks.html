@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+</head>
+<body>
+    <!--面包屑导航 开始-->
+    <div class="crumb_warp">
+        <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">友链管理</a> &raquo; 添加友链
+    </div>
+    <!--面包屑导航 结束-->
+    
+    <div class="result_wrap">
+        <form action="/admin/Setting/addlinks" method="post" enctype="multipart/form-data">
+            <table class="add_tab">
+                <tbody>
+                    <tr>
+                        <th><i class="require">*</i>标题：</th>
+                        <td>
+                            <input type="text" class="lg" name="title" required value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="require">*</i>链接地址：</th>
+                        <td>
+                            <input type="url" class="lg" name="link_url" required value="" style="width:590px;height: 25px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="require">*</i>状态：</th>
+                        <td>
+                            <input type="radio" class="lg" name="status" value="1">激活
+                            <input type="radio" class="lg" name="status" value="0" checked>失效
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <input type="submit" value="提交">
+                            <input type="button" class="back" onclick="history.go(-1)" value="返回">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

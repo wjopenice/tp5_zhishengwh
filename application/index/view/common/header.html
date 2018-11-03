@@ -1,0 +1,49 @@
+<!--  头部登录栏  -->
+<div class="loginBox">
+    <div class="container cf">
+        <a class="fl m_btn"  href="http://www.zhishengwh.com/wap" target="_blank"><i class="dib"></i>玩转H5游戏</a>
+        <div class="fr">
+            <if condition="!$Think.cookie.account">
+            <a class="m_btn login_btn" href="/index/Login/login.html">登录</a>
+            <a class="m_btn" href="/index/Login/register.html"> | 注册 |</a>
+            <else />
+            <a class="m_btn login_btn" href="/uc#1">您好，<?=$_COOKIE['account']?> 【会员中心】</a>
+            <a class="m_btn" href="/index/Login/logout"> | 退出 |</a>
+            </if>
+            <a class="m_btn" href="javascript:void(0);">关注我们</a>
+        </div>
+    </div>
+</div>
+
+<!--  搜索栏  -->
+<div class="s_height">
+    <div class="search container cf">
+        <foreach name="zswh_adv" item="z_a">
+            <if condition="$z_a['position'] eq 2">
+                <img src="../../../uploads/{$z_a['pic_url']}" title="{$z_a['name']}" width="169" height="60" class="logo fl" onclick="location.href='{$z_a['addr']}';">
+            </if>
+        </foreach>
+        <div class="search_box fr cf">
+            <form action="/search" method="post">
+            <input type="text" class="fl" name="d"  placeholder="搜索游戏名称" value="">
+            <input type="submit" name="btn" id="com_search" style="width: 60px;height: 48px;margin: 0;" class="search_icon fr"  value="">
+            <div class="fl hot"><span>热门搜索词：</span><span class="hot_m">绝地求生</span><span class="hot_m">王者荣耀</span><span class="hot_m">世仙王</span><span class="hot_m">阴阳道绝</span></div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php $type = !empty($_GET['type'])? $_GET['type'] : "index" ; ?>
+<!--  导航tab栏  -->
+<nav class="tab_t cf">
+    <div class="container">
+        <ul class="tab_t_wrap cf">
+            <li class="sub_tab pr <?php if('index' == $type){ echo 'active'; }?>"><a href="/index?type=index" class="each_tab_link">首页<span class="tab_line dib"></span></a></li>
+            <li class="sub_tab pr <?php if('center' == $type){ echo 'active'; }?>"><a href="/center?type=center" class="each_tab_link">游戏中心<span class="tab_line dib"></span></a></li>
+            <li class="sub_tab pr <?php if('gift' == $type){ echo 'active'; }?>"><a href="/gift?type=gift" class="each_tab_link">礼包中心<span class="tab_line dib"></span></a></li>
+            <li class="sub_tab pr <?php if('convert' == $type){ echo 'active'; }?>"><a href="/convert?type=convert" class="each_tab_link">兑换中心<span class="tab_line dib"></span></a></li>
+            <li class="sub_tab pr <?php if('news' == $type){ echo 'active'; }?>"><a href="/news?type=news" class="each_tab_link">资讯中心<span class="tab_line dib"></span></a></li>
+            <li class="sub_tab pr <?php if('recharge' == $type){ echo 'active'; }?>"><a href="/recharge?type=recharge" class="each_tab_link">充值中心<span class="tab_line dib"></span></a></li>
+            <li class="sub_tab pr <?php if('customer' == $type){ echo 'active'; }?>"><a href="/customer?type=customer" class="each_tab_link">客服中心</a></li>
+        </ul>
+    </div>
+</nav>

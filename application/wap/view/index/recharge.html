@@ -1,0 +1,41 @@
+<include file="inc/header" title="充值列表" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/customer/recharge.css">
+
+<div class="page-group">
+
+    <!--   充值列表   -->
+    <h4 class="white_b re_title">充值到<span style="color: #ff6b63;">平台币</span></h4>
+
+    <div class="white_b account_num cf"><p class="fl">充值账号：</p><span class="fl ofh">zswh201807261601civu7zdn</span></div>
+
+    <div class="white_b pay_box">
+        <h4 class="re_title">充值金额</h4>
+        <ul class="re_ul cf">
+            <li class="active fl re_ul_li recharge_money_1"><span class="m_num">1</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_100"><span class="m_num">100</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_300"><span class="m_num">300</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_500"><span class="m_num">500</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_1000"><span class="m_num">1000</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_3000"><span class="m_num">3000</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_5000"><span class="m_num">5000</span><span>元</span></li>
+            <li class="fl re_ul_li recharge_money_10000"><span class="m_num">10000</span><span>元</span></li>
+        </ul>
+        <div class="other_money cf"><p class="fl">其他金额：</p><input type="number" id="money_input" class="money_input fl"><p class="fl">元</p></div>
+        <p class="tag">*比例 : 1元=1平台币</p>
+    </div>
+    <h4 class="white_b re_title">支付方式</h4>
+    <div class="white_b mode active pay_mode cf"><i class="fl"></i><p class="fl">支付宝支付</p><span class="select fr"></span></div>
+    <div class="white_b mode wechat_mode cf"><i class="fl"></i><p class="fl">微信支付</p><span class="select fr"></span></div>
+
+    <div class="sub_box"><input type="submit" class="pay_btn" value="立即支付"></div>
+
+</div>
+
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+<script src="<?=JS_PATH?>/wap/customer/recharge.js"></script>
+
+</body>
+</html>

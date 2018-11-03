@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>深圳致晟科技商户系统</title>
+    <link rel="stylesheet" type="text/css" href="<?=INDEX_PATH?>/css/public.css" />
+    <link rel="stylesheet" type="text/css" href="<?=JS_PATH?>/pay/layui-2.2.5/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="<?=INDEX_PATH?>/css/css.css" />
+
+    <script type="text/javascript" src="<?=INDEX_PATH?>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?=INDEX_PATH?>/js/public.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/pay/layui-2.2.5/layui.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/pay/admin/admin.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/pay/admin/login.js"></script>
+
+</head>
+
+<body>
+<!-- 头部 -->
+<div class="head">
+    <div class="headL">
+        <img class="headLogo" src="<?=INDEX_PATH?>/img/headLogo.png" />
+    </div>
+    <div class="headR">
+        <p class="p1">
+            欢迎，
+            {$account.account}
+        </p>
+        <p class="p2">
+            <a href="/pay/adminupass" class="resetPWD">重置密码</a>&nbsp;&nbsp;<a href="javascript:void(0);" class="goOut">退出</a>
+        </p>
+    </div>
+    <!-- onclick="{if(confirm(&quot;确定退出吗&quot;)){return true;}return false;}" -->
+</div>
+
+<div class="closeOut">
+    <div class="coDiv">
+        <p class="p1">
+            <span>X</span>
+        </p>
+        <p class="p2">确定退出当前用户？</p>
+        <P class="p3">
+            <a class="ok yes" href="#">确定</a><a class="ok no" href="#">取消</a>
+        </p>
+    </div>
+</div>
+
+
+
+</body>
+</html>

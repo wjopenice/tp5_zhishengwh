@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/ch-ui.admin.js"></script>
+</head>
+<body>
+<!--面包屑导航 开始-->
+<div class="crumb_warp">
+    <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+    <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">兑换管理</a> &raquo; <a href="#">发布信息管理</a>
+</div>
+<!--面包屑导航 结束-->
+
+
+<!--搜索结果页面 列表 开始-->
+<form action="#" method="post">
+
+    <div class="result_wrap">
+        <div class="result_content">
+            <table class="list_tab">
+                <tr>
+                    <th class="tc" width="5%"><input type="checkbox" name=""></th>
+                    <th class="tc">ID</th>
+                    <th>信息分类</th>
+                    <th>游戏分类</th>
+                    <th>游戏名称</th>
+                    <th>游戏区</th>
+                    <th>商品标题</th>
+                    <th>商品单价</th>
+                    <th>发布数量</th>
+                    <th>游戏图标</th>
+                    <th>添加时间</th>
+                    <th>上/下架</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name="data" item="vo">
+                    <tr>
+                        <td class="tc"><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+                        <td class="tc">{$vo.id}</td>
+                        <td>{$vo.shop_type}</td>
+                        <td>{$vo.type_select}</td>
+                        <td>{$vo.name_select}</td>
+                        <td>{$vo.area_select}</td>
+                        <td>{$vo.title_input}</td>
+                        <td>{$vo.money_input}</td>
+                        <td>{$vo.input_num}</td>
+                        <td><img src="/shop/uploads/{$vo.fileicon}" width="50" height="50" /></td>
+                        <td>{$vo.createtime|date="y-m-d",###}</td>
+                        <td>{$vo.shop_status}</td>
+                        <td>
+                            <a href="/admin/App/shop_review?id={$vo.id}&type=ok" style="color: green;">通过</a>
+                            <a href="/admin/App/shop_review?id={$vo.id}&type=no" style="color: red;">不通过</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+</form>
+<!--搜索结果页面 列表 结束-->
+
+
+
+</body>
+</html>

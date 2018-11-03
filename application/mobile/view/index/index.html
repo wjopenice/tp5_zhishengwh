@@ -1,0 +1,38 @@
+<include file="common/header" title="首页" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/index/index.css">
+
+<div class="page-group">
+    <div class="page">
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+            <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+        </header>
+        <div class="content">
+            <div class="navConWrap cf">
+                <div class="subNav fl topBar1"><i class="navIcon"></i><p class="navNum ofh">{$data.all_data ? : '0.00'}</p><p class="navName">平台总充值额</p></div>
+                <div class="subNav fl topBar2"><i class="navIcon"></i><p class="navNum ofh">{$data.all_with ? : '0.00'}</p><p class="navName">平台总提现额</p></div>
+                <div class="subNav fl topBar3"><i class="navIcon"></i><p class="navNum ofh">{$data.all_sett ? : '0.00'}</p><p class="navName">平台结算额</p></div>
+                <div class="subNav fl topBar4"><i class="navIcon"></i><p class="navNum ofh">{$data.all_pro_counts}</p><p class="navName">商户数</p></div>
+            </div>
+            <div class="orderTodayWrap cf">
+                <p class="indexTit fl">今日订单</p>
+                <div class="indexCon fl cf">
+                    <div class="subBlock fl"><p class="blockName">交易笔数</p><p class="blockNum ofh">{$data.today_orders ? : 0}</p></div>
+                    <div class="subBlock fl"><p class="blockName">成功笔数</p><p class="blockNum ofh">{$data.today_success_orders ? : 0}</p></div>
+                    <div class="subBlock fl"><p class="blockName">成交金额</p><p class="blockNum ofh col-red">￥<span>{$data.today_success_money ? : '0.00'}</span></p></div>
+                </div>
+            </div>
+            <div class="cashTodayWrap cf">
+                <p class="indexTit fl">今日提现</p>
+                <div class="indexCon fl cf">
+                    <div class="subBlock fl"><p class="blockName">交易笔数</p><p class="blockNum ofh">{$data.today_with_strip ? : 0}</p></div>
+                    <div class="subBlock fl"><p class="blockName">成功笔数</p><p class="blockNum ofh">{$data.today_with_strip ? : 0}</p></div>
+                    <div class="subBlock fl"><p class="blockName">成交金额</p><p class="blockNum ofh col-red">￥<span>{$data.today_with_money ? : '0.00'}</span></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="common/footer" />
+
+

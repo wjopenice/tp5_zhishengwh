@@ -1,0 +1,48 @@
+<include file="inc/header" title="修改密码" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/login/modify_pwd.css">
+
+    <div class="page-group">
+
+        <div class="initial_pwd"><input type="password" name="password" maxlength="20" placeholder="原密码" value=""></div>
+        <div class="new_pwd"><input type="password" name="newpass" maxlength="20" placeholder="新密码" value="" ></div>
+        <div class="sure_pwd"><input type="password" name="repass" maxlength="20" placeholder="确认密码" value="" ></div>
+
+        <!--      完成      -->
+        <div class="login_btn"><a onclick="sendpass()">完成</a></div>
+        <div class="text"><p>温馨提示：密码需为6-20位数字或者字母</p></div>
+    </div>
+
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+</body>
+</html>
+<script>
+function sendpass() {
+    var password = $(".initial_pwd input").val();
+    var newpass = $(".new_pwd input").val();
+    var repass = $(".sure_pwd input").val();
+    if(password != "" && newpass != "" && repass != "" ){
+        $.ajax({
+            url:"/wap/modify",
+            type:"post",
+            data:{password:password,newpass:newpass,repass:repass},
+            dataType:"json",
+            asyn:true,
+            success:function (msg) {
+                $.toast(msg.msg);
+                if(msg.msg == '修改成功'){
+                    setTimeout("localink()",2000);
+                }
+            }
+        });
+    }else{
+        $.toast("密码不能为空");
+    }
+}
+function localink() {
+    window.location.href='/wap/login.html';
+}
+</script>

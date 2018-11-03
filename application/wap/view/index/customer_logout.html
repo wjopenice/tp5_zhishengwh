@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>个人设置</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/sm.min.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/login/customer_logout.css">
+</head>
+<body class="mHome">
+    <!--    加载层    -->
+    <div id="loader"><div class="loader_inner"><img src="/public/static/image/wap/login/ajax-loader.gif" alt=""><p class="loader_text">正在加载</p></div></div>
+
+    <!--    页面    -->
+    <div class="page_box">
+        <!--    list列表    -->
+        <div class="list-block">
+            <ul>
+                <li class="item-content my_head item-notice cf">
+                    <a href="javascript:void(0);"><span class="item-title">默认头像</span><span class="head_img fr"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="list-block">
+            <ul>
+                <li class="item-content my_capital item-notice cf">
+                    <a href="javascript:void(0);"><span class="item-title">用户姓名</span><span id="name_text" class="fr">{$userData.real_name}</span></a>
+                </li>
+                <li class="item-content my_capital item-notice cf">
+                    <a href="javascript:void(0);"><span class="item-title">手机号码</span><span id="iphone_num" class="fr">{$userData.phone}</span></a>
+                </li>
+                <li class="item-content my_capital item-notice cf">
+                    <a href="javascript:void(0);"><span class="item-title">身份证号</span><span id="id_card" class="fr">{$userData.idcard}</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="list-block">
+            <ul>
+                <li class="item-content my_capital item-notice cf">
+                    <a href="/wap/modify.html"><span class="item-title">用户密码</span><span class="modify icon icon-right fr"></span><span class="modify fr">修改</span></a>
+                </li>
+            </ul>
+        </div>
+
+
+        <!--      退出登录      -->
+        <div class="login_btn"><a href="/wap/logout">退出登录</a></div>
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/login/customer_logout.js"></script>
+
+</body>
+</html>

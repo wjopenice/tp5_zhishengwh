@@ -1,0 +1,31 @@
+<div class="panel panel-left panel-reveal">
+    <div class="content-block">
+        <div class="headBoxWrap">
+            <img src="<?=IMG_PATH?>/mobile/common/headImg.png" class="headImg" alt="">
+            <p class="headName ofh">{$account.account}</p>
+            <p class="headLine"></p>
+        </div>
+        <div class="slideBarWrap cf">
+            <div class="subSlideBox">
+                <a class="subSlide slide1 cf slideHoverBg" href="/mobile/index" external><i class="slideIcon fl"></i><span>首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a>
+            </div>
+            <div class="subSlideBox cf">
+                <a class="subSlide slide2 cf fl" href="/mobile/buss" external><i class="slideIcon fl"></i><span>商户管理</span></a>
+            </div>
+            <div class="subSlideBox cf">
+                <a class="subSlide slide3 cf" href="/mobile/gear" external><i class="slideIcon fl"></i><span>档位管理</span></a>
+            </div>
+            <div class="subSlideBox cf">
+                <a class="subSlide slide4 cf" href="/mobile/Interfaces" external><i class="slideIcon fl"></i><span>接口管理</span></a>
+            </div>
+            <div class="subSlideBox cf">
+                <a class="subSlide slide5 cf" external><i class="slideIcon fl"></i><span>充值管理</span><i class="upNext"></i></a>
+                <div class="innerSlideBoxWrap fl hide">
+                    <?php for($i=1;$i<=$totalPage;$i++):?>
+                    <a class="subInnerSlide" href="/mobile/recharges?page={$i}&limit={$showList}" external><span class="innerSlideName">充值列表数据第{$i}页</span></a>
+                    <?php endfor;?>
+                </div>
+            </div>
+        </div>
+        <div class="subSlideBox subSlideExit cf"><a class="subSlide slide6 cf" href="/mobile/logout" external><i class="slideIcon fl"></i><span>退出登录</span></a></div></div>
+</div>

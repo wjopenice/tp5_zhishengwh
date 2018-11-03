@@ -1,0 +1,184 @@
+<include file="inc/header" title="首页" />
+
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/swiper-4.3.3.min.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/index/index.css">
+    <!--    页面    -->
+    <div class="page-group">
+        <div class="header_box">
+
+            <!--   搜索框   -->
+            <div class="search_box cf">
+                <i class="scan_box fl pr"><input class="camera" type="file" accept="image/*" capture="camera"></i>
+                <div class="searchbar fl">
+                    <div class="search-input">
+                        <label id="btn" class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' name="d" placeholder='请输入关键字搜索...'/>
+                    </div>
+                </div>
+                <a class="down_box fr" href="/wap/down.html"></a>
+            </div>
+
+            <!--   轮播图   -->
+            <div class="slide-box swiper-container">
+                <div class="swiper-wrapper">
+                    <foreach name="zswh_adv" item="z_a">
+                        <if condition="$z_a['position'] eq 13">
+                            <div class="swiper-slide"><img src="/uploads/{$z_a['pic_url']}" alt="{$z_a['name']}"></div>
+                        </if>
+                    </foreach>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <!--    热门游戏    -->
+            <div class="hot_box pr">
+                <i></i>
+                <ul class="cf">
+                    <foreach name="apk" item="vo">
+                        <li class="dib">
+                            <img src="/uploads/{$vo.icon}" alt="" onclick="location.href='/wap/info?id={$vo.id}'">
+                            <a class="ofh" href="{$vo.addr_code}">下载</a>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+
+        <!--   热门推荐和本周推荐   -->
+        <div class="recommend_box">
+            <foreach name="zswh_adv" item="z_a">
+                <if condition="$z_a['position'] eq 14">
+                    <div class="hot_re" style="padding-bottom: 0;"><img src="/uploads/{$z_a['pic_url']}" title="{$z_a['name']}"></div>
+                </if>
+            </foreach>
+            <foreach name="zswh_adv" item="z_a">
+                <if condition="$z_a['position'] eq 15">
+                    <div class="hot_re"><img src="/uploads/{$z_a['pic_url']}" title="{$z_a['name']}"></div>
+                </if>
+            </foreach>
+        </div>
+
+        <!--   热门礼包   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">热门礼包</h4>
+                <p class="fr"><a href="/wap/gift.html?type=2">更多</a><i></i></p>
+            </div>
+            <ul class="gift_ul">
+                <foreach name="apk1" item="vo1">
+                    <li class="cf" onclick="location.href='/wap/gift_info?id={$vo1.id}'">
+                        <div class="gift_header fl"><img src="/uploads/{$vo1.icon}" alt="{$vo1.title}"></div>
+                        <div class="gift_name fl">
+                            <p class="gift_text ofh">{$vo1.title}</p>
+                            <p class="gift_bag ofh">{$vo1.info}</p>
+                        </div>
+                        <a class="receive_btn fr" href="/wap/gift_info?id={$vo1.id}">领取</a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+
+        <!--   可能喜欢的推荐   -->
+        <div class="like_box">
+            <h4>您可能会喜欢</h4>
+            <p class="like_text">这些游戏与你的气质更配哦</p>
+            <ul class="like_ul">
+                <foreach name="apk2" item="vo3">
+                    <li class="dib cf">
+                        <img class="fl" src="/uploads/{$vo3.icon}" alt="{$vo3.title}" onclick="location.href='/wap/info?id={$vo3.id}'">
+                        <p class="like_game_name fl ofh" onclick="location.href='/wap/info?id={$vo3.id}'">{$vo3.title}</p>
+                        <p class="like_classify fl ofh">{$vo3.type}</p>
+                        <a class="like_down_btn fl ofh" href="{$vo3.addr_code}">下载</a>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+
+        <!--     游戏排行     -->
+        <div class="rank_box">
+            <div class="gift_title rank_title cf">
+                <h4 class="fl">游戏排行</h4>
+                <p class="fr"><a href="/wap/rank.html">更多</a><i></i></p>
+            </div>
+            <div class="rank_banner"><img src="/public/static/image/wap/index/rank_banner.png" alt=""></div>
+            <ul class="rank_ul cf">
+                <foreach name="randData" item="vo2" key="k">
+                    <li class="fl" onclick="location.href='/wap/info?id={$vo2.id}'"><img class="dib" src="/uploads/{$vo2.icon}" alt=""><p class="rank_game_name ofh">{$vo2.title}</p></li>
+                </foreach>
+            </ul>
+        </div>
+
+        <!--    大家都在玩    -->
+        <div class="all_play_box">
+            <div class="gift_title all_play_title cf">
+                <h4 class="fl">大家都在玩</h4>
+            </div>
+            <ul class="gift_ul">
+                <foreach name="apk3" item="vo4">
+                <li class="cf">
+                    <div class="gift_header fl" onclick="location.href='/wap/info?id={$vo4.id}'"><img src="/uploads/{$vo4.icon}" alt=""></div>
+                    <div class="gift_name all_play_name fl" onclick="location.href='/wap/info?id={$vo4.id}'">
+                        <p class="gift_text all_play_text ofh">{$vo4.title}</p>
+                        <p class="all_play_role"><?=rand("10","99")?>.<?=rand("00","99")?>M | {$vo4.type}</p>
+                        <p class="gift_bag ofh">{$vo4.info}</p>
+                    </div>
+                    <a class="receive_btn fr" href="{$vo4.addr_code}">下载</a>
+                </li>
+                </foreach>
+            </ul>
+        </div>
+
+    </div>
+
+    <!--   底部导航栏   -->
+    <include file="inc/footer" />
+    <!--<nav class="bar bar-tab">-->
+        <!--<a class="tab-item external foot-tap-index active" href="/wap.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">首页</span>-->
+        <!--</a>-->
+        <!--<a class="tab-item external foot-tap-gift" href="/wap/gift.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">礼包</span>-->
+        <!--</a>-->
+        <!--<a class="tab-item external foot-tap-classify" href="/wap/gmct.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">分类</span>-->
+        <!--</a>-->
+        <!--<a class="tab-item external foot-tap-center" href="/wap/customer.html">-->
+            <!--<span class="icon"></span>-->
+            <!--<span class="tab-label">我的</span>-->
+        <!--</a>-->
+    <!--</nav>-->
+
+    <!--<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>-->
+    <!--<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>-->
+    <script src="<?=JS_PATH?>/wap/common/swiper-4.3.3.min.js"></script>
+    <!--<script src="<?=JS_PATH?>/wap/common/public.js"></script>-->
+    <script src="<?=JS_PATH?>/wap/index/index.js"></script>
+    <script>
+        $(document).ready(function () {
+            enter();
+        });
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal',
+            autoplay: {
+                delay: 3000,//秒
+                disableOnInteraction: false,//滑动不会失效
+            },
+            loop: true,
+
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+            }
+        })
+    </script>
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+

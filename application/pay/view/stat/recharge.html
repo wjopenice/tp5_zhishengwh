@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>充值统计</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/index/welcome.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/dataCount/rechargeCount.css">
+</head>
+<body>
+    <div class="contentFull">
+        <!-- 搜索引擎部分   -->
+        <div class="content_navBar cf">
+            <p class="fl">我的位置：</p>
+            <p class="fl">数据统计&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+            <p class="fl col-red">充值统计</p>
+        </div>
+        <!--   总充值    -->
+        <div class="todayBoxWrap flex">
+            <!--   今日订单   -->
+            <div class="subTodayBox todayOrder flexBox cf">
+                <div class="tit">总充值</div>
+                <div class="conTotal cf">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="总充值金额：">总充值金额：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$all_data}元">{$all_data}元</span></div>
+                    </div>
+                    <foreach name="$class" item="val">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="{$val.type_name}充值金额：">{$val.type_name}充值金额：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$val.pay_amount}元">{$val.pay_amount}元</span></div>
+                    </div>
+                    </foreach>
+                </div>
+            </div>
+            <!--   今日提现     -->
+            <div class="subTodayBox todayCash flexBox">
+                <div class="tit">各通道充值量</div>
+                <div class="con flex" id="passageway" style="width: 100%;height: 360px;"></div>
+            </div>
+        </div>
+        <!--   当日充值  -->
+        <div class="todayBoxWrap flex">
+            <!--   今日订单   -->
+            <div class="subTodayBox todayOrder flexBox cf">
+                <div class="tit">当日充值</div>
+                <div class="conTotal cf">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="总充值金额：">总充值金额：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$today_data}元">{$today_data}元</span></div>
+                    </div>
+                    <foreach name="$today_class" item="v">
+                    <div class="fl total-list cf">
+                        <label class="fl total-name"><span class="ofh" title="{$v.type_name}充值金额：">{$v.type_name}充值金额：</span></label>
+                        <div class="fl total-text ofh"><span class="ofh" title="{$v.pay_amount}元">{$v.pay_amount}元</span></div>
+                    </div>
+                    </foreach>
+                </div>
+            </div>
+            <!--   今日提现     -->
+            <div class="subTodayBox todayCash flexBox">
+                <div class="tit">当日各通道充值量</div>
+                <div class="con flex" id="dayPassageway" style="width: 100%;height: 360px;"></div>
+            </div>
+        </div>
+        <!-- 七天充值量 -->
+        <div class="todayBoxWrap weekWrap flex">
+            <!--   七天充值量     -->
+            <div class="subTodayBox todayCash flexBox">
+                <div class="tit">七天充值量</div>
+                <div class="con flex" id="weekPassageway" style="width: 100%;height: 360px;"></div>
+            </div>
+        </div>
+        <!-- 七天总充值量 -->
+        <div class="todayBoxWrap weekWrap flex">
+            <!--   七天总充值量   -->
+            <div class="subTodayBox todayCash flexBox">
+                <div class="tit">七天总充值量</div>
+                <div class="con flex" id="weekTotal" style="width: 100%;height: 360px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/echart/echarts.min.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+    <script src="<?=JS_PATH?>/pay/dataCount/rechargeCount.js"></script>
+
+</body>
+</html>

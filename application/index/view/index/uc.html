@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>个人中心</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/index.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+    <!--    中间主页    -->
+    <div class="content_box">
+        <div class="uc_wrap container cf">
+            <div class="title_box cf">
+                <p class="tit_name fl">会员中心</p>
+            </div>
+            <div class="info_box_left fl">
+                <ul>
+                    <li id="essen" class="active"><a class="essential" href="javascript:void(0);"><i class="dib"></i><span>基本信息</span></a></li>
+                    <li id="trans"><a class="transaction" href="javascript:void(0);"><i class="dib"></i><span>充值记录</span></a></li>
+                    <li id="modify_pwd"><a class="modify_pwd" href="javascript:void(0);"><i class="dib"></i><span>修改密码</span></a></li>
+                </ul>
+            </div>
+            <div class="info_content fl">
+                <div id="info_box" class="info_box cf active">
+                    <div class="account_right fl cf">
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">商户号：</div>
+                            <div class="form_text fl">{$arrData['business_id']}</div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">商户密钥：</div>
+                            <div class="form_text fl">{$arrData['token']}</div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">登录账号：</div>
+                            <div class="form_input fl"><input type="text" class="sub_input user_nick_input" placeholder="xiaohei1234" readonly  value="{$arrData['account']}"></div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">商户号余额：</div>
+                            <div class="form_input fl"><input type="text" style="width: 200px;" class="sub_input" placeholder="0.00" readonly value="{$pay_success_total}"></div>
+                            <div class="form_other fl"><a href="/recharge?type=recharge" class="btn_operation">GO充值</a></div>
+                            <?php if(!empty($company)): ?>
+                                <div class="form_other fl"><a href="/forward" class="btn_operation">提现</a></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">手机号：</div>
+                            <div class="form_input fl"><input type="text" class="sub_input" placeholder="170****1234" readonly value="{$arrData['phone']}"></div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">真实姓名：</div>
+                            <div class="form_input fl"><input type="text" class="sub_input" placeholder="张**" readonly value="{$arrData['real_name']}"></div>
+                            <div class="form_other fl"></div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">身份证号：</div>
+                            <div class="form_input fl"><input type="text" class="sub_input" placeholder="3204********0801" readonly value="{$arrData['idcard']}"></div>
+                            <div class="form_other fl"></div>
+                        </div>
+                        <?php if(!empty($company)): ?>
+                        <div class="sub_cus">
+                            <div class="sub_form_box fl cf">
+                                <div class="form_name fl">企业名称：</div>
+                                <div class="form_input fl"><input type="text" class="sub_input" placeholder="深圳市XXXX有限公司" readonly value="{$company['company_name']}"></div>
+                                <div class="form_other fl"></div>
+                            </div>
+                            <div class="sub_form_box fl cf">
+                                <div class="form_name fl">营业执照：</div>
+                                <div id="image_container" class="form_input fl pr">
+                                    <span id="image_btn">阅览图片</span>
+                                    <div class="flex"><img src="/uploads/buss/{$company['business_license']}"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="text_description fl">
+                        <p class="description_title">平台说明：</p>
+                        <p style="color: #ff948e;">1、*此商户号是您唯一的商户账号且不可修改。</p>
+                        <p>2、如需修改基本信息，请致电平台客服，提供身份证号、姓名、手机号、商户号进行验证人工修改。</p>
+                        <p>3、在线客服电话：0755-86659665</p>
+                    </div>
+                </div>
+                <div id="query_box" class="query_box info_box pr">
+                    <div class="record_operation_bar">
+                        <p class="fl recharge_time">充值时间：</p>
+                        <input type="date" class="fl start_time" max="" placeholder="开始时间">
+                        <p class="fl time_interval"> -- </p>
+                        <input type="date" class="fl end_time" min="" placeholder="结束时间">
+                        <select class="fl chose_game">
+                            <option value="">充值方式</option>
+                        </select>
+                        <a href="javascript:void(0)" class="fr btn_search">搜索</a>
+                    </div>
+                    <div class="form cf">
+                        <ul class="each_line cf fl recharge_ul">
+                            <li class="li0 fl">序号</li>
+                            <li class="li1 fl">金额（元）</li>
+                            <li class="li2 fl">充值方式</li>
+                            <li class="li3 fl">状态</li>
+                            <li class="li4 fl">充值时间</li>
+                        </ul>
+                        <volist name="pay_data" id="vo">
+                        <ul class="each_line cf fl recharge_ul copy" data-num="1">
+                            <li class="li0 fl">{$vo.id}</li>
+                            <li class="li1 fl">{$vo.pay_amount}</li>
+                            <li class="li2 fl">支付宝</li>
+                            <?php if($vo['pay_status'] == 1 ){echo "<li class='li3 fl'>已支付</li>";}else{echo "<li class='li3 fl un_pay'>未支付</li>";} ?>
+                            <li class="li4 fl">{$vo.create_time|date='Y-m-d H:i:s',###}</li>
+                        </ul>
+                        </volist>
+                    </div>
+                    <div class="paging">{$page}</div>
+                </div>
+                <div id="pwd_box" class="info_box cf">
+                    <div class="account_right fl cf">
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">当前账号：</div>
+                            <div class="form_text fl" style="color: #ff6b63;"><?=$_COOKIE['account']?></div>
+                        </div>
+                        <div id="userx">
+                            <div class="sub_form_box fl cf">
+                                <div class="form_name fl">真实姓名：</div>
+                                <div class="form_input fl"><input id="username" type="text" class="sub_input user_nick_input" placeholder="例如：黄垂帅"  value=""></div>
+                            </div>
+                            <div class="sub_form_box fl cf">
+                                <div class="form_name fl">身份证号：</div>
+                                <div class="form_input fl"><input id="usercatid" type="text" class="sub_input" placeholder="4600**********1234" value=""></div>
+                            </div>
+                        </div>
+                        <div id="usery" class="hide">
+                            <div class="sub_form_box fl cf">
+                                <div class="form_name fl">新密码：</div>
+                                <div class="form_input fl"><input id="pwd" type="password" class="sub_input" placeholder="6-20数字符号字母组成" value=""></div>
+                                <div class="form_other fl"></div>
+                            </div>
+                            <div class="sub_form_box fl cf">
+                                <div class="form_name fl">确认密码：</div>
+                                <div class="form_input fl"><input id="repwd" type="password" class="sub_input" placeholder="与新密码保持一致" value=""></div>
+                                <div class="form_other fl"></div>
+                            </div>
+                        </div>
+                        <div class="sub_form_box fl"><input id="uc_btn" class="submit_input" type="submit" value="下一步"></div>
+                    </div>
+                    <div class="text_description fl">
+                        <p class="description_title">平台说明：</p>
+                        <p style="color: #ff948e;">1、*此商户号是您唯一的商户账号且不可修改。</p>
+                        <p>2、如需修改基本信息，请致电平台客服，提供身份证号、姓名、手机号、商户号进行验证人工修改。</p>
+                        <p>3、在线客服电话：0755-86659665</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script src="<?=JS_PATH?>/index/common/big_picture.js"></script>
+    <script src="<?=JS_PATH?>/index/uc/index.js"></script>
+    <script>
+        //禁止鼠标右键
+        /*document.oncontextmenu = function () {
+            return false;
+        };
+        //禁止f12
+        document.onkeydown = function () {
+            if (window.event && window.event.keyCode == 123) {
+                window.event.returnValue = false;
+            }
+        }*/
+        $(function() {
+            $('#image_btn').click(function(){
+                $("#image_container img").click();
+            });
+
+            setClickHandler('image_container', function(e) {
+                e.target.tagName === 'IMG' && BigPicture({
+                    el: e.target,
+                    imgSrc: e.target.src
+                });
+            });
+            
+            $("#uc_btn").click(function () {
+                if($("#uc_btn").hasClass("ok")){
+                    var pwd = $("#pwd").val();
+                    var repwd = $("#repwd").val();
+                    if(pwd === repwd){
+                        //验证通过
+                        $.get("/uc/ajaxpwd",{type:'pwd',p:pwd},function (msg) {
+                            if(msg.code == 1){
+                                modal(300,"修改成功");
+                                window.setTimeout("links()",2000);
+                            }else{
+                                modal(300,"修改失败");
+                            }
+                        },"json");
+                    }else{
+                        //验证失败
+                        modal(300,"两次密码不一致");
+                    }
+                }else{
+                    var username = $("#username").val();
+                    var usercatid = $("#usercatid").val();
+                    $.get("/uc/ajaxpwd",{type:'user',n:username,c:usercatid},function (msg) {
+                        if(msg.code == 1){
+                            //验证通过
+                            $("#userx").attr("class","hide");
+                            $("#usery").removeAttr("class");
+                            $("#uc_btn").val("完成");
+                            $("#uc_btn").addClass("ok");
+                        }else{
+                            //验证失败
+                            $("#usery").attr("class","hide");
+                            $("#userx").removeAttr("class");
+                            $("#uc_btn").val("下一步");
+                            modal(300,"验证失败");
+                        }
+                    },"json");
+                }
+
+            });
+        });
+        function setClickHandler(id, fn) {
+            document.getElementById(id).onclick = fn;
+        }
+        function links() {
+            window.location.href='/index/Login/login';
+        }
+
+    </script>
+</body>
+</html>

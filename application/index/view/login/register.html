@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>注册</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/login/index.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--  中间主页   -->
+    <div class="content_box">
+
+        <!--  banner   -->
+        <div class="banner pr">
+            <div class="sign_in_box container pr">
+                <div class="reg_banner">
+                    <p class="login_tit">账号注册</p>
+                    <div class="login_content reg_content">
+                        <?php $type = empty($_GET['login'])?"www":$_GET['login']; ?>
+                        <form action="/index/Login/register?login={$type}" method="post" onsubmit="" autocomplete="off">
+                            <input type="hidden" name="type" value="pc">
+                            <div class="error_msg reg_msg"><span class="error_star">请输入账号</span></div>
+                            <div class="input_box reg_box pr">
+                                <input type="tel" id="phone" name="phone"  autofocus  required  onblur="return send(this);" placeholder="请填写正确手机号" pattern="^(13|14|15|17|18)[0-9]{9}$" >
+                                <i class="user_icon dib"></i>
+                                <span class="warn_star">*</span>
+                            </div>
+                            <div class="input_box reg_box pr">
+                                <input type="password" id="password" class="vir" name="password" required  placeholder="请填写密码" maxlength="20">
+                                <i class="pwd_icon dib"></i>
+                                <span class="warn_star">*</span>
+                            </div>
+                            <div class="input_box reg_box pr">
+                                <input type="text" id="real_name" class="vir" name="real_name" required placeholder="请填写真实姓名" pattern="^([\u4e00-\u9fa5]{1,20}|[a-zA-Z\.\s]{1,20})$">
+                                <i class="user_name dib"></i>
+                                <span class="warn_star">*</span>
+                            </div>
+                            <div class="input_box reg_box pr">
+                                <input type="text" id="idcard" class="vir" name="idcard" required  placeholder="请填写真实身份证号码"  pattern="^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$" >
+                                <i class="id_card_icon dib"></i>
+                                <span class="warn_star">*</span>
+                            </div>
+                            <input type="submit"  id="login_button" class="login_button" value="注册" style="border: 0; cursor: pointer;width: 320px;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>
+<script>
+    var send = function (tag) {
+        var data = tag.value;
+        var len = data.length;
+        if(len === 11){
+            $.post("/index/Login/loginajax",{d:data},function (msg) {
+                if(msg == 1){
+                    modal(300,'账号已经存在。');
+                    tag.style.border = "1px solid #ff0000";
+                    $(".vir").attr("disabled","disabled");
+                    tag.focus();
+                    return false;
+                }else{
+                    modal(300,'账号可以使用。');
+                    tag.style.border = "1px solid #ffffff";
+                    $(".vir").removeAttr("disabled");
+                }
+            });
+        }
+    }
+</script>

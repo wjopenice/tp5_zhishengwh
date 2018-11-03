@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置档位</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">档位管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">设置档位</p>
+    </div>
+    <!--  标题   -->
+    <div class="cont_btnLine cf">
+        <p class="fl">设置档位</p>
+    </div>
+    <form class="addProContent cf">
+        <input type="hidden" name="id" value="{$data.id}">
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>档位名称：</dt>
+            <dd class="fl"><input placeholder="请填写档位名称" type="text" name="level" value="{$data.level}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>提现费率（PC）：</dt>
+            <dd class="fl"><input placeholder="请填写PC提现费率" type="text" name="revenue" value="{$data.revenue}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>提现费率（H5微信）：</dt>
+            <dd class="fl"><input placeholder="请填写H5微信提现费率" type="text" name="h5_wetch_revenue"  value="{$data.h5_wetch_revenue}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>提现费率（H5支付宝）：</dt>
+            <dd class="fl"><input placeholder="请填写H5支付宝提现费率" type="text" name="h5_alipay_revenue"  value="{$data.h5_alipay_revenue}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>佣金提现费率：</dt>
+            <dd class="fl"><input placeholder="请填写佣金提现费率" type="text" name="comm_revenue"  value="{$data.comm_revenue}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>佣金提现周期：</dt>
+            <dd class="fl"><input placeholder="请填写佣金提现周期" type="text" name="with_cycle" value="{$data.with_cycle}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>档位标识：</dt>
+            <dd class="fl"><input placeholder="请填写档位标识" type="text" name="ident" value="{$data.ident}" class="fl"></dd>
+        </dl>
+    </form>
+    <a class="confirmBtn" href="javascript:void(0)" id="add" name="submit">确定</a>
+</div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+<script>
+
+    $("#add").on('click',function(){
+
+        var prompt = checkParamete($(".addProContent").serialize());
+        console.log(prompt);
+        if(prompt){
+            bombBox.bombBoxError('', prompt);
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            }); 
+            return false;
+        }
+        submitAdd('/pay/Stall/editstall');
+
+    });
+</script>
+</body>
+</html>

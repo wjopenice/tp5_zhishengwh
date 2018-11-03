@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>提现审核记录</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/put_forward.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+
+    <!--    中间主页    -->
+    <div class="content_box">
+        <div class="uc_wrap container cf">
+            <div class="title_box cf">
+                <p class="tit_name fl">操作审核打款</p>
+            </div>
+            <form action="/forward_edit?id={$putdata['id']}" method="post">
+            <input type="hidden" name="_method" value="PUT" >
+            <div class="info_content examine_box fl">
+                <div class="form cf">
+                    <div class="account_right examine_right fl cf">
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">商户号：</div>
+                            <div class="form_text fl">{$putdata['account']}</div>
+                            <input type="hidden" name="account" value="{$putdata['account']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现金额：</div>
+                            <div class="form_text fl">{$putdata['forward_price']}</div>
+                            <input type="hidden" name="forward_price" value="{$putdata['forward_price']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现用户：</div>
+                            <div class="form_text fl">{$putdata['bank_name']}</div>
+                            <input type="hidden" name="bank_name" value="{$putdata['bank_name']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现银行：</div>
+                            <div class="form_text fl">{$putdata['bank_account']}</div>
+                            <input type="hidden" name="bank_account" value="{$putdata['bank_account']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现卡号：</div>
+                            <div class="form_text fl">{$putdata['bank_id']}</div>
+                            <input type="hidden" name="bank_id" value="{$putdata['bank_id']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现时间：</div>
+                            <div class="form_text fl">{$putdata.forward_time|date='Y年m月d日',###}</div>
+                            <input type="hidden" name="forward_time" value="{$putdata['forward_time']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现状态：</div>
+                            <div class="form_text fl"><?php if($putdata['forward_status'] == 0){echo "<span style='color:#ff6b63;'>提现申请中</span>";}else{echo "<span style='color: #48f396;'>提现成功</span>";}?></div>
+                            <input type="hidden" name="forward_status" value="{$putdata['forward_status']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">确定操作：</div>
+                            <div class="form_text fl">
+                                <input type="submit" value="审核打款" class="confirm_btn"  style="border: 0;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>

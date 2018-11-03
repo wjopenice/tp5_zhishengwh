@@ -1,0 +1,68 @@
+<include file="common/header" title="档位设置" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/detail.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="content">
+                <!-- 面包屑 -->
+                <div class="crumbs"><a href="javascript:void(0);">档位管理&nbsp;>&nbsp;</a><a href="javascript:void(0);" onClick="javascript :history.back(-1);" external>档位设置 ✕</a></div>
+                <form action="/mobile/Gear/detail?id={$data['id']}" method="post">
+                <div class="list-block">
+                    <!-- 商户列表 -->
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title item-order">档位名称</div>
+                                <div class="item-after"><input class="item-order" type="text" name="level" value="{$data['level']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title item-order">提率（PC）</div>
+                                <div class="item-after"><input class="item-order" type="text" name="revenue" value="{$data['revenue']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title item-order">提率（H5支付宝）</div>
+                                <div class="item-after"><input class="item-order" type="text" name="h5_alipay_revenue" value="{$data['h5_alipay_revenue']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title item-order">提率（H5微信）</div>
+                                <div class="item-after"><input class="item-order" type="text" name="h5_wetch_revenue" value="{$data['h5_wetch_revenue']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title item-order">佣金提率</div>
+                                <div class="item-after"><input class="item-order" type="text" name="comm_revenue" value="{$data['comm_revenue']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title item-order">佣金提现周期</div>
+                                <div class="item-after"><input class="item-order" type="text" name="with_cycle" value="{$data['with_cycle']}"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 保存返回按钮 -->
+                <input class="sure-btn" type="submit" value="保存" style="border: 0;">
+                </form>
+                <a class="return-btn" href="javascript:void(0);" onClick="javascript :history.back(-1);">返回</a>
+            </div>
+        </div>
+    </div>
+<include file="common/footer" />
+<script src="<?=JS_PATH?>/mobile/buss/detail.js"></script>

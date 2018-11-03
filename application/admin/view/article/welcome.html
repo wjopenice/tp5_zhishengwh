@@ -1,0 +1,129 @@
+<?php
+$type = empty($_GET['type'])?"w":$_GET['type'];
+if($type == 'w'){
+   $crumbs = "文章管理";
+   $batch = "<a href='/admin/Article/batch_artc&type=e&id=' id='set_btn'><i class='fa fa-recycle'></i>批量删除</a>";
+}
+if($type == 's'){
+   $crumbs = "文章审核";
+   $batch = "<a href='/admin/Article/batch_artc&type=s&id=' id='set_btn'><i class='fa fa-recycle'></i>批量审核</a>";
+}
+if($type == 'r'){
+   $crumbs = "回收站";
+   $batch = "<a href='/admin/Article/batch_artc&type=c&id=' id='set_btn'><i class='fa fa-recycle'></i>批量删除</a> <a href='/admin/Article/batch_artc&type=r'><i class='fa fa-recycle'></i>清空回收站</a>";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/ch-ui.admin.js"></script>
+</head>
+<body>
+<!--面包屑导航 开始-->
+<div class="crumb_warp">
+    <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+    <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">{$crumbs}</a>
+</div>
+<!--面包屑导航 结束-->
+
+
+<!--搜索结果页面 列表 开始-->
+<form action="#" method="post">
+    <div class="result_wrap">
+        <!--快捷导航 开始-->
+        <div class="result_content">
+            <div class="short_wrap">
+                <a href="/admin/Article/add_artc?type=a"><i class="fa fa-plus"></i>新增文章</a>
+                {$batch}
+            </div>
+        </div>
+        <!--快捷导航 结束-->
+    </div>
+
+    <div class="result_wrap">
+        <div class="result_content">
+            <table class="list_tab">
+                <tr>
+                    <th class="tc" width="5%"><input id="check_btn" type="checkbox" name=""></th>
+                    <th class="tc">ID</th>
+                    <th>标题</th>
+                    <th>作者</th>
+                    <th>流量</th>
+                    <th>来源</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name="artc" item="vo">
+                    <?php
+                    $id = $vo['id'];
+                    if($type == 'w'){
+                        $operate = "<a href='/admin/Article/one_artc&type=e&id=".$id."'>删除</a>";
+                      }
+                      if($type == 's'){
+                          $operate = "<a href='/admin/Article/one_artc&type=s&id=".$id."'>审核</a>";
+                      }
+                      if($type == 'r'){
+                          $operate = "<a href='/admin/Article/one_artc&type=c&id=".$id."'>删除</a> <a href='/admin/Article/one_artc&type=r&id=".$id."'>恢复</a>";
+                      }
+                    ?>
+                    <tr>
+                        <td class="tc"><input type="checkbox" class="check" name="{$vo.id}" value="{$vo.id}"></td>
+                        <td class="tc">{$vo.id}</td>
+                        <td><a href="/admin/Article/edit_artc?type=e&id={$vo.id}">{$vo.title}</a></td>
+                        <td>{$vo.author}</td>
+                        <td>{$vo.click}</td>
+                        <td>{$vo.source}</td>
+                        <td>{$vo.create_time}</td>
+                        <td>{$operate}</td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+</form>
+<!--搜索结果页面 列表 结束-->
+<script>
+    /*var formsNode = document.getElementById("formsNode");
+    var len = $("#formsNode input").length;
+    var aNode = document.getElementById("set_btn").innerHTML;
+    for(var i=0;i<len;i++){
+        formsNode.elements[i].onclick = function () {
+            var inputVal = this.value;
+            if(this.checked){
+                aNode += ",id="+inputVal;
+                document.getElementById("set_btn").innerHTML = aNode;
+            }else{
+                var inputArr = aNode.split(",");
+                var newArr = inputArr.indexOf("id="+inputVal);
+                inputArr.splice(newArr,1);
+                var strANode = inputArr.join(",");
+                aNode = strANode;
+                document.getElementById("set_btn").innerHTML = aNode;
+            }
+        };
+    }*/
+
+    $(function(){
+        var aNode = $("#set_btn").attr('href');
+        $(".check").click(function () {
+            var inputVal = $(this).val();
+            if($(this).is(":checked")){
+                aNode += ","+inputVal;
+                $("#set_btn").attr('href',aNode)
+            }else{
+                var inputArr = aNode.split(",");
+                var newArr = inputArr.indexOf(inputVal);
+                inputArr.splice(newArr,1);
+                var strANode = inputArr.join(",");
+                aNode = strANode;
+                $("#set_btn").attr('href',aNode)
+            }
+        });
+    });
+</script>
+</body>
+</html>

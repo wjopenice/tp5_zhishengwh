@@ -1,0 +1,55 @@
+<include file="inc/header" title="游戏排行" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/rank/index.css">
+
+    <div class="page-group">
+        <!--  热门排行  -->
+        <ul class="gift_header_ul cf">
+            <foreach name="apk1" item="vo" key="k">
+                <li class="fl rank_first">
+                    <img src="/uploads/{$vo.icon}" alt="" onclick="location.href='/wap/info?id={$vo.id}'">
+                    <p class="ofh" onclick="location.href='/wap/info?id={$vo.id}'">{$vo.title}</p>
+                    <a href="{$vo.addr_code}">下载</a>
+                </li>
+            </foreach>
+            <!--<li class="fl rank_first">-->
+                <!--<img src="/uploads/20180716141655/d439b5b718cc126ad975800229a487b1.png" alt="">-->
+                <!--<p class="ofh">神庙逃亡2最新礼包</p>-->
+                <!--<a href="/wap/info?id=33">下载</a>-->
+            <!--</li>-->
+            <!--<li class="fl">-->
+                <!--<img src="/uploads/20180716141655/d439b5b718cc126ad975800229a487b1.png" alt="">-->
+                <!--<p class="ofh">英雄之剑最新礼包</p>-->
+                <!--<a href="/wap/info?id=35">下载</a>-->
+            <!--</li>-->
+            <!--<li class="fl rank_third">-->
+                <!--<img src="/uploads/20180716141655/d439b5b718cc126ad975800229a487b1.png" alt="">-->
+                <!--<p class="ofh">火柴人突击格斗最新礼包</p>-->
+                <!--<a href="/wap/info?id=36">下载</a>-->
+            <!--</li>-->
+        </ul>
+
+        <!--   list列表   -->
+        <ul class="gift_ul">
+            <foreach name="apk2" item="vo" key="k">
+            <li class="cf">
+                <p class="num fl ofh">{$k+4}</p>
+                <div class="gift_header fl" onclick="location.href='/wap/info?id={$vo.id}'"><img src="/uploads/{$vo.icon}" alt=""></div>
+                <div class="gift_name all_play_name fl" onclick="location.href='/wap/info?id={$vo.id}'">
+                    <p class="gift_text all_play_text ofh">{$vo.title}</p>
+                    <p class="all_play_role ofh"><?=rand("10","99")?>.<?=rand("00","99")?>M | {$vo.type}</p>
+                    <p class="gift_bag ofh">{$vo.info}</p>
+                </div>
+                <a class="receive_btn fr" href="{$vo.addr_code}">下载</a>
+            </li>
+            </foreach>
+        </ul>
+    </div>
+
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/rank/index.js"></script>
+</body>
+</html>

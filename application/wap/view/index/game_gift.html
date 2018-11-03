@@ -1,0 +1,67 @@
+<include file="inc/header" title="游戏礼包" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/gift/info.css">
+
+    <div class="page-group">
+        <!--   游戏礼包领取   -->
+        <div class="info_box">
+            <ul class="gift_ul">
+                <li class="cf">
+                    <div class="gift_header fl"><img src="/uploads/{$arrData['icon']}" alt=""></div>
+                    <div class="gift_name info_name fl">
+                        <p class="gift_text all_play_text ofh">{$arrData['title']}礼包</p>
+                    </div>
+                    <a class="receive_btn fr" href="javascript:void(0);">领取</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--   礼包时效   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">游戏礼包</h4>
+            </div>
+            <p class="time">2018-07-06 至 2018-08-14</p>
+        </div>
+
+        <!--   礼包时效   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">礼包内容</h4>
+            </div>
+            <p class="time">潮流凯蒂男头*7天/彩色菱格女头*7天 潮流凯蒂男鞋*7天</p>
+        </div>
+
+        <!--   注意事项   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">注意事项</h4>
+            </div>
+            <p class="time">礼包每个角色只限使用1次；每个激活码只限使用1次；每个ID限领 1次。</p>
+        </div>
+
+        <!--   游戏下载   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">游戏下载</h4>
+            </div>
+            <ul class="gift_ul">
+                <li class="cf">
+                    <div class="gift_header fl" onclick="location.href='/wap/info?id={$arrData['id']}'"><img src="/uploads/{$arrData['icon']}" alt=""></div>
+                    <div class="gift_name all_play_name fl" onclick="location.href='/wap/info?id={$arrData['id']}'">
+                        <p class="gift_text all_play_text ofh">{$arrData['title']}</p>
+                        <p class="all_play_role"><?=rand("10","99")?>.<?=rand("00","99")?>M</p>
+                        <p class="gift_bag ofh">{$arrData['type']}</p>
+                    </div>
+                    <a class="receive_btn fr" href="/wap/info?id={$arrData['addr_code']}">下载</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/gift/info.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<include file="common/header" title="档位列表" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/list.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="content">
+                <!-- 添加 -->
+                <div class="search-bar add-bar">
+                    <a href="/mobile/Gear/add" class="add-icon add-bar-icon" external><img src="<?=IMG_PATH?>/mobile/buss/add-icon.png" alt=""></a>
+                </div>
+                <!-- 列表 -->
+                <div class="list-block">
+                    <foreach name="level" item="value">
+                    <ul class="item-delete pr">
+                        <li>
+                            <a href="/mobile/Gear/detail?id={$value.id}" external>
+                                <div class="item-content item-link">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner item-border">
+                                        <div class="item-title">{$value.level}</div>
+                                    </div>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title item-time">佣金提现费率</div>
+                                        <div class="item-after item-files">{$value.comm_revenue}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <div class="item-del" data-id="{$value.id}">删除</div>
+                    </ul>
+                    </foreach>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<include file="common/footer" />
+<script src="<?=JS_PATH?>/mobile/mobile/common/zepto.touchWipe.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.item-delete').touchWipe({itemDelete: '.item-del'});
+    });
+    $(document).on('click','.item-del', function () {
+        var that = $(this);
+        var id = that.data("id");
+        $.confirm('确定删除该档位吗？', function () {
+            $.post("/mobile/gear",{id:id},function (msg) {
+                 if(msg.msg){
+                     that.parent().remove();
+                 }
+            },"json");
+        });
+    });
+</script>

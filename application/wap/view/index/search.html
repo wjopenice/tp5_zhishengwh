@@ -1,0 +1,55 @@
+<include file="inc/header" title="搜索" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/search/index.css" />
+    <!--  页面  -->
+    <div class="page-group">
+        <!--    搜索框    -->
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel">取消</a>
+                <div class="search-input">
+                    <label id="btn" class="icon icon-search" for="search"></label>
+                    <input type="search" id='search' name="d" placeholder='输入游戏关键字...'/>
+                </div>
+            </div>
+        </div>
+        <!--   热搜礼包   -->
+        <div class="gift_box hot_gift">
+            <div class="gift_title cf">
+                <h4 class="fl">热搜礼包</h4>
+            </div>
+            <ul class="gift_ul">
+                <li class="cf">大逃杀绝地吃鸡礼包大全</li>
+                <li class="cf">王者荣耀李白敏锐之力皮肤礼包</li>
+                <li class="cf">DOTA2勇士令状等级礼包</li>
+                <li class="cf">王者荣耀诸葛亮掌控之力皮肤礼包</li>
+            </ul>
+        </div>
+
+        <!--   搜索内容   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">搜索全部内容</h4>
+            </div>
+            <ul class="rank_ul cf">
+                <volist  name="arrData" id="vo2">
+                    <li class="fl" onclick="window.location.href='/wap/info?id={$vo2['id']}'">
+                        <img class="dib" src="/uploads/{$vo2['icon']}" alt="{$vo2['title']}">
+                        <p class="rank_game_name ofh">{$vo2['title']}</p>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+
+    </div>
+
+<!--<include file="inc/footer" />-->
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        enter();
+    });
+</script>

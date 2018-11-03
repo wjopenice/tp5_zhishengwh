@@ -1,0 +1,120 @@
+<include file="common/header" title="商户详情" />
+
+    <link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/detail.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <form action="/mobile/buss/edit" method="post">
+                <input type="hidden" name="id" value="{$data['promote']['id']}">
+                <div class="content">
+                <!-- 面包屑 -->
+                <div class="crumbs" style="margin-top: 3rem;"><a href="javascript:void(0);">商户管理&nbsp;>&nbsp;</a><a href="/mobile/buss" external>商户详情 ✕</a></div>
+
+                <div class="list-block">
+                    <!-- 商户列表 -->
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">商户号</div>
+                                <div class="item-after"><input type="text" name="account" value="{$data['promote']['account']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">商品名称</div>
+                                <div class="item-after"><input type="text" name="nickname" value="{$data['promote']['nickname']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">手机号</div>
+                                <div class="item-after"><input type="text" name="mobile_phone" value="{$data['promote']['mobile_phone']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">Email</div>
+                                <div class="item-after"><input type="text" class="item-order" name="email" value="{$data['promote']['email']}"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-link">
+                            <div class="item-media"><i class="icon icon-f7"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">充值金额</div>
+                                <div class="item-after"><a href="/mobile/buss/rechargedetail&id={$data['promote']['id']}" external>详情</a></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 状态设置 -->
+                <div class="crumbs set-bar"><a href="javascript:void(0);">状态设置</a></div>
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">状态设置</div>
+                                    <div class="item-input">
+                                        <input type="text" placeholder="请选择状态设置" id="picker" readonly="" name="status" value="<?php if($data['promote']['status']=1){echo "正常";}else{echo "禁用";} ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 档位设置 -->
+                <div class="crumbs set-bar"><a href="javascript:void(0);">档位设置</a></div>
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">档位设置</div>
+                                    <div class="item-input" id="inputpicker1">
+                                        <input type="text" placeholder="请选择档位设置" id="picker1" name="level_id" readonly value="{$data['promote']['level']}">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 保存返回按钮 -->
+                <input class="sure-btn" type="submit" name="btn" value="保存" style="border: 0;">
+                <a class="return-btn" href="/mobile/buss" external>返回</a>
+            </div>
+            </form>
+        </div>
+    </div>
+<include file="common/footer" />
+<script>
+    $(function(){
+        $("#picker").picker({
+            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择状态设置</h1></header>',
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: ['正常', '禁用']
+                }
+            ]
+        });
+        $("#picker1").picker({
+            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择档位设置</h1></header>',
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: eval("["+"<?=$data['level']?>"+"]")
+                }
+            ]
+        });
+
+    });
+</script>

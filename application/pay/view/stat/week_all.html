@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="lineChart" id="week_all"></div>
+
+<script type="text/javascript" src="<?=JS_PATH?>/pay/echarts.min.js"></script>
+<script>
+    var myWeekAllChart = echarts.init(document.getElementById('week_all'));
+    var seriesData = [];
+    $.ajax({
+        type:'post',
+        url:'/pay/Stat/weekalljson',
+        data:{},
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+            var timeBox = [];
+            var ArrNum = [];
+            var data = data;
+            var subSeriesData = [];
+
+            var content = data[0].content;
+            $.each(content,function(i,obj){
+                timeBox.push(obj.time);
+            });
+
+            $.each(data,function(i,obj){
+                var amount = [];
+                subSeriesData[i] = {name:[],type:'line',stack: null,areaStyle: {normal: {}},data:[]};
+                subSeriesData[i].name = obj.name;
+                ArrNum.push(obj.name);
+
+                $.each(obj.content,function(j,obj2){
+                    amount.push(obj2.data.pay_amount);
+                });
+                subSeriesData[i].data = amount;
+            });
+
+
+            myWeekAllChart.setOption({ //加载数据图表
+                xAxis: {
+                    data: timeBox
+                },
+                legend: {
+                    data: ArrNum
+                },
+                series: subSeriesData
+            });
+        }
+    });
+
+    // 指定图表的配置项和数据
+    var WeekAll = {
+        title: {
+            text: '7天充值'
+        },
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data:[]
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : []
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : []
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myWeekAllChart.setOption(WeekAll);
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<include file="common/header" title="接口添加" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/detail.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="content">
+                <!-- 面包屑 -->
+                <div class="crumbs"><a href="javascript:void(0);">接口列表&nbsp;>&nbsp;</a><a href="javascript:void(0);" onClick="javascript :history.back(-1);" external>接口添加 ✕</a></div>
+                <form action="/mobile/interfaces/add" method="post">
+                    <div class="list-block">
+                        <!-- 商户列表 -->
+                        <ul>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">接口名称</div>
+                                    <div class="item-after"><input type="text" class="item-order" name="pay_title" required value="" placeholder="请填写接口名称"></div>
+                                </div>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">接口商户号</div>
+                                    <div class="item-after"><input type="text" class="item-order" name="pay_number" required value="" placeholder="请填写接口商户号"></div>
+                                </div>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">接口APPID</div>
+                                    <div class="item-after"><input type="text" class="item-order" name="pay_appid" required value="" placeholder="请填写接口APPID"></div>
+                                </div>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">接口CUSID</div>
+                                    <div class="item-after"><input type="text" class="item-order" name="pay_cusid" required value="" placeholder="请填写接口CUSID"></div>
+                                </div>
+                            </li>
+                            <li class="item-content item-link">
+                                <div class="item-media"><i class="icon icon-f7"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title">接口APPKEY</div>
+                                    <div class="item-after"><input type="text" class="item-order" name="pay_appkey" required value="" placeholder="请填写接口APPKEY"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 接入方 -->
+                    <div class="crumbs set-bar"><a href="javascript:void(0);">接入方</a></div>
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">接入方</div>
+                                        <div class="item-input">
+                                            <input type="text" placeholder="请选择接入方" id="picker" name="pay_type" value="" readonly="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 状态设置 -->
+                    <div class="crumbs set-bar"><a href="javascript:void(0);">状态设置</a></div>
+                    <div class="list-block">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">状态设置</div>
+                                        <div class="item-input">
+                                            <input type="text" placeholder="请选择状态设置" id="picker1" name="status" value="" readonly="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 保存返回按钮 -->
+                    <input type="submit" class="sure-btn" value="添加" style="border: 0;">
+                </form>
+                <a class="return-btn" href="javascript:void(0);" onClick="javascript :history.back(-1);">返回</a>
+            </div>
+        </div>
+    </div>
+<include file="common/footer" />
+<script src="<?=JS_PATH?>/mobile/interface/add.js"></script>

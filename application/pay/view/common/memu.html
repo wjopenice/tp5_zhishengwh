@@ -1,0 +1,37 @@
+<body id="bg">
+<!-- 左边节点 -->
+<div class="container">
+
+    <div class="leftsidebar_box">
+        <a href="/pay" style="display: block;"><div class="line">
+            <img src="<?=INDEX_PATH?>/img/coin01.png" />&nbsp;&nbsp;首页
+        </div></a>
+        <!-- <dl class="system_log">
+        <dt><img class="icon1" src="/static/index/img/coin01.png" /><img class="icon2"src="/static/index/img/coin02.png" />
+            首页<img class="icon3" src="/static/index/img/coin19.png" /><img class="icon4" src="/static/index/img/coin20.png" /></dt>
+    </dl> -->
+        <foreach name="$menu" item="val">
+        <dl class="system_log">
+            <dt>
+                <img class="icon1" src="<?=INDEX_PATH?>/img/{$val.faicon}" />
+                <img class="icon2" src="<?=INDEX_PATH?>/img/{$val.faicon2}" /> {$val.title}
+                <img class="icon3" src="<?=INDEX_PATH?>/img/coin19.png" />
+                <img class="icon4" src="<?=INDEX_PATH?>/img/coin20.png" />
+            </dt>
+            <if condition="$val['children'] neq null">
+            <foreach name="$val.children" item="v">
+            <dd>
+                <img class="coin11" src="<?=INDEX_PATH?>/img/coin111.png" />
+                <img class="coin22" src="<?=INDEX_PATH?>/img/coin222.png" />
+                <a class="cks" href="{$v.url}">{$v.title}</a>
+                <img class="icon5" src="<?=INDEX_PATH?>/img/coin21.png" />
+            </dd>
+            </foreach>
+            </if>
+        </dl>
+        </foreach>
+    </div>
+
+</div>
+</body>
+</html>

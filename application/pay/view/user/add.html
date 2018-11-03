@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加管理员</title>
+    <link rel="stylesheet" href="../../Static/Js/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="../../Static/Css/common/public.css">
+    <link rel="stylesheet" href="../../Static/Css/common/page.css">
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">权限列表&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">添加管理员</p>
+    </div>
+    <!--  标题   -->
+    <div class="cont_btnLine cf">
+        <p class="fl">添加管理员</p>
+    </div>
+    <form class="addProContent cf">
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>角色：</dt>
+            <dd class="fl">
+                <select name="roleId" >
+                    {foreach name="$role" item="val"}
+                    <option value="{$val.rid}">{$val.role_name}</option>
+                    {/foreach}
+                </select>
+            </dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>账户：</dt>
+            <dd class="fl"><input placeholder="请填写账户" type="text" name="account" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>状态：</dt>
+            <dd class="fl">
+                <label class="fl cf"><input class="fl" type="radio" name="status" value="1" checked><p class="fl labelName">正常</p></label>
+                <label class="fl cf"><input class="fl" type="radio" name="status" value="0"><p class="fl labelName">禁用</p></label>
+            </dd>
+        </dl>
+    </form>
+    <a class="confirmBtn" href="javascript:void(0)" id="add" name="submit">确定</a>
+</div>
+<script src="../../Static/Js/common/jquery.js"></script>
+<script src="../../Static/Js/common/ligerUI/js/core/base.js"></script>
+<script src="../../Static/Js/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="../../Static/Js/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="../../Static/Js/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="../../Static/Js/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="../../Static/Js/common/dialog.js"></script>
+<script src="../../Static/Js/common/public.js"></script>
+<script>
+
+    $("#add").on('click',function(){
+
+        var prompt = checkParamete($(".addProContent").serialize());
+        console.log(prompt);
+        if(prompt){
+            bombBox.bombBoxError('', prompt);
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            }); 
+            return false;
+        }
+        
+
+        submitAdd('/admin/user/add.html');
+
+    });
+</script>
+</body>
+</html>

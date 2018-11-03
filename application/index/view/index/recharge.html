@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>充值中心</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/recharge/index.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--    中间主页    -->
+    <div class="content_box">
+        <!--   充值   -->
+        <form id="form" action="http://www.zhishengwh.com/alipay/pagepay/pagepay.php" method="post">
+        <input type='hidden' id="pay_type" name='pay_way' value='支付宝'>
+        <input type='hidden' id="pay_body" name='body' value='充值卡0.01'>
+        <input type='hidden' id="notify_url" name='notify_url' value='http://www.zhishengwh.com/asyn_url.php'>
+        <input type='hidden' id="return_url" name='return_url' value='http://www.zhishengwh.com/success_url.php'>
+        <input type='hidden' id="resqn" name='resqn' value="<?='zspay'.date('Ymd').substr(implode(array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8) ?>">
+        <div class="rank_hot_wrap container cf">
+            <!--<div style="text-align: center;margin: 80px 0;">
+                <img class="dib" src="<?=IMG_PATH?>/index/gift/news.png" width="801" height="670" alt="">
+            </div>-->
+            <div class="pay_item fl">
+                <div class="title_box cf">
+                    <p class="tit_name fl">充值通道</p>
+                </div>
+                <ul class="pay_ul_box">
+                    <li class="active">
+                        <a class="alipay_text channe" href="javascript:void(0);"><i class="dib"></i><span>游戏通道(PC)</span></a>
+                        <input type='hidden' name='channe_type' value='游戏通道(PC)'>
+                    </li>
+                    <li>
+                        <a class="wechat_text channe" href="javascript:void(0);"><i class="dib"></i><span>蜂巢通道(PC)</span></a>
+                        <input type='hidden' name='channe_type' value='蜂巢通道(PC)'>
+                    </li>
+                    <li>
+                        <a class="wechat_text channe" href="javascript:void(0);"><i class="dib"></i><span>全付通道(H5)</span></a>
+                        <input type='hidden' name='channe_type' value='全付通道(H5)'>
+                    </li>
+                    <li>
+                        <a class="wechat_text channe" href="javascript:void(0);"><i class="dib"></i><span>固额通道(H5)</span></a>
+                        <input type='hidden' name='channe_type' value='固额通道(H5)'>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="pay_content fl">
+                <div class="title_box cf">
+                    <p class="tit_name fl">充值信息</p>
+                </div>
+                <p class="pay_state"><span>充值到</span><span class="a_org">平台币</span></p>
+                    <!--   支付宝充值,微信充值,银联充值   -->
+                    <div class="pay_box">
+                        <div class="pay_account cf">
+                            <label for="u_recharge_box" class="fl">充值商户：</label>
+                            <input type="text" name="account" class="fl" id="u_recharge_box" maxlength="20" value="{$business_id}" readonly />
+                            <span class="error fl"></span>
+                        </div>
+                        <!--<div class="pay_account cf">
+                            <label for="u_confirm_box" class="fl">确定账号：</label>
+                            <input type="text" class="fl" id="u_confirm_box" maxlength="20" value="">
+                            <span class="error fl"></span>
+                        </div>-->
+                        <div class="pay_type cf">
+                            <p class="fl">支付类型：</p>
+                            <div class="card_box cf fl" id="card_box_type">
+                                <button type='button' class="active fl">支付宝</button>
+                            </div>
+
+                        </div>
+                        <div class="recharge_money_box">
+                            <div class="recharge_title">充值金额</div>
+                            <ul class="recharge_money_uL cf">
+                                <li class="recharge_money_li recharge_money_1 fl active">1元</li>
+                                <li class="recharge_money_li recharge_money_100 fl">100元</li>
+                                <li class="recharge_money_li recharge_money_300 fl">300元</li>
+                                <li class="recharge_money_li recharge_money_500 fl">500元</li>
+                                <li class="recharge_money_li recharge_money_1000 fl">1000元</li>
+                                <li class="recharge_money_li recharge_money_3000 fl">3000元</li>
+                                <li class="recharge_money_li recharge_money_5000 fl">5000元</li>
+                            </ul>
+                            <div class="other_money cf">
+                                <p class="other_amount fl">其他金额：</p>
+                                <input type="text" id="money_input" class="money_input fl" name="pay_amount" value="">
+                                <p class="money fl">元</p>
+                                <p class="percent fl">*&nbsp;比例：1元=1平台币</p>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="pay_btn" value="立即充值">
+                    <div class="text_description">
+                        <p class="description_title">平台支付说明：</p>
+                        <p>1、您必须拥有平台账户。</p>
+                        <p>2、充值时请确认好充值金额准确无误后再充值，避免输错导致错误，如因未仔细确认金额造成的充值问题，我们将一律不予处理此类退款申诉。</p>
+                        <p style="color: #ff948e;">3、充值时遇到该充值通道充值无效，请更换其他通道进行充值。</p>
+                        <p>4、在线客服电话：0755-86659665</p>
+                    </div>
+
+            </div>
+        </div>
+        </form>
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script src="<?=JS_PATH?>/index/recharge/index.js"></script>
+    <script>
+//        //禁止鼠标右键
+//        document.oncontextmenu = function () {
+//            return false;
+//        };
+//        //禁止f12
+//        document.onkeydown = function () {
+//            if (window.event && window.event.keyCode == 123) {
+//                window.event.returnValue = false;
+//            }
+//        }
+    </script>
+</body>
+</html>

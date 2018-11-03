@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+     <form action="/api/Order/test" method="post">
+         商品名称：<input type="text" name="order_name" value="测试产品" /><br />
+         商品价格：<input type="text" name="order_amount" value="0.01" readonly /><br />
+         用户名称：<input type="text" name="account" value="ZB1520821677" /><br />
+         支付方式：<select name="pay_way">
+                       <option value="1">微信</option>
+                       <option value="2">支付宝</option>
+                   </select><br />
+         <input type="submit" name="btn" value="下单"/>
+     </form>
+
+
+</body>
+</html>

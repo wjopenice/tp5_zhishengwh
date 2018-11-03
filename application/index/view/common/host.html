@@ -1,0 +1,14 @@
+<div class="card_nav container cf pr">
+    <i class="card_hot_game fl"></i>
+    <ul class="gift_hot_ul fl cf">
+        <foreach name="host" item="vox">
+        <li class="gift_hot_li fl">
+            <a href="javascript:void(0);">
+                <img class="gift_img dib" src="/uploads/{$vox.icon}" alt="{$vox.title}" onclick="location.href='/detail?type=center&id={$vox.id}'">
+                <p class="gift_li_text ofh" onclick="location.href='/detail?type=center&id={$vox.id}'">{$vox.title}</p>
+            </a>
+        </li>
+        </foreach>
+    </ul>
+    <i class="card_nav_icon"></i>
+</div>

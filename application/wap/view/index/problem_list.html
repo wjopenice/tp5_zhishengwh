@@ -1,0 +1,27 @@
+<include file="inc/header" title="问题列表" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/customer/problem_list.css">
+
+<div class="page-group">
+
+    <!--    问题列表    -->
+    <ul class="problem_ul">
+        <foreach name="arrData" item="vo">
+        <li class="cf">
+            <a href="/wap/problem_info.html?id={$vo.id}">
+                <p class="ofh fl">{$vo.title}</p>
+                <span class="icon icon-right fr"></span>
+            </a>
+        </li>
+        </foreach>
+    </ul>
+
+</div>
+
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+<script src="<?=JS_PATH?>/wap/customer/problem_list.js"></script>
+
+</body>
+</html>

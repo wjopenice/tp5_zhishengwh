@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>账号注册</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/sm.min.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/login/register.css">
+</head>
+<body class="mHome">
+
+    <!--    加载层    -->
+    <div id="loader"><div class="loader_inner"><img src="/public/static/image/wap/login/ajax-loader.gif" alt=""><p class="loader_text">正在加载</p></div></div>
+
+    <!--    页面    -->
+    <div class="page_box">
+        <!--     login头部     -->
+        <div class="login_header">
+            <!--     logo      -->
+            <img class="dib" src="/public/static/image/wap/login/logo.png" alt="">
+            <div class="login_text"><span>欢迎来到致晟游戏平台</span></div>
+        </div>
+        <form action="/index/Login/register" method="post" onsubmit="" autocomplete="off">
+            <input type="hidden" name="type" value="wap">
+            <!--      手机号      -->
+            <div class="input_box iphone pr"><i></i><p></p><input type="number" name="phone" autofocus  required  onblur="return send(this);"  placeholder="请填写正确手机号" pattern="^(13|14|15|17|18)[0-9]{9}$"></div>
+            <!--      密码      -->
+            <div class="input_box pwd pr"><i></i><p></p><input type="password" class="vir" name="password" placeholder="请输入6-20位数的密码"  pattern="\w{6,20}"></div>
+            <!--      姓名      -->
+            <div class="input_box name pr"><i></i><p></p><input type="text" class="vir" name="real_name" placeholder="请输入真实姓名" pattern="^([\u4e00-\u9fa5]{1,20}|[a-zA-Z\.\s]{1,20})$"></div>
+            <!--      身份证      -->
+            <div class="input_box id_card pr"><i></i><p></p><input type="text" class="vir" name="idcard" placeholder="请输入正确身份证号码" pattern="^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$"></div>
+
+            <!--      注册      -->
+            <div class="login_btn"><input type="submit" value="注册"></div>
+        </form>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/login/register.js"></script>
+    <script>
+        var send = function (tag) {
+            var data = tag.value;
+            var len = data.length;
+            if(len === 11){
+                $.post("/index/Login/loginajax",{d:data},function (msg) {
+                    if(msg == 1){
+                        $.toast("账号已经存在");
+                        $(".vir").attr("disabled","disabled");
+                        tag.focus();
+                        return false;
+                    }else{
+                        $.toast("账号可以使用");
+                        $(".vir").removeAttr("disabled");
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

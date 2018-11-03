@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>忘记密码</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/sm.min.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/wap/login/register.css">
+</head>
+<body class="mHome">
+
+    <!--    加载层    -->
+    <div id="loader"><div class="loader_inner"><img src="/public/static/image/wap/login/ajax-loader.gif" alt=""><p class="loader_text">正在加载</p></div></div>
+
+    <!--    页面    -->
+    <div class="page_box">
+        <!--     login头部     -->
+        <div class="login_header">
+            <!--     logo      -->
+            <img class="dib" src="/public/static/image/wap/login/logo.png" alt="">
+            <div class="login_text"><span>欢迎来到致晟游戏平台</span></div>
+        </div>
+        <div>
+            <!--      手机号      -->
+            <div class="input_box iphone pr"><i></i><p></p><input type="number" id="account" name="phone" placeholder="请输入手机号" pattern="\d{11}"></div>
+            <!--      姓名      -->
+            <div class="input_box name pr " id="name" style="display: none;"><i></i><p></p><input type="text" id="real_name" name="	real_name" placeholder="请输入真实姓名"  maxlength="20"></div>
+            <!--      身份证      -->
+            <div class="input_box id_card pr " id="id_card" style="display: none;"><i></i><p></p><input type="text" id="idcard" name="idcard" placeholder="请输入正确身份证号码"  maxlength="20"></div>
+            <!--      密码      -->
+            <div class="input_box pwd pr " id="pwd" style="display: none; "><i></i><p></p><input type="password" id="password" name="password" placeholder="请输入6-20位数的密码"  pattern="\w{6,20}"></div>
+            <!--      注册      -->
+            <div class="login_btn"><input type="button" id="btn" value="完成" disabled style="background: #f2f2f2;"></div>
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/login/forget_pwd.js"></script>
+</body>
+</html>
+
+<script>
+$(function () {
+   $("#account").keyup(function () {
+       var userNode = $(this).val();
+       var len = userNode.length;
+       if(len == 11){
+           $.post("/index/Login/loginajax",{d:userNode},function (msg) {
+               if(msg == 1){
+                   $("#account").attr("readonly","readonly");
+                   $("#name").show(1500);
+                   $("#id_card").show(1500);
+                   $("#account").css("background","none");
+               }else{
+                   $("#account").css("background","antiquewhite");
+               }
+           },"json");
+       }else{
+           $("#account").css("background","antiquewhite");
+       }
+   });
+
+   $("#idcard").keyup(function () {
+        var idcardNode = $(this).val();
+        var realNameNode = $("#real_name").val();
+       $.get("/uc/ajaxpwd",{type:'user',n:realNameNode,c:idcardNode},function (msg) {
+           if(msg.code == 1){
+               //验证通过
+               $("#real_name").attr("readonly","readonly");
+               $("#idcard").attr("readonly","readonly");
+               $("#real_name").css("background","none");
+               $("#idcard").css("background","none");
+               $("#pwd").show(1500);
+           }else{
+               //验证失败
+               $("#real_name").css("background","antiquewhite");
+               $("#idcard").css("background","antiquewhite");
+           }
+       },"json");
+   });
+
+   $("#password").keyup(function () {
+       var pwdNode = $(this).val();
+       var lenp = pwdNode.length;
+       if( (lenp >= 6) && (lenp <20) ){
+           $("#btn").removeAttr("disabled");
+           $("#btn").css("background","#ff6c64");
+       }else{
+           $("#btn").attr("disabled","disabled");
+           $("#btn").css("background","#f2f2f2");
+       }
+   });
+
+   $("#btn").click(function () {
+       var pwdNode2 = $("#password").val();
+       $.get("/uc/ajaxpwd",{type:'pwd',p:pwdNode2},function (msg) {
+           if(msg.code == 1){
+               $.toast("修改成功,三秒后跳转到登录");
+               window.setTimeout(()=>{window.location.href='/wap/login.html';},3000);
+           }else{
+               $.toast("不能使用原密码");
+           }
+       },"json");
+   });
+});
+
+</script>

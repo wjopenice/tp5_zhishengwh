@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商户详情</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/index/welcome.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+    <!--  内容的整体部分    -->
+    <div class="contentFull">
+        <!-- 搜索引擎部分   -->
+        <div class="content_navBar cf">
+            <p class="fl">我的位置：</p>
+            <p class="fl">商户列表&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+            <p class="fl col-red">商户列表详情</p>
+        </div>
+        <!-- 详情banner -->
+        <div class="bannerDetail">商户号：{$account.account}</div>
+        <!-- 详情模块 -->
+        <div class="modelDetail">
+            <div class="cf">
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">总充值额</p>
+                    <p class="ofh" title="{$data.all_money ? : '0.00'}">{$data.all_money ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList2 fl">
+                    <p class="title ofh" title="总充值额">H5充值额</p>
+                    <p class="ofh" title="{$data.recharge.h5 ? : '0.00'}">{$data.recharge.h5 ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">PC充值额</p>
+                    <p class="ofh" title="{$data.recharge.pc ? : '0.00'}">{$data.recharge.pc ? : '0.00'}</p>
+                </div>
+            </div>
+            <div class="cf">
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">总结算额</p>
+                    <p class="ofh" title="{$data.all_rech_money ? : '0.00'}">{$data.all_rech_money ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5支付宝结算额</p>
+                    <p class="ofh" title="{$data.sett.already.h5_alipay ? : '0.00'}">{$data.sett.already.h5_alipay ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5微信结算额</p>
+                    <p class="ofh" title="{$data.sett.already.h5_wetch ? : '0.00'}">{$data.sett.already.h5_wetch ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">PC结算额</p>
+                    <p class="ofh" title="{$data.sett.already.pc ? : '0.00'}">{$data.sett.already.pc ? : '0.00'}</p>
+                </div>
+            </div>
+            <div class="cf">
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">未结算额</p>
+                    <p class="ofh" title="{$data.not_rech_money ? : '0.00'}">{$data.not_rech_money ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5支付宝未结算额</p>
+                    <p class="ofh" title="{$data.sett.not.h5_alipay ? : '0.00'}">{$data.sett.not.h5_alipay ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5微信未结算额</p>
+                    <p class="ofh" title="{$data.sett.not.h5_wetch ? : '0.00'}">{$data.sett.not.h5_wetch ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">PC未结算额</p>
+                    <p class="ofh" title="{$data.sett.not.pc ? : '0.00'}">{$data.sett.not.pc ? : '0.00'}</p>
+                </div>
+            </div>
+            <div class="cf">
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">总提现额</p>
+                    <p class="ofh" title="{$data.all_with_money ? : '0.00'}">{$data.all_with_money ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5支付宝提现额</p>
+                    <p class="ofh" title="{$data.with.already.h5_alipay ? : '0.00'}">{$data.with.already.h5_alipay ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5微信提现额</p>
+                    <p class="ofh" title="{$data.with.already.h5_wetch ? : '0.00'}">{$data.with.already.h5_wetch ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">PC提现额</p>
+                    <p class="ofh" title="{$data.with.already.pc ? : '0.00'}">{$data.with.already.pc ? : '0.00'}</p>
+                </div>
+            </div>
+            <div class="cf">
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">总未提现额</p>
+                    <p class="ofh" title="{$data.not_with_money.not_money ? : '0.00'}">{$data.not_with_money.not_money ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5支付宝未提现额</p>
+                    <p class="ofh" title="{$data.with.not.h5_alipay ? : '0.00'}">{$data.with.not.h5_alipay ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">H5微信未提现额</p>
+                    <p class="ofh" title="{$data.with.not.h5_wetch ? : '0.00'}">{$data.with.not.h5_wetch ? : '0.00'}</p>
+                </div>
+                <div class="modelList modelList1 fl">
+                    <p class="title ofh" title="总充值额">PC未提现额</p>
+                    <p class="ofh" title="{$data.with.not.pc ? : '0.00'}">{$data.with.not.pc ? : '0.00'}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+</body>
+</html>

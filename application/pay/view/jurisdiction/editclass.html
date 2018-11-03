@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑权限分类</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">权限列表&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">编辑权限分类</p>
+    </div>
+    <!--  标题   -->
+    <div class="cont_btnLine cf">
+        <p class="fl">编辑权限分类</p>
+    </div>
+    <form class="addProContent cf">
+        <input type="hidden" name="id" value="{$find.id}">
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>分类名称：</dt>
+            <dd class="fl"><input placeholder="请填写分类名称" type="text" name="title" value="{$find.title}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>排序：</dt>
+            <dd class="fl"><input placeholder="请填写排序" type="text" name="solf"  value="{$find.solf}" class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>图标：</dt>
+            <dd class="fl"><input placeholder="请填写图标" type="text" name="faicon"  value="{$find.faicon}" class="fl"></dd>
+        </dl>
+        <!-- <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>图标2：</dt>
+            <dd class="fl"><input placeholder="请填写图标2" name="faicon2" type="text" value="{$find.faicon2}" class="fl"></dd>
+        </dl> -->
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>是否隐藏：</dt>
+            <dd class="fl cf">
+                <if condition="$find.hide == '0'">
+                <label class="fl cf"><input class="fl" type="radio" name="hide" value="0" checked><p class="fl labelName">显示</p></label>
+                <label class="fl cf"><input class="fl" type="radio" name="hide" value="1"><p class="fl labelName">隐藏</p></label>
+                <else />
+                 <label class="fl cf"><input class="fl" type="radio" name="hide" value="0"><p class="fl labelName">显示</p></label>
+                <label class="fl cf"><input class="fl" type="radio" name="hide" value="1" checked><p class="fl labelName">隐藏</p></label>
+                </if>
+            </dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>状态：</dt>
+            <dd class="fl">
+                <if condition="$find.status == '0'">
+                <label class="fl cf"><input class="fl" type="radio" name="status" value="0" checked><p class="fl labelName">正常</p></label>
+                <label class="fl cf"><input class="fl" type="radio" name="status" value="1"><p class="fl labelName">禁用</p></label>
+                <else />
+                 <label class="fl cf"><input class="fl" type="radio" name="status" value="0"><p class="fl labelName">正常</p></label>
+                <label class="fl cf"><input class="fl" type="radio" name="status" value="1" checked><p class="fl labelName">禁用</p></label>
+                </if>
+            </dd>
+        </dl>
+    </form>
+    <a class="confirmBtn" href="javascript:void(0)" id="add"  name="submit">确定</a>
+</div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+<script>
+
+    $("#add").on('click',function(){
+        
+        var prompt = checkParamete($(".addProContent").serialize());
+        console.log(prompt);
+        if(prompt){
+            bombBox.bombBoxError('', prompt);
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            }); 
+            return false;
+        }
+        
+
+        submitAdd('/pay/Jurisdiction/editclass');
+
+    });
+</script>
+</body>
+</html>

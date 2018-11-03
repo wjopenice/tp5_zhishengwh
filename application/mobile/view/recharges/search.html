@@ -1,0 +1,59 @@
+<include file="common/header" title="充值查询" />
+<link rel="stylesheet" href="<?=JS_PATH?>/mobile/common/dist/mescroll.min.css">
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/list.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="contentBox mescroll" id="mescroll">
+                <!-- 搜索框 -->
+                <form action="/mobile/recharges/search" method="post">
+                    <div class="search-bar cf search-box">
+                        <div class="bar bar-header-secondary fl search-bar-box bar-header-box">
+                            <div class="searchbar">
+                                <a class="searchbar-cancel">取消</a>
+                                <div class="search-input">
+                                    <label class="icon icon-search" for="search"></label>
+                                    <input type="search" id='search' name="search" placeholder='输入完整的商户号查询...'/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- 列表 -->
+                <div class="list-block">
+                    <div class="list-container data-list" id="dataList">
+                        <foreach $deposit as $key=>$value>
+                        <ul>
+                            <li>
+                                <a href="/mobile/recharges/detail?id={$value['id']}" external>
+                                    <div class="item-content item-link">
+                                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                                        <div class="item-inner item-border item-order">
+                                            <div class="item-title item-num">{$value['promote_account']}</div>
+                                            <div class="item-after item-order-num">{$value['pay_order_number']}</div>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title item-time">{$value['create_time']}</div>
+                                            <?php $class = ($value['pay_status'] == '支付成功') ? "item-green":"item-red"?>
+                                            <div class="item-after item-files {$class}">{$value['pay_status']}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        </foreach>
+                    </div>
+                    <div class="mescroll-upwarp mescroll-hardware" style="visibility: visible;"><p class="upwarp-nodata">-- 只返回最新20条数据，查看更多请访问PC端 --</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="common/footer" />
+
+

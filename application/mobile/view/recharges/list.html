@@ -1,0 +1,115 @@
+<include file="common/header" title="充值列表" />
+<link rel="stylesheet" href="<?=JS_PATH?>/mobile/common/dist/mescroll.min.css">
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/list.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="contentBox mescroll" id="mescroll">
+                <!-- 搜索框 -->
+                <form action="/mobile/recharges/search" method="post">
+                    <div class="search-bar cf search-box">
+                        <div class="bar bar-header-secondary fl search-bar-box bar-header-box">
+                            <div class="searchbar">
+                                <a class="searchbar-cancel">取消</a>
+                                <div class="search-input">
+                                    <label class="icon icon-search" for="search"></label>
+                                    <input type="search" id='search' name="search" placeholder='输入完整的商户号查询...'/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- 列表 -->
+                <div class="list-block">
+                    <div class="list-container data-list" id="dataList">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="common/footer" />
+    <script src="<?=JS_PATH?>/mobile/common/dist/mescroll.min.js"></script>
+    <script>
+        $(function(){
+            //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,重置列表数据;
+            var mescroll = new MeScroll("mescroll", {
+                up: {
+                    callback: getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
+                    isBounce: false, //此处禁止ios回弹,解析
+                    clearEmptyId: "dataList", //1.下拉刷新时会自动先清空此列表,再加入数据; 2.无任何数据时会在此列表自动提示空
+                    toTop:{ //配置回到顶部按钮
+                        src : "<?=IMG_PATH?>/mobile/common/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                        //offset : 1000
+                    }
+                }
+            });
+            /*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
+            function getListData(page){
+                //联网加载数据
+                getListDataFromNet(page.num, page.size, function(curPageData){
+                    //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
+                    //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
+                    //console.log("page.num="+page.num+", page.size="+page.size+", curPageData.length="+curPageData.length);
+                    mescroll.endSuccess(curPageData.length);
+
+                    //设置列表数据,因为配置了emptyClearId,第一页会清空dataList的数据,所以setListData应该写在最后;
+                    setListData(curPageData);
+                }, function(){
+                    //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+                    mescroll.endErr();
+                });
+            }
+            /*设置列表数据*/
+            var str = '';
+            function setListData(curPageData){
+                //console.log(curPageData);
+                for (var i = 0; i < curPageData.length; i++) {
+                    var pd=curPageData[i];
+
+                    var statusCol = pd.pay_status === "支付成功" ? 'item-green' : 'item-red';
+
+                    var str='<ul><li><a href="/mobile/recharges/detail?id='+pd.id+'" external>' +
+                        '<div class="item-content item-link">' +
+                        '<div class="item-media"><i class="icon icon-f7"></i></div>' +
+                        '<div class="item-inner item-border item-order">' +
+                        '<div class="item-title item-num">'+pd.promote_account+'</div>' +
+                        '<div class="item-after item-order-num">'+pd.pay_order_number+'</div></div></div>' +
+                        '<div class="item-content">' +
+                        '<div class="item-media"><i class="icon icon-f7"></i></div>' +
+                        '<div class="item-inner">' +
+                        '<div class="item-title item-time">'+pd.create_time+'</div>' +
+                        '<div class="item-after item-files '+statusCol+'">'+pd.pay_status+'</div></div></div></a>' +
+                        '</li></ul>';
+                    $("#dataList").append(str);
+
+                }
+            }
+            /*加载列表数据* */
+            function getListDataFromNet(pageNum,pageSize,successCallback,errorCallback) {
+                //延时一秒,模拟联网
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/mobile/recharges/getlist',
+                        //url: '../res/pdlist1.json?num='+pageNum+"&size="+pageSize,
+                        data:{page:{$urlpage},limit:{$urllimit}},
+                        dataType: 'json',
+                        success: function(data){
+                            //模拟分页数据
+                            var listData=[];
+                            for (var i = (pageNum-1)*pageSize; i < pageNum*pageSize; i++) {
+                                if(i==data.length) break;
+                                listData.push(data[i]);
+                            }
+                            successCallback(listData);
+
+                        },
+                        error: errorCallback
+                    });
+                },500)
+            }
+        });
+    </script>

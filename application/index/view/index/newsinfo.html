@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>致晟游戏玩转平台-{$artcdata['title']}</title>
+    <meta name="keywords" content="致晟游戏,玩转平台,玩转游戏，致晟文化">
+    <meta name="description" content="致晟游戏,玩转平台,玩转游戏，致晟文化">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/gift/index.css">
+    <link rel="icon" href="/favicon.ico">
+    <style>img{display: inline-block;}</style>
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--    中间主页    -->
+    <div class="content_box">
+
+        <!--   卡片导航   -->
+        <include file="common/host" />
+
+        <!--     游戏礼包，礼包排行，游戏排行     -->
+        <div class="rank_hot_wrap container cf">
+            <div class="type_news_game fl pr">
+                <div class="title_box cf">
+                    <p class="tit_name fl">资讯详情</p>
+                </div>
+                <div class="news_info">
+                    <div class="article_title">
+                        <p class="title ofh dib">{$artcdata['title']}</p>
+                        <p class="time">作者：{$artcdata['author']}&nbsp;&nbsp;&nbsp;&nbsp;来源：{$artcdata['source']}&nbsp;&nbsp;&nbsp;&nbsp;浏览量：{$artcdata['click']}&nbsp;&nbsp;&nbsp;&nbsp;时间：<?php echo date("Y-m-d",$artcdata['create_time']); ?> </p>
+                    </div>
+                    <div style="padding: 10px 80px;line-height: 32px;font-size: 14px;">
+                        <?php echo $artcdata['content']; ?>
+                    </div>
+                </div>
+            </div>
+            <include file="common/ranking" />
+        </div>
+
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>

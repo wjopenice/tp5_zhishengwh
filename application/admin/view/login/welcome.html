@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>html5响应式后台登录模板</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<?=CSS_PATH?>/admin/supersized.css">
+<link rel="stylesheet" href="<?=CSS_PATH?>/admin/login.css">
+<link rel="stylesheet" href="<?=CSS_PATH?>/admin/bootstrap.css">
+<script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+<script type="text/javascript" src="<?=JS_PATH?>/admin/tooltips.js"></script>
+</head>
+
+<body>
+<div class="page-container">
+	<div class="main_box">
+		<div class="login_box">
+			<div class="login_logo">
+				<img src="<?=IMG_PATH?>/admin/logo.png">
+			</div>
+		
+			<div class="login_form">
+				<form action="/admin" id="login_form" method="post">
+					<div class="form-group">
+						<label for="j_username" class="t">账　号：</label>
+						<input id="email"  name="username" class="form-control x319 in"  autocomplete="off" type="text" style=" height: 40px;"> <span class="text-info">*</span>
+					</div>
+					<div class="form-group">
+						<label for="j_password" class="t">密　码：</label> 
+						<input id="password"  name="userpass" class="password form-control x319 in" type="password"  value="" style=" height: 40px;"> <span class="text-info">*</span>
+					</div>
+					<div class="form-group">
+						<label for="j_captcha" class="t">验证码：</label>
+						 <input id="j_captcha" name="captcha" class="form-control x164 in" type="text"  style=" height: 40px;">
+						<img id="captcha_img" alt="点击更换" title="点击更换" src="/admin/Login/captcha" onclick="this.src='/admin/Login/captcha?data='+Math.random();" class="m" style=" width: 148px;height: 38px;">
+						<span id="info" class="text-info">*</span>
+						<span id="ok" class="glyphicon glyphicon-ok text-success" style="display: none;"></span>
+						<span id="error" class="glyphicon glyphicon-remove text-danger" style="display: none;"></span>
+					</div>
+					<div class="form-group">
+						<label class="t"></label>
+						<label for="j_remember" class="m">
+						<input id="j_remember" name="code" value="true" type="checkbox">&nbsp;记住登陆账号!</label>
+					</div>
+					<div class="form-group space">
+						<label class="t"></label>　　　
+						<button type="submit" id="submit_btn" class="btn btn-primary btn-lg" disabled>&nbsp;登&nbsp;录&nbsp; </button>
+						<input value="&nbsp;重&nbsp;置&nbsp;" class="btn btn-default btn-lg" type="reset">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="bottom">Copyright © 2018 sucaihuo.com</div>
+	</div>
+</div>
+<script src="<?=JS_PATH?>/admin/supersized.js"></script>
+<script src="<?=JS_PATH?>/admin/supersized-init.js"></script>
+</body>
+</html>
+<script>
+$(function () {
+	$("#j_captcha").keyup(function () {
+		var code = $(this).val();
+		$.post("/admin/Login/recaptcha",{code:code},function (msg) {
+			if(msg.msg == "ok"){
+                $("#submit_btn").removeAttr("disabled");
+                $("#info,#error").hide();
+                $("#ok").show();
+			}else{
+                $("#submit_btn").attr("disabled","disabled");
+                $("#info,#ok").hide();
+                $("#error").show();
+			}
+        });
+    });
+});	
+</script>

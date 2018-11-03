@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>资讯详情</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/gift/index.css">
+    <style>img{display: inline-block;}p{font-size: 0.9rem;}</style>
+</head>
+<body class="homeMain">
+    <!--    中间主页    -->
+    <div class="content_box">
+        <!--     游戏礼包，礼包排行，游戏排行     -->
+        <div class="rank_hot_wrap container cf">
+            <div class="type_news_game fl pr" style="width: 100%;">
+                <div class="news_info">
+                    <div class="article_title">
+                        <p class="title ofh dib" style="font-size: 36px;font-weight: bold;width: 90%;margin: 20px 40px;">{$artcdata['title']}</p>
+                        <p class="time">来源：{$artcdata['source']}&nbsp;&nbsp;&nbsp;&nbsp;浏览量：{$artcdata['click']}</p>
+                    </div>
+                    <div style="padding: 10px 80px;line-height: 32px;font-size: 14px;">
+                        <?php echo $artcdata['content']; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>

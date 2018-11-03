@@ -1,0 +1,123 @@
+<include file="common/header" title="添加商户" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/detail.css">
+<div class="page-group">
+    <div class="page">
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+            <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+        </header>
+        <div class="content">
+            <!-- 面包屑 -->
+            <div class="crumbs"><a href="javascript:void(0);">商户管理&nbsp;>&nbsp;</a><a href="javascript:void(0);" onClick="javascript :history.back(-1);" external> 添加 ✕</a></div>
+            <form action="/mobile/buss/add" method="post">
+            <div class="list-block">
+                <!-- 商户列表 -->
+                <ul>
+                    <li class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">商户号</div>
+                            <div class="item-after"><input type="text" class="item-order"  name="account" value="{$account_key}"></div>
+                        </div>
+                    </li>
+                    <li class="item-content item-link">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">商品名称</div>
+                            <div class="item-after"><input type="text" class="item-order" name="nickname" value="" placeholder="请填写商户名称"></div>
+                        </div>
+                    </li>
+                    <li class="item-content item-link">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">手机号</div>
+                            <div class="item-after"><input type="text" class="item-order" name="mobile_phone" maxlength="11" value=""  placeholder="请输入手机号"></div>
+                        </div>
+                    </li>
+                    <li class="item-content item-link">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">Emial</div>
+                            <div class="item-after"><input type="text" class="item-order" name="email" value=""  class="item-order" placeholder="请输入邮箱"></div>
+                        </div>
+                    </li>
+                    <li class="item-content item-link">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">登陆密码</div>
+                            <div class="item-after"><input type="text" class="item-order" name="hands_pass" value="" placeholder="请输入登陆密码"></div>
+                        </div>
+                    </li>
+                    <li class="item-content item-link">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner">
+                            <div class="item-title">结算方式</div>
+                            <div class="item-after"><input type="text" class="item-order" name="comm_type" value="T1" placeholder="请输入结算方式"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 档位设置 -->
+            <div class="crumbs set-bar"><a href="javascript:void(0);">商户等级</a></div>
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">商户等级</div>
+                                <div class="item-input">
+                                    <input type="text" name="level_id" class="item-order" placeholder="请选择商户等级" id="picker" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 推荐商户号 -->
+            <div class="crumbs set-bar"><a href="javascript:void(0);">推荐商户号</a></div>
+            <div class="list-block">
+                <ul>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">推荐商户号</div>
+                                <div class="item-input">
+                                    <input type="text" class="item-order" placeholder="请选择推荐商户号" id="picker1" name="referee_id" value="" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 添加返回按钮 -->
+            <input class="sure-btn" type="submit" value="添加" style="border: 0;" />
+            <a class="return-btn" href="javascript:void(0);" onClick="javascript :history.back(-1);">返回</a>
+            </form>
+        </div>
+    </div>
+</div>
+<include file="common/footer" />
+<script>
+    $(function(){
+        $("#picker").picker({
+            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择商户等级</h1></header>',
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: eval("["+"<?=$level?>"+"]")
+                }
+            ]
+        });
+        $("#picker1").picker({
+            toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择推荐商户号</h1></header>',
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: eval("["+"<?=$account_data?>"+"]")
+                }
+            ]
+        });
+    });
+</script>

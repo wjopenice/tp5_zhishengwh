@@ -1,0 +1,59 @@
+<!--   友情链接   -->
+<div class="f_link_box container">
+    <div class="title_box cf">
+        <p class="tit_name fl">友情链接</p>
+    </div>
+    <ul class="link_content_ul cf">
+        <volist name="link" id="vo">
+            <li class="each_sub_link fl"><a href="{$vo.link_url}" class="link_a" target="_blank">{$vo.title}</a></li>
+        </volist>
+    </ul>
+</div>
+
+<!--  版权信息   -->
+<div class="footer_box">
+    <div class="container cf">
+        <div class="footerContentWrap fl">
+            <div class="subCopy aboutUs">
+                <a href="javascript:void(0)">关于我们</a>
+                <span>|</span>
+                <a href="javascript:void(0)">商务合作</a>
+                <span>|</span>
+                <a href="javascript:void(0)">合作伙伴</a>
+                <span>|</span>
+                <a href="javascript:void(0)">客服帮助</a>
+                <span>|</span>
+                <a href="javascript:void(0)">注册协议</a>
+            </div>
+            <div class="subCopy">
+                <a href="javascript:void(0)">防沉迷系统</a>
+                <span>|</span>
+                <a href="javascript:void(0)">未成年家长监护工程</a>
+                <span>|</span>
+                <a href="javascript:void(0)">《网络游戏服务格式化协议必备条款》</a>
+            </div>
+            <div class="subCopy">
+                <p>{$site['copyright']}</p>
+            </div>
+            <div class="subCopy">
+                <p>网站备案：{$site['icpb']}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function (w, d, s, i, v, j, b) {
+        w[i] = w[i] || function () {
+                (w[i].v = w[i].v || []).push(arguments)
+            };
+        j = d.createElement(s),
+            b = d.getElementsByTagName(s)[0];
+        j.async = true;
+        j.charset = "UTF-8";
+        j.src = "https://www.v5kf.com/158566/v5kf.js";
+        b.parentNode.insertBefore(j, b);
+    })(window, document, "script", "V5CHAT");
+</script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"177.5"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"致晟游戏分享：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>

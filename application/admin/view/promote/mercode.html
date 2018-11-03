@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/ch-ui.admin.js"></script>
+</head>
+<body>
+    <!--面包屑导航 开始-->
+    <div class="crumb_warp">
+        <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">游戏渠道管理</a>
+    </div>
+    <!--面包屑导航 结束-->
+
+
+    <!--搜索结果页面 列表 开始-->
+    <form action="#" method="post">
+        <div class="result_wrap">
+            <!--快捷导航 开始-->
+            <div class="result_content">
+                <div class="short_wrap">
+                    <a href="/admin/Promote/add_mercode"><i class="fa fa-plus"></i>新增渠道</a>
+                </div>
+            </div>
+            <!--快捷导航 结束-->
+        </div>
+
+        <div class="result_wrap">
+            <div class="result_content">
+                <table class="list_tab">
+                    <tr>
+                        <th class="tc" width="5%"><input type="checkbox" name=""></th>
+                        <th class="tc">ID</th>
+                        <th>游戏公司名称</th>
+                        <th>游戏名称</th>
+                        <th>状态</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <foreach name="merData" item="vo">
+                    <tr>
+                        <td class="tc"><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+                        <td class="tc">{$vo.id}</td>
+                        <td>{$vo.mercode}</td>
+                        <td>{$vo.gamename}</td>
+                        <td>
+                            <input type="radio" name="status_{$vo.id}" value="1" onclick="send(this.value,{$vo.id},'mercode')" <?php if($vo['status'] == 1){echo "checked";} ?> /><span style='color:#0f0;'>&nbsp;激活&nbsp;&nbsp;</span>
+                            <input type="radio" name="status_{$vo.id}" value="0" onclick="send(this.value,{$vo.id},'mercode')" <?php if($vo['status'] == 0){echo "checked";} ?> /><span style='color:#f00;'>&nbsp;失效</span>
+                        </td>
+                        <td>{$vo.create_time|date="Y-m-d",###}</td>
+                        <td><a href="/admin/Promote/del_mercode?id={$vo.id}">删除</a></td>
+                    </tr>
+                    </foreach>
+                </table>
+            </div>
+        </div>
+    </form>
+    <!--搜索结果页面 列表 结束-->
+</body>
+</html>

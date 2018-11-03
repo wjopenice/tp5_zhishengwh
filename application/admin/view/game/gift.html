@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/ch-ui.admin.js"></script>
+    <style>
+        input[type="text"].lg{width: 400px;display: block;margin: 10px 0;}
+        input[type="date"].lg{width: 200px;display: block;margin: 10px 0;padding: 6px 5px;line-height: 10px;;}
+        .add_tab label{line-height: 34px;float: left;display: inline-block;}
+        .short_wrap a{font-size: 14px;background: #FF5E62;padding: 10px 16px;color: #fff;margin: 4px 0;display: inline-block;}
+        .del_btn span{background: #FF5E62;width: 50px;text-align: center!important;color: #fff!important;font-size: 16px;cursor: pointer;border-radius: 4px;display: none;}
+        .info:hover .del_btn span{display: block;}
+    </style>
+</head>
+<body>
+    <!--面包屑导航 开始-->
+    <div class="crumb_warp">
+        <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">礼包管理</a> &raquo; 添加礼包
+    </div>
+    <!--面包屑导航 结束-->
+
+    <!--结果集标题与导航组件 开始-->
+    <div class="result_wrap">
+        <div class="result_content">
+            <div class="short_wrap">
+                <a href="#" class="add_btn"><i class="fa fa-plus"></i>新增多条礼包</a>
+            </div>
+        </div>
+    </div>
+    <!--结果集标题与导航组件 结束-->
+
+    <div class="result_wrap">
+        <form action="/admin/Game/gift" method="post">
+            <table class="add_tab">
+                <tbody class="tr_box">
+                <tr>
+                    <th width="120"><i class="require">*</i>游戏名称：</th>
+                    <td>
+                        <select name="gamename">
+                            <foreach name="arrData" item="vo">
+                                <option value="{$vo['gamename']}">{$vo['gamename']}</option>
+                            </foreach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require">*</i>礼包参数：</th>
+                    <td>
+                        <input type="text" placeholder="游戏礼包名称" class="lg" name="gifttitle[]" value="">
+                        <input type="text" placeholder="游戏礼包详情" class="lg" name="giftinfo[]" value="">
+                        <label>生效时间：</label><input type="date" max="" class="lg start_time" name="createtime[]" value="">
+                        <label>生效时间：</label><input type="date" min="" class="lg end_time" name="endtime[]" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" value="提交">
+                        <input type="button" class="back" onclick="history.go(-1)" value="返回">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <!---->
+
+    <script>
+
+        var trHtml = "<tr class='info'><th><i class='require'>*</i>礼包参数：</th><td><input type='text' placeholder='游戏礼包名称' class='lg' name='gifttitle[]' ><input type='text' placeholder='游戏礼包详情' class='lg' name='giftinfo[]' ><label>生效时间：</label><input type='date' class='lg start_time' name='createtime[]' value=''><label>生效时间：</label><input type='date' class='lg end_time' name='endtime[]' ></td><td class='del_btn'><span onclick='delFn(this)'>删除</span></td></tr>";
+
+        $(function(){
+
+            //新增一条数据
+            $(".add_btn").click(function(){
+                $('.tr_box').find('tr').eq(1).after(trHtml);
+            });
+
+            //时间格式选择不能超过开始时间
+            $(".start_time").change(function(){
+                var start_time = $(".start_time").val();
+                $(".end_time").attr('min',start_time);
+            });
+
+            $(".end_time").change(function(){
+                var end_time = $(".end_time").val();
+                $(".start_time").attr('max',end_time);
+            });
+
+
+        });
+
+        //删除
+        function delFn(tag){
+            $(tag).parent().parent().remove();
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/jquery.js"></script>
+    <script type="text/javascript" src="<?=JS_PATH?>/admin/ch-ui.admin.js"></script>
+    <style>.tab_content ul li{margin: 15px 0px;}.tab_content ul li input{width: 400px;height: 25px;}</style>
+</head>
+<body>
+<!--面包屑导航 开始-->
+<div class="crumb_warp">
+    <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+    <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">商品管理</a> &raquo; 添加商品
+</div>
+<!--面包屑导航 结束-->
+
+<!--TAB切换面板和外置按钮组 开始-->
+<div class="result_wrap">
+    <ul class="tab_title">
+        <li class="active">基本配置</li>
+        <li>内容配置</li>
+    </ul>
+    <form action="/admin/Site/basc?id={$site['id']}" method="post">
+    <div class="tab_content">
+            <ul>
+            <li><b>媒体官网标题设置</b>（用于显示媒体官网标题）</li>
+            <li><input type="text" name="title" value="{$site['title']}" /></li>
+
+            <li><b>媒体网站关键词设置</b>（网站关键词）</li>
+            <li><input type="text" name="kewords" value="{$site['kewords']}" /></li>
+
+            <li><b>网络文化经营许可证编号</b>（网络文化经营许可证编号）</li>
+            <li><input type="text" name="ncicp" value="{$site['ncicp']}" /></li>
+
+            <li><b>网站备案号</b>（工业与信息化部备案）</li>
+            <li><input type="text" name="icpb" value="{$site['icpb']}" /></li>
+
+            <li><b>媒体网站描述设置</b>（网站描述）</li>
+            <li><input type="text" name="description" value="{$site['description']}" /></li>
+
+            <li><b>媒体官网版权信息设置</b>（媒体官网版权信息设置）</li>
+            <li><input type="text" name="copyright" value="{$site['copyright']}" /></li>
+        </ul>
+    </div>
+    <div class="tab_content">
+            <ul>
+            <li><b>客服电话</b>（客服联系电话或手机）</li>
+            <li><input type="text" name="tell" value="{$site['tell']}" /></li>
+
+            <li><b>客服QQ</b>（客服QQ）</li>
+            <li><input type="text" name="qq" value="{$site['qq']}" /></li>
+
+            <li><b>客服邮箱</b>（客服邮箱）</li>
+            <li><input type="text" name="email" value="{$site['email']}" /></li>
+
+            <li><b>工作时间</b>（工作时间）</li>
+            <li><input type="text" name="jobtime" value="{$site['jobtime']}" /></li>
+
+            <li><b>投诉邮箱</b>（投诉邮箱）</li>
+            <li><input type="text" name="cpemail" value="{$site['cpemail']}" /></li>
+        </ul>
+    </div>
+    <div class="btn_group">
+        <input type="submit" value="提交" id="sub_btn" style="height: 40px;"  />
+        <input type="button" class="back" onclick="history.go(-1)" value="返回" style="height: 40px;" >
+    </div>
+    </form>
+</div>
+
+</body>
+</html>

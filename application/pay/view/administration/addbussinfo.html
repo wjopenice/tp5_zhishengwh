@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商户信息</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">商户管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">添加商户信息</p>
+    </div>
+    <!--  标题   -->
+    <div class="cont_btnLine cf">
+        <p class="fl">添加商户信息</p>
+    </div>
+    <form action="/addbussinfo" method="post" enctype="multipart/form-data" class="addProContent cf">
+        <dl class="cf">
+            <dt class="fl"><span class="col-red">*</span>商户号：</dt>
+            <dd class="fl"><input placeholder="请填写商户号" type="text" name="business_id" value="" class="fl"></dd>
+        </dl>
+        <dl class="cf">
+            <dt class="fl"><span class="col-red">*</span>真实姓名：</dt>
+            <dd class="fl"><input placeholder="请填写真实姓名" type="text" name="real_name"  value="" class="fl"></dd>
+        </dl>
+        <dl class="cf">
+            <dt class="fl"><span class="col-red">*</span>法人身份证号：</dt>
+            <dd class="fl"><input placeholder="请填写法人身份证号" type="text" name="idcard"  value="" class="fl"></dd>
+        </dl>
+        <dl class="cf">
+            <dt class="fl"><span class="col-red">*</span>企业名称：</dt>
+            <dd class="fl"><input placeholder="请填写企业名称" type="text" name="company_name"  value="" class="fl"></dd>
+        </dl>
+        <dl class="cf">
+            <dt class="fl"><span class="col-red">*</span>营业执照：</dt>
+            <dd class="fl">
+                <input type="file" name="business_license" style="margin-top: 15px;" class="fl" />
+            </dd>
+        </dl>
+        <input type="submit" class="confirmBtn" id="add" name="btn" value="确定" style="border: 0;outline: none; margin-top: 10px;" />
+    </form>
+</div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+</body>
+</html>

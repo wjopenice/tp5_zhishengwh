@@ -1,0 +1,62 @@
+<include file="inc/header" title="问题详情" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/customer/problem_info.css">
+
+<div class="page-group">
+
+    <!--   问题详情   -->
+    <div class="problem_info">
+        <p class="info_title">{$oneData.title}</p>
+        <p class="info_text">{$oneData.info}</p>
+
+    </div>
+
+    <!--   可能遇到的问题   -->
+    <div class="maybe_box">
+        <p class="maybe">您可能会遇到的问题？</p>
+        <!--   常见问题列表   -->
+        <ul class="problem_ul">
+            <foreach name="arrData" item="vo">
+            <li class="cf">
+                <a href="/wap/problem_info.html?id={$vo.id}">
+                    <p class="ofh fl">{$vo.title}</p>
+                    <span class="icon icon-right fr"></span>
+                </a>
+            </li>
+            </foreach>
+        </ul>
+    </div>
+
+    <!--   联系方式   -->
+    <ul class="contact_box cf">
+        <li class="fl"><div class="qq_icon"><div class="center cf"><i class="fl"></i><p class="contact_text fl">2454410379</p></div></div><p class="online">在线时间:10:00-19:00</p></li>
+        <li class="fr"><div class="iphone_icon tel"><div class="center cf"><i class="fl"></i><p class="contact_text fl">0755-86659665</p></div></div><p class="online">在线时间:10:00-19:00</p></li>
+    </ul>
+
+
+</div>
+
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+<script src="<?=JS_PATH?>/wap/customer/problem_info.js"></script>
+<script>
+    //监听微信、支付宝等及浏览器的返回到具体页面
+    $(function(){
+        pushHistory();
+        window.addEventListener("popstate", function(e) {
+            window.location.href = '/wap/problem.html?type=2';//根据自己的需求实现自己的功能
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+
+</script>
+
+</body>
+</html>

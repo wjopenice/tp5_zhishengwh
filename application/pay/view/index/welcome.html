@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/index/welcome.css">
+    <script src="<?=JS_PATH?>/pay/common/echart/echarts.min.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+</head>
+<body>
+    <!--  导航   -->
+    <div class="topBarWrap flex">
+        <div class="subTopBar flexBox cf rechargeBar">
+            <i></i>
+            <p class="barNum ofh" title="{$data.all_data ? : '0.00'}">{$data.all_data ? : '0.00'}</p>
+            <p class="barName" title="平台总充值额">平台总充值额</p>
+        </div>
+        <div class="subTopBar flexBox cf cashBar">
+            <i></i>
+            <p class="barNum ofh" title="{$data.all_with ? : '0.00'}">{$data.all_with ? : '0.00'}</p>
+            <p class="barName" title="平台总提现额">平台总提现额</p>
+        </div>
+        <div class="subTopBar flexBox cf accountBar">
+            <i></i>
+            <p class="barNum ofh" title="{$data.all_sett ? : '0.00'}">{$data.all_sett ? : '0.00'}</p>
+            <p class="barName" title="平台结算额">平台结算额</p>
+        </div>
+        <div class="subTopBar flexBox cf bussNumBar">
+            <i></i>
+            <p class="barNum ofh" title="{$data.all_pro_counts}">{$data.all_pro_counts}</p>
+            <p class="barName" title="商户数">商户数</p>
+        </div>
+    </div>
+    <!--   今日相关    -->
+    <div class="todayBoxWrap flex">
+        <!--   今日订单   -->
+        <div class="subTodayBox todayOrder flexBox">
+            <div class="tit">今日订单</div>
+            <div class="con flex">
+                <div class="subCon flexBox">
+                    <p class="conName" title="交易笔数">交易笔数</p>
+                    <p class="conNum ofh" title="{$data.today_orders ? : 0}">{$data.today_orders ? : 0}</p>
+                </div>
+                <div class="subCon flexBox">
+                    <p class="conName" title="成功笔数">成功笔数</p>
+                    <p class="conNum ofh" title="{$data.today_success_orders ? : 0}">{$data.today_success_orders ? : 0}</p>
+                </div>
+                <div class="subCon flexBox">
+                    <p class="conName" title="成交金额">成交金额</p>
+                    <p class="conNum ofh" title="{$data.today_success_money ? : '0.00'}">￥{$data.today_success_money ? : '0.00'}</p>
+                </div>
+            </div>
+        </div>
+        <!--   今日提现     -->
+        <div class="subTodayBox todayCash flexBox">
+            <div class="tit">今日提现</div>
+            <div class="con flex">
+                <div class="subCon flexBox"><p class="conName" title="交易笔数">交易笔数</p><p class="conNum ofh" title="{$data.today_with_strip ? : 0}">{$data.today_with_strip ? : 0}</p></div>
+                <div class="subCon flexBox"><p class="conName" title="成功笔数">成功笔数</p><p class="conNum ofh" title="0">0</p></div>
+                <div class="subCon flexBox"><p class="conName" title="成交金额">成交金额</p><p class="conNum ofh" title="{$data.today_with_money ? : '0.00'}">￥{$data.today_with_money ? : '0.00'}</p></div>
+            </div>
+        </div>
+    </div>
+    <!--  统计和公告  -->
+    <div class="lastLan flex">
+         <!--  统计   -->
+         <div class="countBoxWrap subLastBox flexBox6 cf">
+             <div class="tit">七天总充值量</div>
+             <div class="countDivBox" id="weekTotal"></div>
+         </div>
+         <!--  公告   -->
+         <div class="noticeBoxWrap subLastBox flexBox3 cf">
+             <div class="tit">公告</div>
+             <div class="noticeCon">
+                <if condition="$notice neq null">
+                <foreach name="$notice" item="val">
+                <p class="subNoticeBox cf">
+                    <span class="noticeName ofh fl" title="{$val.title}">{$val.title}</span>
+                    <span class="noticeTime fr"><?=date('Y-m-d',$val['ctime'])?></span>
+                </p>
+                </foreach>
+                </if>
+             </div>
+         </div>
+     </div>
+     <script type="text/javascript">
+        
+        $(function(){
+            var weekTotalChart = echarts.init(document.getElementById('weekTotal'));
+            var timeBox = [];
+            var option4subSeriesData = [];
+            
+            $.ajax({
+                type:'post',
+                url:'/admin/stat/weekAllJson.html',
+                data:{},
+                async:false,
+                dataType:'json',
+                success:function(data){
+                    var content = data[0].content;
+                    var totalamount = [];
+                    
+                    $.each(content,function(i,obj){
+                        timeBox.push(obj.time);
+                    });
+
+                    option4subSeriesData = {name:'七天总充值量',type:'line',stack: '总量',data:[]};
+                    $.each(data,function(i,obj){
+                        $.each(obj.content,function(j,obj2){
+                            if(typeof(totalamount[j]) == 'undefined'){
+                                totalamount[j] = 0;
+                            }
+                            totalamount[j] = Number(obj.content[j].data.pay_amount)+totalamount[j]; 
+                            
+                        });
+                    });
+                    //console.log(totalamount);
+                    option4subSeriesData.data = totalamount;
+                }
+            });
+            //************************七天各通道充值量********************************
+            var option4 = {
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ["七天总充值量"]
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data : timeBox
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: option4subSeriesData
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            weekTotalChart.setOption(option4);
+            /*窗口自适应*/
+            setTimeout(function (){
+                window.onresize = function () {
+                    weekTotalChart.resize();
+                }
+            },200)
+
+        });
+    </script>
+
+</body>
+</html>

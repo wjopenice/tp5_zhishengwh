@@ -1,0 +1,62 @@
+<include file="inc/header" title="常见问题" />
+
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/customer/problem.css">
+
+<div class="page-group">
+
+    <!--   常见问题列表   -->
+    <ul class="problem_ul">
+        <foreach name="arrData" item="vo">
+        <li class="cf">
+            <a href="/wap/problem_info.html?id={$vo.id}">
+                <p class="ofh fl">{$vo.title}</p>
+                <span class="icon icon-right fr"></span>
+            </a>
+        </li>
+        </foreach>
+    </ul>
+
+    <!--    密码、充值、账号、礼包问题    -->
+    <ul class="problem_modular cf">
+        <li class="pwd fl"><a href="/wap/problem_list.html?type=1"><i></i><p>密码问题</p></a></li>
+        <li class="recharge fl"><a href="/wap/problem_list.html?type=4"><i></i><p>充值问题</p></a></li>
+        <li class="account fl"><a href="/wap/problem_list.html?type=3"><i></i><p>账号问题</p></a></li>
+        <li class="package fl"><a href="/wap/problem_list.html?type=5"><i></i><p>礼包问题</p></a></li>
+    </ul>
+
+    <!--   反馈意见   -->
+    <ul class="problem_ul">
+        <li class="cf">
+            <a href="/wap/feedback.html">
+                <p class="ofh fl">意见反馈</p>
+                <span class="icon icon-right fr"></span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+<script src="<?=JS_PATH?>/wap/common/public.js"></script>
+<script src="<?=JS_PATH?>/wap/customer/problem.js"></script>
+<script>
+    //监听微信、支付宝等及浏览器的返回到具体页面
+    $(function(){
+        pushHistory();
+        window.addEventListener("popstate", function(e) {
+            window.location.href = '/wap/capital.html';//根据自己的需求实现自己的功能
+        }, false);
+        function pushHistory() {
+            var state = {
+                title: "title",
+                url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }
+    });
+
+</script>
+
+</body>
+</html>

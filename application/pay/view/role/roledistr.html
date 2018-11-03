@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限分配</title>
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+
+</head>
+<body style="background: #F4F4F4;">
+    <div class="roleAllotWrap">
+        <span id="id" data-id="{$id}"></span>
+        <foreach name="$role" item="val">
+        <div class="subRoleAllot cf">
+
+            <div class="roleFirst fl cf"><i {if <?php if($val['selected'] == 1){ echo 'class="checked"';} ?> ></i><span data-id="{$val.id}" class="fl roleFirstName">{$val.title}</span></div>
+            <div class="roleSecond fl cf">
+                <foreach name="$val.second" item="v">
+                <div class="subRoleBox fl cf" ><i <?php if($v['selected'] == 1){ echo 'class="checked"';} ?>></i><span data-id="{$v.id}" class="fl roleSecondName">{$v.title}</span></div>
+                </foreach>
+            </div>
+        </div>
+        </foreach>
+        <a href="javascript:void(0)" class="roleSubmit">提交</a>
+    </div>
+<script>
+    $(function(){
+    
+        //点击一级单选按钮
+        $(document).on("click",'.roleFirst',function(){
+            var isChecked = $(this).find("i").hasClass("checked");
+            if(!isChecked){
+                $(this).find("i").addClass("checked");
+                $(this).parents(".subRoleAllot").find(".roleSecond i").addClass("checked");
+            }else{
+                $(this).find("i").removeClass("checked");
+                $(this).parents(".subRoleAllot").find(".roleSecond i").removeClass("checked");
+            }
+        });
+        //点击二级单选按钮
+        $(document).on("click",'.subRoleBox',function(){
+            var isChecked = $(this).find("i").hasClass("checked");
+            if(!isChecked){
+                $(this).find("i").addClass("checked");
+                $(this).parents(".subRoleAllot").find(".roleFirst i").addClass("checked");
+            }else{
+                $(this).find("i").removeClass("checked");
+                var subSecondObj = $(this).parents(".roleSecond").find("i");
+                var val = false;
+                $.each(subSecondObj,function(i,obj){
+                    val = $(obj).hasClass("checked") || val;
+                });
+                if(!val){
+                    $(this).parents(".subRoleAllot").find(".roleFirst i").removeClass("checked");
+                }
+            }
+        });
+
+        $(document).on("click",'.roleSubmit',function(){
+
+            var id = $('#id').attr('data-id');
+            var class_id = [];
+            var r_id = [];
+            //读取一级权限
+            $(".roleFirst").each(function(){
+                var isChecked = $(this).find("i").hasClass("checked");
+                var classId = $(this).find("span").attr('data-id');
+                if(isChecked){
+                    class_id.push(classId);
+                }
+            });
+            //读取二级权限
+            $(".subRoleBox").each(function(){
+                var isChecked = $(this).find("i").hasClass("checked");
+                var rId = $(this).find("span").attr('data-id');
+                if(isChecked){
+                    r_id.push(rId);
+                }
+            });
+            if(!r_id){
+                bombBox.bombBoxError('', '请选择权限！');
+                $("#confirm").on("click",function(){
+                    bombBox.bombBoxColse($(".pub_bBox"));
+                });
+            }
+            $.ajax({
+                type:'post',
+                url:"/pay/Role/roledistr",
+                data:{id:id,class_id:class_id,rid:r_id},
+                dataType:'json',
+                success:function(result){
+                    bombBox.bombBoxError('', result.msg);
+                    $("#confirm").on("click",function(){
+                        bombBox.bombBoxColse($(".pub_bBox"));
+                    });
+                }
+            })
+            return false;
+
+        });
+
+
+
+    });
+
+</script>
+</body>
+</html>

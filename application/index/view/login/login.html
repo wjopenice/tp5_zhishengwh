@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>登录</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/login/index.css">
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        /*       客服机器人        */
+        .v5-bar{background-color: #ff6b63!important;}
+        .v5-btn:hover{background-color: #fff!important;color: #ff6b63!important;}
+        .v5-pnl-btn ,.v5-pnl-link{background-color: #ff6b63!important;color: #fff!important;border: 1px solid #ff6b63!important;}
+        .v5-pnl-img{color: #ff6b63!important;}
+        .v5-pnl-link:hover{border: 1px solid #ff6b63!important;color: #ff6b63!important;background: #fff!important;}
+        #pnlHead ,#submit{background-color: #ff6b63!important;}
+    </style>
+</head>
+<body class="homeMain">
+
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--  中间主页   -->
+    <div class="content_box">
+
+        <!--  banner   -->
+        <div class="banner pr">
+            <div class="sign_in_box container pr">
+                <div class="login_box">
+                    <p class="login_tit">账号登录</p>
+                    <div class="login_content">
+                        <?php $type = empty($_GET['login'])?"www":$_GET['login']; ?>
+                        <form action="/index/Login/login?login={$type}" method="post" >
+                            <div class="input_box pr">
+                                <input type="text" name="username" required placeholder="请填写手机号" oninput="if(value.length>11)value=value.slice(0,11)">
+                                <i class="user_icon dib"></i>
+                                <div class="error_msg"><span class="error_star">*</span>请输入账号</div>
+                            </div>
+                            <div class="input_box pr">
+                                <input type="password" name="userpass" required placeholder="请填写密码" maxlength="20">
+                                <i class="pwd_icon dib"></i>
+                                <div class="error_msg"><span class="error_star">*</span>请输入密码</div>
+                            </div>
+                            <input type="submit" class="login_button" value="登录" style="border: 0; cursor: pointer;">
+                            <div class="forget_pwd cf">
+                                <a class="fl cf" href="javascript:void(0);">
+                                    <i class="chose fl active"></i>
+                                    <span class="fl">记住密码</span>
+                                </a>
+                                <a class="fr btn_forget_pwd" href="/index/Login/forget_pwd.html">忘记密码？</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>

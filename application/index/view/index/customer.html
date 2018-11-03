@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>客服中心</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/customer/index.css">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--   中间主页    -->
+    <div class="content_box">
+        <!-- 客服中心内容 -->
+        <div class="customer">
+            <div class="container customer_content">
+                <div class="work cf">
+                    <foreach name="zswh_adv" item="z_a">
+                        <if condition="$z_a['position'] eq 12">
+                            <a class="work_img fl" href="{$z_a['addr']}"><img src="/uploads/{$z_a['pic_url']}" width="800" height="300" alt="{$z_a['name']}"></a>
+                        </if>
+                    </foreach>
+                    <div class="work_time fr">
+                        <img class="dib" src="<?=IMG_PATH?>/index/customer/customer_icon.png" width="60" height="62" alt="">
+                        <p>工作时间：{$site['jobtime']}</p>
+                        <p>服务热线：{$site['tell']}</p>
+                        <p>客服&nbsp;QQ：{$site['qq']}</p>
+                    </div>
+                </div>
+                <div class="problem cf">
+                    <a class="password_icon fl" href="/customer/info.html?tab=1"><img class="dib" src="<?=IMG_PATH?>/index/customer/password_icon.png" width="52" height="62" alt=""><p>密码问题</p></a>
+                    <a class="recharge_icon fl" href="/customer/info.html?tab=2"><img class="dib" src="<?=IMG_PATH?>/index/customer/recharge_icon.png" width="62" height="64" alt=""><p>充值问题</p></a>
+                    <a class="account_icon fl" href="/customer/info.html?tab=3"><img class="dib" src="<?=IMG_PATH?>/index/customer/account_icon.png" width="62" height="62" alt=""><p>账户问题</p></a>
+                    <a class="package_icon fr" href="/customer/info.html?tab=4"><img class="dib" src="<?=IMG_PATH?>/index/customer/package_icon.png" width="63" height="63" alt=""><p>礼包问题</p></a>
+                </div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>

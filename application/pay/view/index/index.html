@@ -1,0 +1,84 @@
+
+<!doctype html>
+<html class="overHid">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>致晟支付平台系统</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-tab.css" rel="stylesheet">
+    <link href="<?=CSS_PATH?>/pay/common/public.css" rel="stylesheet">
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+</head>
+<body>
+    <!--  头  -->
+    <div class="header cf">
+        <div class="logoBox"><img src="<?=IMG_PATH?>/pay/common/header/logo.png" alt=""></div>
+        <div class="headerRight fr">
+            <ul class="cf">
+                <li class="subRightTab fl active"><a href="javascript:void(0)"><i class="userIcon"></i><p>{$account.account}</p></a></li>
+                <li class="subRightTab fl"><a href="javascript:window.parent.window.f_addTab('adminupass','重置密码','/pay/adminupass.html')"><i class="resetPwdIcon"></i><p>重置密码</p></a></li>
+                <li class="subRightTab fl"><a href="javascript:void(0)" class="goOut"><i class="exitIcon"></i><p>退出</p></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--   主体内容   -->
+    <div class="adminConWrap" id="layout1">
+        <div class="adminLeft" id="accordion1">
+            <div class="nav-tabs cf">
+                <foreach name="$menu" item="val">
+                <div class="subFirstWrap">
+                    <h3>
+                        <a class="a-link cf" href="javascript:void(0)">
+                            <i class="navIcon nav-<?php echo strstr($val['faicon'],'.',true); ?> fl"></i>
+                            <span class="fl">{$val.title}</span>
+                            <i class="upNext"></i>
+                        </a>
+                    </h3>
+                    <if condition="$val['children'] neq null">
+                        <foreach name="$val.children" item="v">
+                        <?php $tag = substr($v['url'],1,strpos($v['url'],'.')-1);?>
+                        <div class="subSecondWrap hide">
+                            <h4><a class="a-link" href="javascript:f_addTab('{$tag}','{$v.title}','{$v.url}')">{$v.title}</a></h4>
+                        </div>
+                        </foreach>
+                    </if>
+                </div>
+                </foreach>
+            </div>
+        </div>
+        <div class="adminRight" id="frameCenter">
+            <div title="首页">
+                <iframe class="myFrame" frameborder="0" name="home" id="home" src="/pay/welcome"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    
+        $(document).on("click",'.goOut',function(){
+            bombBox.bombBoxQuestion('', "确认退出？");
+            $("#confirm").on("click",function(){
+                //ajax
+                window.location.href = '/pay/logout';
+                bombBox.bombBoxColse($(".pub_bBox"));   
+                
+            });
+            
+        });
+
+    </script>
+
+</body>
+</html>

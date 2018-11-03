@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>忘记密码</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/login/forget_pwd.css">
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        /*       客服机器人        */
+        .v5-bar{background-color: #ff6b63!important;}
+        .v5-btn:hover{background-color: #fff!important;color: #ff6b63!important;}
+        .v5-pnl-btn ,.v5-pnl-link{background-color: #ff6b63!important;color: #fff!important;border: 1px solid #ff6b63!important;}
+        .v5-pnl-img{color: #ff6b63!important;}
+        .v5-pnl-link:hover{border: 1px solid #ff6b63!important;color: #ff6b63!important;background: #fff!important;}
+        #pnlHead ,#submit{background-color: #ff6b63!important;}
+    </style>
+</head>
+<body class="homeMain">
+
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--  中间主页   -->
+    <div class="content_box">
+
+        <div class="container">
+            <!--  进度条  -->
+            <div class="forget_guide pr">
+                <span class="forget_one dib active">1.填写账号</span>
+                <span class="forget_two dib">2.验证信息</span>
+                <span class="forget_three dib">3.重置密码</span>
+                <span class="forget_four dib">4.完成</span>
+            </div>
+            <div class="forget_input_box cf">
+                <div class="forget_input_box_left dib fl">
+
+                    <!-- 账号信息 -->
+                    <div class="input_info div1">
+                        <label class="user_text" for="user_account">用户账号：</label>
+                        <input class="user_input" type="text" id="account_id" placeholder="请填写正确账号信息" id="user_account" maxlength="20">
+                        <span class="remarks">
+                            <i class="star">*</i>
+                            <span class="notice_text">正确填写账号信息</span>
+                        </span>
+                        <input type="button" id="btn1" class="next dib " value="下一步" disabled>
+                    </div>
+
+                    <!-- 验证信息 -->
+                    <div class="back_pwd div2 hide">
+                        <div class="user_num">
+                            <label class="user_text" for="username">用户姓名：</label>
+                            <input class="user_input" type="text" id="username" placeholder="请填写正确的姓名">
+                            <span class="remarks">
+                                <i class="star">*</i>
+                                <span class="notice_text">请填写正确的姓名</span>
+                            </span>
+                        </div>
+                        <div class="user_num">
+                            <label class="user_text" for="id_card">身份证号：</label>
+                            <input class="user_input" type="number" placeholder="请填写正确的身份证号码" id="id_card" maxlength="18">
+                            <span class="remarks">
+                                <i class="star">*</i>
+                                <span class="notice_text">请填写正确的身份证号码</span>
+                            </span>
+                        </div>
+                        <input type="button" id="btn2" class="next dib next_finish" value="下一步">
+                    </div>
+
+                    <!-- 重置密码 -->
+                    <div class="reset_pwd div3 hide">
+                        <div class="user_num">
+                            <label class="user_text" for="reset_pwd">重置密码：</label>
+                            <input class="user_input" type="password" placeholder="请填写您的新密码" id="reset_pwd" maxlength="20">
+                            <span class="remarks">
+                                <i class="star">*</i>
+                                <span class="notice_text">请填写您的密码</span>
+                            </span>
+                        </div>
+                        <div class="user_num">
+                            <label class="user_text" for="confirm_pwd">确认密码：</label>
+                            <input class="user_input" type="password" id="confirm_pwd" placeholder="请重新填写密码" maxlength="20">
+                            <span class="notice">
+                                <i class="star">*</i>
+                                <span class="notice_text">请再次确认密码</span>
+                            </span>
+                        </div>
+                        <input type="button" id="btn3" class="next dib next_finish" value="下一步">
+                    </div>
+
+                    <!-- 完成 -->
+                    <div class="complete div4 hide">
+                        <img src="<?=IMG_PATH?>/index/forgetpwd/complete.png" class="success_reset fl">
+                        <span class="complete_reset">恭喜您，已成功重置密码，请前往<a style="color: #ff6b63;" href="/index/Login/login.html">登录</a>吧！</span>
+                    </div>
+
+                </div>
+                <div class="forget_input_box_right dib fl">
+                    <div class="explain">
+                        <p><i>*</i>请正确填写您要找回的账号信息</p>
+                        <p><i>*</i>按操作提示依次完成找回</p>
+                        <p><i>*</i>如您所有的找回方式均不可用，请联系客服</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+    </div>
+
+<script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>
+
+<script>
+$(function () {
+    //填写账号请求接口
+   $("#account_id").keyup(function () {
+       var data = $(this).val();
+       $.post("/index/Login/loginajax",{d:data},function (msg) {
+            if(msg == 1){
+                $("#btn1").addClass("next_finish");
+                $("#btn1").removeAttr("disabled");
+            }else{
+                $("#btn1").removeClass("next_finish");
+                $("#btn1").attr("disabled","disabled");
+            }
+       },"json");
+   });
+
+   $("#btn1").click(function () {
+       $(".div1").attr("class","hide");
+       $(".forget_two").addClass("active");
+       $(".div2").removeClass("hide");
+   });
+
+   //验证信息请求接口
+   $("#btn2").click(function(){
+       var username = $("#username").val();
+       var usercatid = $("#id_card").val();
+       $.get("/uc/ajaxpwd",{type:'user',n:username,c:usercatid},function (msg) {
+           if(msg.code == 1){
+               //验证通过
+               $(".forget_three").addClass("active");
+               $(".div2").addClass("hide");
+               $(".div3").removeClass("hide");
+           }else{
+               //验证失败
+               modal(300,"验证失败");
+           }
+       },"json");
+   });
+
+   //重置密码请求接口
+    $("#btn3").click(function(){
+        var pwd = $("#reset_pwd").val();
+        var repwd = $("#confirm_pwd").val();
+        if(pwd === repwd){
+            //验证通过
+            $.get("/uc/ajaxpwd",{type:'pwd',p:pwd},function (msg) {
+                if(msg.code == 1){
+                    $(".forget_four").addClass("active");
+                    $(".div3").addClass("hide");
+                    $(".div4").removeClass("hide");
+
+                    //完成
+                    setTimeout("links()",3000);
+                }else{
+                    modal(300,"不能使用原密码");
+                }
+            },"json");
+        }else{
+            //验证失败
+            modal(300,"两次密码不一致");
+        }
+    });
+
+
+
+});
+
+function links() {
+    window.location.href='/index/Login/login';
+}
+
+
+</script>

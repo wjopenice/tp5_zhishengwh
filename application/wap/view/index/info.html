@@ -1,0 +1,104 @@
+<include file="inc/header" title="游戏详情" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/common/swiper-4.3.3.min.css">
+<link rel="stylesheet" href="<?=CSS_PATH?>/wap/gmct/info.css" />
+    <!--     页面     -->
+    <div class="page-group">
+        <!--    游戏头部    -->
+        <div class="info_box">
+            <ul class="gift_ul">
+                <li class="cf">
+                    <div class="gift_header fl"><img src="/uploads/{$arrData['icon']}" alt=""></div>
+                    <div class="gift_name all_play_name fl">
+                        <p class="gift_text all_play_text ofh">{$arrData['title']}</p>
+                        <p class="all_play_role"><?=rand("10","99")?>.<?=rand("00","99")?>M</p>
+                        <p class="gift_bag ofh">{$arrData['type']}</p>
+                    </div>
+                    <a class="receive_btn fr" href="{$arrData['addr_code']}">下载</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--     游戏介绍     -->
+        <div class="intro_box">
+            <h4>游戏简介</h4>
+            <!--    轮播    -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src='/uploads/{$arrData['pic']}' /></div>
+                    <div class="swiper-slide"><img src='/uploads/{$arrData['pic']}' /></div>
+                    <div class="swiper-slide"><img src='/uploads/{$arrData['pic']}' /></div>
+                </div>
+            </div>
+            <!--   文字简介   -->
+            <p class="info_text">{$arrData['info']}</p>
+        </div>
+
+        <!--   礼包   -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">游戏礼包</h4>
+            </div>
+            <ul class="gift_ul">
+                <li class="cf">
+                    <div class="gift_header fl"><img src="/uploads/{$arrData['icon']}" alt="{$arrData['title']}"></div>
+                    <div class="gift_name fl">
+                        <p class="gift_text ofh">{$arrData['title']}</p>
+                        <p class="gift_bag ofh">{$arrData['title']}</p>
+                    </div>
+                    <a class="receive_btn fr" href="/wap/gift_info?id={$arrData['id']}">领取</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--  热门游戏  -->
+        <div class="gift_box">
+            <div class="gift_title cf">
+                <h4 class="fl">热门游戏</h4>
+            </div>
+            <ul class="rank_ul cf">
+                <volist  name="apk1" id="vo">
+                    <li class="fl">
+                        <img class="dib" src="/uploads/{$vo['icon']}" alt="" onclick="location.href='/wap/info?id={$vo['id']}'">
+                        <p class="rank_game_name ofh">{$vo['title']}</p>
+                        <a class="like_down_btn fl ofh" href="{$vo['addr_code']}">下载</a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+
+        <!--  推荐  -->
+        <div class="gift_box recom_box">
+            <div class="gift_title cf">
+                <h4 class="fl">玩过“{$arrData['title']}”游戏的人还在玩</h4>
+            </div>
+            <ul class="rank_ul cf">
+                <volist  name="apk2" id="vo2">
+                    <li class="fl">
+                        <img class="dib" src="/uploads/{$vo2['icon']}" alt="{$vo2['title']}" onclick="location.href='/wap/info?id={$vo2['id']}'">
+                        <p class="rank_game_name ofh">{$vo2['title']}</p>
+                        <a class="like_down_btn fl ofh" href="{$vo2['addr_code']}">下载</a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+
+    <script src="<?=JS_PATH?>/wap/common/zepto.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/sm.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/swiper-4.3.3.min.js"></script>
+    <script src="<?=JS_PATH?>/wap/common/public.js"></script>
+    <script src="<?=JS_PATH?>/wap/gmct/info.js"></script>
+    <script>
+
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+    </script>
+</body>
+</html>

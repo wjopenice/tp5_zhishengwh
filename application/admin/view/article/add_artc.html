@@ -1,0 +1,86 @@
+<?php
+$type =$_GET['type'];
+if($type == 'a'){
+   $crumbs = "添加文章";
+   $action = "add_artc";
+}
+if($type == 'e'){
+   $crumbs = "修改文章";
+   $action = "edit_artc";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/admin/ch-ui.admin.css">
+    <link rel="stylesheet" href="/fonts/css/font-awesome.min.css">
+</head>
+<body>
+    <!--面包屑导航 开始-->
+    <div class="crumb_warp">
+        <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+        <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">文章管理</a> &raquo; {$crumbs}
+    </div>
+    <!--面包屑导航 结束-->
+
+
+    <div class="result_wrap">
+        <form action="/admin/Article/{$action}" method="post" enctype="multipart/form-data">
+            <table class="add_tab">
+                <tbody>
+                <tr>
+                    <th><i class="require">*</i>文章标题：</th>
+                    <td>
+                        <input type="text" class="lg" name="title" value="<?php echo ($type == 'a')?'':$artcone['title']; ?>" required >
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require">*</i>文章作者：</th>
+                    <td>
+                        <input type="text" class="lg" name="author" value="<?php echo ($type == 'a')?'':$artcone['author']; ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require">*</i>文章流量：</th>
+                    <td>
+                        <input type="number" min="0" max="1000" step="10" class="lg" name="click" value="<?php echo ($type == 'a')?'0':$artcone['click']; ?>" style="padding: 6px 10px;">
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require">*</i>文章来源：</th>
+                    <td>
+                        <input type="text" class="lg" name="source" value="<?php echo ($type == 'a')?'':$artcone['source']; ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th><i class="require">*</i>文章内容：</th>
+                    <td>
+                        <textarea id="editor_id" name="content" style="width:100%;height:600px;">
+                            <?php echo ($type == 'a')?'&lt;strong&gt;HTML内容&lt;/strong&gt;':$artcone['content']; ?>
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <?php echo ($type == 'a')?'':"<input type='hidden' name='id' value='".$artcone['id']."'>"; ?>
+                        <input type="submit" value="提交">
+                        <input type="button" class="back" onclick="history.go(-1)" value="返回">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <script charset="utf-8" src="/public/static/js/admin/kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="/public/static/js/admin/kindeditor/lang/zh-CN.js"></script>
+    <script>
+        var KE;
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#editor_id',{ imageSizeLimit : '200MB',imageUploadLimit : 100});
+        });
+    </script>
+</body>
+</html>

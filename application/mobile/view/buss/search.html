@@ -1,0 +1,64 @@
+<include file="common/header" title="商户列表" />
+<link rel="stylesheet" href="<?=JS_PATH?>/mobile/common/dist/mescroll.min.css">
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/common/list.css">
+
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="contentBox mescroll" id="mescroll">
+                <!-- 搜索框 -->
+                <div class="search-bar cf search-box">
+                    <form action="/mobile/buss/search" method="post">
+                    <div class="bar bar-header-secondary fl search-bar-box">
+                        <div class="searchbar">
+                            <a class="searchbar-cancel">取消</a>
+                            <div class="search-input">
+                                <label class="icon icon-search" for="search"></label>
+                                <input type="search" id='search' name="search" placeholder='输入关键字...' value="" />
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    <a href="/mobile/buss/add" class="add-icon fr add-icon-box" external><img src="<?=IMG_PATH?>/mobile/buss/add-icon.png" alt=""></a>
+                </div>
+                <!-- 列表 -->
+                <div class="list-block">
+                    <div class="list-container data-list" id="dataList">
+                        <ul>
+                            <foreach name="searchData" item="vo" key="k">
+                            <li>
+                                <a href='/mobile/buss/detail&id={$vo.id}' external>
+                                    <div class='item-content item-link'>
+                                        <div class='item-media'>
+                                            <i class='icon icon-f7'></i>
+                                            </div>
+                                        <div class='item-inner item-border'>
+                                            <div class='item-title'>{$vo.account}</div>
+                                        </div>
+                                    </div>
+                                    <div class='item-content'>
+                                        <div class='item-media'>
+                                            <i class='icon icon-f7'></i>
+                                            </div>
+                                        <div class='item-inner'>
+                                            <div class='item-title item-time'>{$vo.create_time|date="Y-m-d H:i:s",###}</div>
+                                            <div class='item-after item-files'>{$vo.level}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            </foreach>
+                        </ul>
+                        <div class="mescroll-upwarp mescroll-hardware" style="visibility: visible;"><p class="upwarp-nodata">-- 只返回最新20条数据，查看更多请访问PC端 --</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<include file="common/footer" />
+
+

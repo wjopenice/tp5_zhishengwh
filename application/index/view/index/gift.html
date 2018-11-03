@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>礼包中心</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/gift/index.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--    中间主页    -->
+    <div class="content_box">
+
+        <!--   卡片导航   -->
+        <include file="common/host" />
+
+        <!--     游戏礼包，礼包排行，游戏排行     -->
+        <div class="rank_hot_wrap container cf">
+            <div class="type_gift_game fl pr">
+                <div class="title_box cf">
+                    <p class="tit_name fl">游戏礼包</p>
+                </div>
+                <ul class="hot_ul cf">
+                    <foreach name="apk" item="vo">
+                    <li class="sub_gift_game cf fl">
+                        <div class="game_img fl"><img src="/uploads/{$vo.icon}" onclick="location.href='/detail?type=center&id={$vo.id}'"></div>
+                        <div class="hot_content fl">
+                            <p class="sub_hot_name ofh" onclick="location.href='/detail?type=center&id={$vo.id}'">{$vo.title}</p>
+                            <p class="sub_hot_type_box ofh"><span class="sub_hot_type">{$vo.type}</span><span>|</span><span class="sub_hot_big"><?=rand("10","99")?>.<?=rand("00","99")?>MB</span></p>
+                            <p class="operate_btn_box cf"><a href="javascript:void(0);" onclick="verifycookie(this.href);" class="fl">礼包</a></p>
+                        </div>
+                    </li>
+                    </foreach>
+                </ul>
+                <div class="paging">{$page}</div>
+            </div>
+            <include file="common/ranking" />
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script src="<?=JS_PATH?>/index/common/js_cookie.js"></script>
+</body>
+</html>
+<script>
+    function verifycookie(tag) {
+        if(!getCookie("account")){
+            alert("请先登陆");
+            window.location.href='/index/Login/login';
+        }else{
+            window.location.href=tag;
+        }
+    }
+</script>

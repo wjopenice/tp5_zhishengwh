@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>提现系统</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/put_forward.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+
+    <!--  公共导航栏   -->
+    <header class="header" id="header"></header>
+
+    <!--    中间主页    -->
+    <div class="content_box">
+        <div class="uc_wrap container cf">
+            <div class="title_box cf">
+                <p class="tit_name fl">提现系统</p>
+                <p class="sign_out fr" onclick="window.location.href='/put_logout.html'">安全退出</p>
+            </div>
+            <div class="info_box_left fl">
+                <ul>
+                    <li id="essen" class="active"><a class="put_forward" href="/forward.html"><i class="dib"></i><span>提现</span></a></li>
+                    <li id="put"><a class="transaction" href="/forward/list.html?type=list"><i class="dib"></i><span>提现申请记录</span></a></li>
+                    <li id="put2"><a class="transaction" href="/forward/success.html?type=success"><i class="dib"></i><span>提现成功记录</span></a></li>
+                    <li id="put3"><a class="transaction" href="/forward/put_recharge.html"><i class="dib"></i><span>充值记录</span></a></li>
+                    <li id="trans"><a class="select" href="/select.html"><i class="dib"></i><span>订单查询</span></a></li>
+                </ul>
+            </div>
+            <div class="info_content fl">
+                <div id="info_box" class="info_box cf active">
+                    <form action="/forward" method="post">
+                    <div class="account_right fl cf">
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">总提现金额：</div>
+                            <div class="form_text fl"><span id="total_m">{$pay_success_total}</span>元(已扣费率)</div>
+                            <input type="hidden" name="forward_total" value="{$pay_success_total}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">商户号：</div>
+                            <div class="form_text fl">{$arrData['business_id']}</div>
+                            <input type="hidden" name="account" value="{$arrData['business_id']}">
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">提现金额：</div>
+                            <div class="form_input fl"><input type="text" id="money" class="sub_input" name="forward_price" placeholder="请输入金额，金额不能大于总提现金额。" value=""></div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">开户姓名：</div>
+                            <div class="form_input fl"><input type="text" id="bank_name" class="sub_input" name="bank_name" placeholder="黄垂帅" value=""></div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">开户卡号：</div>
+                            <div class="form_input fl"><input type="text" id="bank_id" class="sub_input" name="bank_id" placeholder="6217001590200184635" value=""></div>
+                            <div class="form_other fl"></div>
+                        </div>
+                        <div class="sub_form_box fl cf">
+                            <div class="form_name fl">开户银行：</div>
+                            <div class="form_input fl"><input type="text" id="bank_account" class="sub_input" name="bank_account" placeholder="中国XX银行XX分行" value=""></div>
+                            <div class="form_other fl"></div>
+                        </div>
+                        <div class="sub_form_box put_btn fl">
+                            <input type="submit" value="申请提现">
+                        </div>
+                    </div>
+                    </form>
+                    <div class="text_description fl">
+                        <p class="description_title">提现说明：</p>
+                        <p style="color: #ff948e;">1、*此商户号是您唯一的商户账号且不可修改。</p>
+                        <p style="color: #ff948e;">2、*请填写提现金额且提现金额不能大于总提现金额，填写开户银行卡姓名、银行卡号、开户支行。</p>
+                        <p>3、如需修改基本信息，请致电平台客服，提供身份证号、姓名、手机号、商户号进行验证人工修改。</p>
+                        <p>4、在线客服电话：0755-86659665</p>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer"></div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script src="<?=JS_PATH?>/index/uc/put_forward.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑商户</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+    <!--  内容的整体部分    -->
+    <div class="contentFull">
+        <!-- 搜索引擎部分   -->
+        <div class="content_navBar cf">
+            <p class="fl">我的位置：</p>
+            <p class="fl">商户管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+            <p class="fl col-red">编辑商户</p>
+        </div>
+        <!--  标题   -->
+        <div class="cont_btnLine cf">
+            <p class="fl">编辑商户</p>
+        </div>
+        <form class="addProContent cf">
+            <input type="hidden" name="id" value="{$pro_data.id}">
+            <dl class="cf fl">
+                <dt class="fl"><span class="col-red">*</span>商户号：</dt>
+                <dd class="fl"><input placeholder="请填写商户号" type="text" name="account" disabled value="{$pro_data.account}" class="fl"></dd>
+            </dl>
+            <dl class="cf fl">
+                <dt class="fl"><span class="col-red">*</span>商户名称：</dt>
+                <dd class="fl"><input placeholder="请填写商户名称" name="nickname" type="text" value="{$pro_data.nickname}" class="fl"></dd>
+            </dl>
+            <dl class="cf fl">
+                <dt class="fl"><span class="col-red">*</span>手机号码：</dt>
+                <dd class="fl"><input placeholder="请填写手机号码" name="mobile_phone" type="text" value="{$pro_data.mobile_phone}" class="fl"></dd>
+            </dl>
+            <dl class="cf fl">
+                <dt class="fl"><span class="col-red">*</span>Email：</dt>
+                <dd class="fl"><input placeholder="请填写Email" name="email" type="text" value="{$pro_data.email}" placeholder="Email" class="fl"></dd>
+            </dl>
+            <dl class="cf fl">
+                <dt class="fl"><span class="col-red">*</span>档位：</dt>
+                <dd class="fl">
+                    <select name="level_id" lay-filter="aihao">
+                        <foreach name="$level" item="val">
+                        <option value="{$val.id}" <?php if($pro_data['level_id'] == $val['id']){ echo 'selected';} ?> >{$val.level}</option>
+                        </foreach>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="cf fl">
+                <dt class="fl"><span class="col-red">*</span>结算方式：</dt>
+                <dd class="fl"><input placeholder="请填写结算方式" name="comm_type" type="text" value="{$pro_data.comm_type}" placeholder="结算方式" class="fl"></dd>
+            </dl>
+        </form>
+        <a class="confirmBtn" href="javascript:void(0)" id="add" name="submit">确定</a>
+    </div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+
+<script>
+
+    $("#add").on('click',function(){
+
+        var prompt = checkParamete($(".addProContent").serialize());
+        if(prompt){
+            bombBox.bombBoxError('', prompt);
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            }); 
+            return false;
+        }
+
+        submitAdd('/pay/Administration/edit.html');
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>提现审核记录</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/put_forward.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+
+    <!--    中间主页    -->
+    <div class="content_box">
+        <div class="uc_wrap container">
+            <div class="title_box cf">
+                <p class="tit_name fl">平台总记录</p>
+            </div>
+            <div class="total_box cf">
+                <div class="top_bar_box fl cf">
+                    <div class="top_img fl cf"><img class="fr top_bar_icon1" src="<?=IMG_PATH?>/index/finance/top_bar_icon1.png" alt=""></div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.all_data ? : '0.00'}">￥{$data.all_data ? : '0.00'}</p>
+                        <p class="bar_name" title="平台总充值额">平台总充值额</p>
+                    </div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.today_data ? : '0.00'}">￥{$data.today_data ? : '0.00'}</p>
+                        <p class="bar_name" title="平台总充值额">今日总充值额</p>
+                    </div>
+                </div>
+                <div class="top_bar_box fl cf">
+                    <div class="top_img fl cf"><img class="fr top_bar_icon2" src="<?=IMG_PATH?>/index/finance/top_bar_icon2.png" alt=""></div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.all_with ? : '0.00'}">￥{$data.all_with ? : '0.00'}</p>
+                        <p class="bar_name" title="平台总提现额">平台总提现额(已扣费率)</p>
+                    </div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.today_with ? : '0.00'}">￥{$data.today_with ? : '0.00'}</p>
+                        <p class="bar_name" title="平台总提现额">今日总提现额(已扣费率)</p>
+                    </div>
+                </div>
+                <div class="top_bar_box fl cf">
+                    <div class="top_img fl cf"><img class="fr top_bar_icon3" src="<?=IMG_PATH?>/index/finance/top_bar_icon3.png" alt=""></div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.all_settle ? : '0.00'}">￥{$data.all_settle ? : '0.00'}</p>
+                        <p class="bar_name" title="平台结算额">平台总结算额(已扣费率)</p>
+                    </div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.today_settle ? : '0.00'}">￥{$data.today_settle ? : '0.00'}</p>
+                        <p class="bar_name" title="平台结算额">今日结算额(已扣费率)</p>
+                    </div>
+                </div>
+                <div class="top_bar_box fl cf">
+                    <div class="top_img fl cf"><img class="fr top_bar_icon4" src="<?=IMG_PATH?>/index/finance/top_bar_icon5.png" alt=""></div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.all_profit}">￥{$data.all_profit}</p>
+                        <p class="bar_name" title="平台总利润">平台总利润</p>
+                    </div>
+                    <div class="bar_box fl">
+                        <p class="bar_num ofh" title="￥{$data.today_profit}">￥{$data.today_profit}</p>
+                        <p class="bar_name" title="今日总利润">今日总利润</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uc_wrap container cf">
+            <div class="title_box cf">
+                <p class="tit_name fl">提现结算审核列表</p>
+            </div>
+            <div class="info_content examine_box fl">
+                <div id="query_box" class="query_box info_box active pr">
+                    <div class="record_operation_bar" id="refresh">
+                        <p class="fl recharge_time" style="font-size: 14px;">商户号查询：</p>
+                        <input type="text" id="search" class="fl start_time search_order" style="font-size: 14px;" placeholder="请输入您要查询的商户号！">
+                        <a href="javascript:void(0)" class="fl btn_search" style="font-size: 14px;" onclick="sendData()">搜索</a>
+                    </div>
+                    <div id="pardata" class="form cf">
+                        <ul class="each_line cf fl recharge_ul examine_ul">
+                            <li class="re_li1 fl">序号</li>
+                            <li class="re_li8 fl">商户号</li>
+                            <li class="re_li2 fl">提现金额（元）</li>
+                            <li class="re_li3 fl">提现用户</li>
+                            <li class="re_li4 fl">提现银行</li>
+                            <li class="re_li2 fl">提现卡号</li>
+                            <li class="re_li6 fl">提现时间</li>
+                            <li class="re_li7 fl">提现状态</li>
+                            <li class="re_li1 fl">操作</li>
+                        </ul>
+                        <foreach name="arrData" item="vo" >
+                        <ul class="each_line cf fl recharge_ul examine_ul sdata">
+                            <li class="re_li1 fl ofh" title="{$vo.id}">{$vo.id}</li>
+                            <li class="re_li8 fl ofh" title="{$vo.account}">{$vo.account}</li>
+                            <li class="re_li2 fl ofh" title="{$vo.forward_price}">{$vo.forward_price}</li>
+                            <li class="re_li3 fl ofh" title="{$vo.bank_name}">{$vo.bank_name}</li>
+                            <li class="re_li4 fl ofh" title="{$vo.bank_account}">{$vo.bank_account}</li>
+                            <li class="re_li2 fl ofh" title="{$vo.bank_id}">{$vo.bank_id}</li>
+                            <li class="re_li6 fl ofh" title="{$vo.forward_time|date='Y年m月d日',###}">{$vo.forward_time|date='Y年m月d日',###}</li>
+                            <li class="re_li7 fl ofh"><?php if($vo['forward_status'] == 0){echo "<span style='color:#ff6b63;'>提现申请中</span>";}else{echo "<span style='color: #48f396;'>提现成功</span>";}?></li>
+                            <li class="re_li1 fl ofh"><a class="examine_edit" href="/forward_edit.html?id={$vo.id}">审核</a></li>
+                        </ul>
+                        </foreach>
+                    </div>
+                    <div class="paging">{$page}</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>
+<script>
+function sendData() {
+    var search = $("#search").val();
+    $.post("/forward_search.html",{d:search},function (msg){
+        $(".sdata").remove();
+        var strdata = "";
+        var msgJson = eval('('+msg+')');
+        for(var i=0;i<msgJson.length;i++){
+            strdata += "<ul class='each_line cf fl recharge_ul examine_ul sdata'>";
+            strdata += "<li class='re_li1 fl ofh' title='"+msgJson[i].id+"'>"+msgJson[i].id+"</li>";
+            strdata += "<li class='re_li8 fl ofh' title='"+msgJson[i].account+"'>"+msgJson[i].account+"</li>";
+            strdata += "<li class='re_li2 fl ofh' title='"+msgJson[i].forward_price+"'>"+msgJson[i].forward_price+"</li>";
+            strdata += "<li class='re_li3 fl ofh' title='"+msgJson[i].bank_name+"'>"+msgJson[i].bank_name+"</li>";
+            strdata += "<li class='re_li4 fl ofh' title='"+msgJson[i].bank_account+"'>"+msgJson[i].bank_account+"</li>";
+            strdata += "<li class='re_li2 fl ofh' title='"+msgJson[i].bank_id+"'>"+msgJson[i].bank_id+"</li>";
+            strdata += "<li class='re_li6 fl ofh' title='"+msgJson[i].forward_time+"'>"+fmtDate(msgJson[i].forward_time)+"</li>";
+            if(msgJson[i].forward_status == 0){
+                strdata += "<li class='re_li7 fl ofh'><span style='color:#ff6b63;'>提现申请中</span></li>";
+            }else{
+                strdata += "<li class='re_li7 fl ofh'><span style='color:#48f396;'>提现成功</span></li>";
+            }
+            strdata += "<li class='re_li1 fl ofh'><a class='examine_edit' href='/forward_edit.html?id="+msgJson[i].id+"'>审核</a></li>";
+            strdata += "</ul>";
+        }
+        $(strdata).appendTo($("#pardata"));
+        $("<a href='/forward_list.html' class='fl btn_search' style='font-size: 14px;margin-left: 20px;'>刷新</a>").appendTo($("#refresh"));
+    },"json");
+}
+
+function fmtDate(obj){
+    var timeObj = obj*1000;
+    var date =  new Date(timeObj);
+    var y = 1900+date.getYear();
+    var m = "0"+(date.getMonth()+1);
+    var d = "0"+date.getDate();
+    return y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length)+"日";
+
+}
+</script>

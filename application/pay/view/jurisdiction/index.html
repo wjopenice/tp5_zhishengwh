@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+    <script src="<?=JS_PATH?>/pay/power/manager.js"></script>
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">权限管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">权限列表</p>
+    </div>
+    <!-- 表格部分  -->
+    <div id="side_con">
+        <div class="cont_btnLine cf">
+            <p class="fl">权限列表</p>
+            <a class="fr btn_orange " href="javascript:window.parent.window.f_addTab('addPower','添加权限','/pay/Jurisdiction/add')">新增权限</a>
+        </div>
+        <!--   表格   -->
+        <div id="sheet" class="comfirm_pro"></div>
+    </div>
+</div>
+</body>
+</html>

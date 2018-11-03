@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>订单查询</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/uc/put_forward.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+<!--  公共导航栏   -->
+<header class="header" id="header"></header>
+
+<!--    中间主页    -->
+<div class="content_box">
+    <div class="uc_wrap container cf">
+        <div class="title_box cf">
+            <p class="tit_name fl">提现系统</p>
+            <p class="sign_out fr" onclick="window.location.href='/put_logout.html'">安全退出</p>
+        </div>
+        <div class="info_box_left fl">
+            <ul>
+                <li id="essen"><a class="put_forward" href="/forward.html"><i class="dib"></i><span>提现</span></a></li>
+                <li id="put"><a class="transaction" href="/forward/list.html?type=list"><i class="dib"></i><span>提现申请记录</span></a></li>
+                <li id="put2"><a class="transaction" href="/forward/success.html?type=success"><i class="dib"></i><span>提现成功记录</span></a></li>
+                <li id="put3" class="active"><a class="transaction" href="/forward/put_recharge.html"><i class="dib"></i><span>充值记录</span></a></li>
+                <li id="trans"><a class="select" href="/select.html"><i class="dib"></i><span>订单查询</span></a></li>
+            </ul>
+        </div>
+        <div class="info_content fl">
+            <div id="query_box" class="query_box info_box active pr">
+                <div class="record_operation_bar">
+                    <p class="fl recharge_time">充值时间：</p>
+                    <input type="date" class="fl start_time" max="" placeholder="开始时间">
+                    <p class="fl time_interval"> -- </p>
+                    <input type="date" class="fl end_time" min="" placeholder="结束时间">
+                    <a href="javascript:void(0)" class="fl btn_search" style="margin-left: 10px;">搜索</a>
+                </div>
+                <div class="form cf">
+                    <ul class="each_line cf fl recharge_ul">
+                        <li class="ge_li1 fl">订单号</li>
+                        <li class="ge_li2 fl">充值金额</li>
+                        <li class="ge_li3 fl">平台费率</li>
+                        <li class="ge_li4 fl">提现金额</li>
+                        <li class="ge_li5 fl">支付时间</li>
+                        <li class="ge_li6 fl">支付状态</li>
+                    </ul>
+                    <foreach name="pay_data" item="vo">
+                        <ul class="each_line cf fl recharge_ul">
+                            <li class="ge_li1 fl ofh" title="{$vo.order_number}">{$vo.order_number}</li>
+                            <li class="ge_li2 fl ofh" title="{$vo.pay_amount}">{$vo.pay_amount}</li>
+                            <li class="ge_li3 fl ofh" title="{$vo.revenue}">{$vo.revenue}</li>
+                            <li class="ge_li4 fl ofh" title="{$vo.actual_amount}">{$vo.actual_amount}</li>
+                            <li class="ge_li5 fl ofh" title="{$vo.create_time|date='Y年m月d日',###}">{$vo.create_time|date="Y年m月d日",###}</li>
+                            <li class="ge_li6 fl ofh">
+                                <?php if($vo['pay_status'] == 0){echo "<span style='color:#ff6b63;'>未支付</span>";}else{echo "<span style='color: #48f396;'>支付成功</span>";}?>
+                            </li>
+                        </ul>
+                    </foreach>
+                </div>
+                <div class="paging">{$page}</div>
+            </div>
+        </div>
+    </div>
+
+    <!--   公共底部    -->
+    <div id="footer"></div>
+</div>
+<script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>
+<script>
+    function sendData() {
+        var searchData = $("#search").val();
+        $.post("/select.html",{d:searchData},function (msg) {
+            var msgJson = eval('('+msg+')');
+            $("#order_number").html(msgJson.order_number);
+            $("#promote_account").html(msgJson.promote_account);
+            $("#pay_amount").html(msgJson.pay_amount+"元");
+            $("#create_time").html(fmtDate(msgJson.create_time));
+            if(msgJson.pay_status == 0){
+                $("#pay_status").html("<span style='color: red;'>未支付</span>");
+            }else{
+                $("#pay_status").html("<span style='color: green;'>已支付</span>");
+            }
+        },"json");
+    }
+    function fmtDate(obj){
+        var timeObj = obj*1000;
+        var date =  new Date(timeObj);
+        var y = 1900+date.getYear();
+        var m = "0"+(date.getMonth()+1);
+        var d = "0"+date.getDate();
+        return y+"年"+m.substring(m.length-2,m.length)+"月"+d.substring(d.length-2,d.length)+"日";
+
+    }
+</script>

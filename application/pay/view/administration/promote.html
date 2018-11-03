@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商户列表</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+    <script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+    <script src="<?=JS_PATH?>/pay/common/public.js"></script>
+    <script src="<?=JS_PATH?>/pay/buss/list.js"></script>
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">商户管理&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">商户列表</p>
+    </div>
+    <!--  条件筛选   -->
+    <form id="">
+        <div class="content_search cf ">
+            <div class="cont_btnLine cf">
+                <p class="fl">查询</p>
+            </div>
+            <div class="cf search_all">
+                <div class="search_line fl cf">
+                    <div class="fl each_search cf">
+                        <p class="fl search_name">商户号：</p>
+                        <input class="comInp" name="account" type="text" placeholder="请输入商户号">
+                    </div>
+                    <div class="fl each_search cf">
+                        <p class="fl search_name">商户名称：</p>
+                        <input class="comInp" name="nickname" type="text" placeholder="请输入商户名称">
+                    </div>
+                    <input class="search_btn reset-btn fr" type="reset"  value="重置">
+                    <input class="search_btn fr" type="button" id="search" value="查询">
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- 表格部分  -->
+    <div id="side_con">
+        <div class="cont_btnLine cf">
+            <p class="fl">商户列表</p>
+            <a class="fr btn_orange" href="javascript:window.parent.window.f_addTab('addBuss','添加商户','/pay/Administration/addpro.html')">添加</a>
+        </div>
+        <!--   表格   -->
+        <div id="sheet" class="comfirm_pro"></div>
+    </div>
+</div>
+</body>
+</html>

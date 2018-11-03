@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现审核</title>
+    <link rel="stylesheet" href="<?=JS_PATH?>/pay/common/ligerUI/skins/Aqua/css/ligerui-all.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/pay/common/page.css">
+</head>
+<body>
+<!--  内容的整体部分    -->
+<div class="contentFull">
+    <!-- 搜索引擎部分   -->
+    <div class="content_navBar cf">
+        <p class="fl">我的位置：</p>
+        <p class="fl">提现审核&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+        <p class="fl col-red">提现审核</p>
+    </div>
+    <!--  标题   -->
+    <div class="cont_btnLine cf">
+        <p class="fl">提现审核</p>
+    </div>
+    <form class="addProContent cf">
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>商户号：</dt>
+            <dd class="fl"><input placeholder="请填写商户号" type="text" name="account" value="{$data.account}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>商户名称：</dt>
+            <dd class="fl"><input placeholder="请填写商户名称" type="text" name="nickname"  value="{$data.nickname}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>提现金额：</dt>
+            <dd class="fl"><input placeholder="请填写提现金额" type="text" name="money"  value="{$data.money}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>提现费率：</dt>
+            <dd class="fl"><input placeholder="请填写提现费率" type="text" name="rate"  value="{$data.rate}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>实际到帐金额：</dt>
+            <dd class="fl"><input placeholder="请填写实际到帐金额" type="text" name="actual_money"  value="{$data.actual_money}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>提现银行：</dt>
+            <dd class="fl"><input placeholder="请填写提现银行" type="text" name="bank_name"  value="{$data.bank_name}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>卡号：</dt>
+            <dd class="fl"><input placeholder="请填写卡号" type="text" name="bank_number"  value="{$data.bank_number}" disabled class="fl"></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>持卡人姓名：</dt>
+            <dd class="fl"><input placeholder="请填写持卡人姓名" type="text" name="bank_user"  value="{$data.bank_user}" class="fl" disabled></dd>
+        </dl>
+        <input type="hidden" name="pid" value="{$data.promote_id}">
+        <input type="hidden" name="id" value="{$data.id}">
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>开户城市：</dt>
+            <dd class="fl"><input placeholder="请填写开户城市" type="text" name="bank_city"  value="{$data.bank_city}" class="fl" disabled></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>开户支行：</dt>
+            <dd class="fl"><input placeholder="请填写开户支行" type="text" name="sub_branch"  value="{$data.sub_branch}" class="fl" disabled></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>预留手机：</dt>
+            <dd class="fl"><input placeholder="请填写预留手机" type="text" name="bank_phone"  value="{$data.bank_phone}" class="fl" disabled></dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>审核：</dt>
+            <dd class="fl">
+                <select name="status">
+                    <option value="0" <?php if($data['bstatus'] == 0){echo 'selected';} ?> >-------- 待审核 ---------</option>
+                    <option value="1" <?php if($data['bstatus'] == 1){echo 'selected';} ?> >-------- 审核不通过 -------</option>
+                    <option value="2" <?php if($data['bstatus'] == 2){echo 'selected';} ?> >-------- 审核通过 --------</option>
+                    <option value="3" <?php if($data['bstatus'] == 3){echo 'selected';} ?> >-------- 打款中 ----------</option>
+                    <option value="4" <?php if($data['bstatus'] == 4){echo 'selected';} ?> >-------- 提现完成 --------</option>
+                </select>
+            </dd>
+        </dl>
+        <dl class="cf fl">
+            <dt class="fl"><span class="col-red">*</span>备注：</dt>
+            <dd class="fl">
+                <textarea name="remark" class="fl remark" placeholder="请填写备注">{$data.remark}</textarea>
+            </dd>
+        </dl>
+    </form>
+    <a class="confirmBtn" href="javascript:void(0)" id="add" name="submit">确定</a>
+</div>
+<script src="<?=JS_PATH?>/pay/common/jquery.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/core/base.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerAccordion.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerLayout.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerTab.js"></script>
+<script src="<?=JS_PATH?>/pay/common/ligerUI/js/plugins/ligerGrid.js"></script>
+<script src="<?=JS_PATH?>/pay/common/dialog.js"></script>
+<script src="<?=JS_PATH?>/pay/common/public.js"></script>
+<script>
+
+    $("#add").on('click',function(){
+
+        var prompt = checkParamete($(".addProContent").serialize());
+        console.log(prompt);
+        if(prompt){
+            bombBox.bombBoxError('', prompt);
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            }); 
+            return false;
+        }
+        if(!$("select[name=status]").val()){
+            bombBox.bombBoxError('', '请选择审核结果');
+            $("#confirm").on("click",function(){
+                bombBox.bombBoxColse($(".pub_bBox"));
+            });
+            return false;
+        }
+
+        submitAdd('/pay/Examine/withauth');
+
+    });
+</script>
+</body>
+</html>

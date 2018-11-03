@@ -1,0 +1,49 @@
+<include file="common/header" title="商户管理-充值详情" />
+<link rel="stylesheet" href="<?=CSS_PATH?>/mobile/buss/rechargeDetail.css">
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav">
+                <a class="icon icon-me pull-left open-panel" id="slideBtn"></a>
+                <h1 class="title"><img class="logo" src="<?=IMG_PATH?>/mobile/common/logo.png" alt=""></h1>
+            </header>
+            <div class="content">
+                <!-- 面包屑 -->
+                <div class="crumbs"><a href="javascript:void(0);">商户管理&nbsp;>&nbsp;</a><a href="javascript:void(0);">商户详情&nbsp;>&nbsp;</a><a href="javascript:void(0);" onClick="javascript :history.back(-1);" external>充值详情 ✕</a></div>
+                <!-- 今日充值 -->
+                <div class="orderTodayWrap cf">
+                    <p class="indexTit fl">今日充值额</p>
+                    <div class="indexCon fl cf">
+                        <div class="subBlock fl"><p class="blockName">PC</p><p class="blockNum ofh">{$data.recharge.pc ? : '0.00'}</p></div>
+                        <div class="subBlock fl"><p class="blockName">H5支付宝</p><p class="blockNum ofh">{$data.recharge.h5alipay ? : '0.00'}</p></div>
+                        <div class="subBlock fl"><p class="blockName">H5微信</p><p class="blockNum ofh">{$data.recharge.h5wecatpay ? : '0.00'}</p></div>
+                    </div>
+                </div>
+                <!-- PC充值 -->
+                <div class="crumbs set-bar"><a href="javascript:void(0);">PC充值</a></div>
+                <div class="recharge-box">
+                    <div class="recharge-top cf"><p class="fl ofh">充值额</p><p class="fl ofh">结算额</p><p class="fl ofh">未结算额</p><p class="fl ofh">提现额</p><p class="fl ofh">未提现额</p></div>
+                    <div class="recharge-bottom cf"><p class="fl ofh">{$data.recharge.pc ? : '0.00'}</p><p class="fl ofh">{$data.sett.already.pc ? : '0.00'}</p><p class="fl ofh">{$data.sett.not.pc ? : '0.00'}</p><p class="fl ofh">{$data.with.already.pc ? : '0.00'}</p><p class="fl ofh">{$data.with.not.pc ? : '0.00'}</p></div>
+                </div>
+                <!-- H5支付宝充值 -->
+                <div class="crumbs set-bar"><a href="javascript:void(0);">H5支付宝充值</a></div>
+                <div class="recharge-box">
+                    <div class="recharge-top cf"><p class="fl ofh">充值额</p><p class="fl ofh">结算额</p><p class="fl ofh">未结算额</p><p class="fl ofh">提现额</p><p class="fl ofh">未提现额</p></div>
+                    <div class="recharge-bottom cf"><p class="fl ofh">{$data.recharge.h5alipay ? : '0.00'}</p><p class="fl ofh">{$data.sett.already.h5_alipay ? : '0.00'}</p><p class="fl ofh">{$data.sett.not.h5_alipay ? : '0.00'}</p><p class="fl ofh">{$data.with.already.h5_alipay ? : '0.00'}</p><p class="fl ofh">{$data.with.not.h5_alipay ? : '0.00'}</p></div>
+                </div>
+                <!-- H5微信充值 -->
+                <div class="crumbs set-bar"><a href="javascript:void(0);">H5微信充值</a></div>
+                <div class="recharge-box">
+                    <div class="recharge-top cf"><p class="fl ofh">充值额</p><p class="fl ofh">结算额</p><p class="fl ofh">未结算额</p><p class="fl ofh">提现额</p><p class="fl ofh">未提现额</p></div>
+                    <div class="recharge-bottom cf"><p class="fl ofh">{$data.recharge.h5wecatpay ? : '0.00'}</p><p class="fl ofh">{$data.sett.already.h5_wetch ? : '0.00'}</p><p class="fl ofh">{$data.sett.not.h5_wetch ? : '0.00'}</p><p class="fl ofh">{$data.with.already.h5_wetch ? : '0.00'}</p><p class="fl ofh">{$data.with.not.h5_wetch ? : '0.00'}</p></div>
+                </div>
+                <!-- 总充值 -->
+                <div class="crumbs set-bar"><a href="javascript:void(0);">总充值</a></div>
+                <div class="recharge-box">
+                    <div class="recharge-top cf"><p class="fl ofh">充值额</p><p class="fl ofh">结算额</p><p class="fl ofh">未结算额</p><p class="fl ofh">提现额</p><p class="fl ofh">未提现额</p></div>
+                    <div class="recharge-bottom cf"><p class="fl ofh">{$data.paytotal ? : '0.00'}</p><p class="fl ofh">{$data.all_rech_money ? : '0.00'}</p><p class="fl ofh">{$data.not_rech_money ? : '0.00'}</p><p class="fl ofh">{$data.all_with_money ? : '0.00'}</p><p class="fl ofh">{$data.not_with_money.not_money ? : '0.00'}</p></div>
+                </div>
+                <a class="return-btn" href="javascript:void(0);" onClick="javascript :history.back(-1);">返回</a>
+            </div>
+        </div>
+    </div>
+<include file="common/footer" />

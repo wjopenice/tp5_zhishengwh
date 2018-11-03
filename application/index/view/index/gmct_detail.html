@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>游戏详情</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/gmct/detail.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--   中间主页   -->
+    <div class="content_box">
+
+        <!--   游戏详情   -->
+        <div class="detail_wrap container">
+
+            <!-- 游戏详情面包屑 -->
+            <div class="customer_crumbs">
+                <span>当前位置&nbsp;</span>
+                <a href="javascript:;">-&nbsp;游戏中心&nbsp;-</a>
+                <a href="javascript:;" id="active_problem">&nbsp;{$apz.title}</a>
+            </div>
+
+            <!--     游戏详情     -->
+            <div class="rank_hot_wrap container cf">
+                <div class="type_news_game fl pr">
+                    <div class="game_download pr">
+                        <img src="/uploads/{$apz.icon}" class="game_head fl"/>
+                        <div class="download_des">
+                            <h2 class="game_name_d">{$apz.title}</h2>
+                            <p class="mark">评分：<span class="score pr"><span style="width:94%"></span></span></p>
+                            <div class="game_info">
+                                游戏类型：<span class="online"><span class="game-type">{$apz.type}</span></span>
+                                大小：<span class="game-size"><?=rand("10","99")?>.<?=rand("00","99")?>MB</span><br>
+                                更新时间：<span class="update-time"><?=date('Y-m-d H:i:s')?></span>
+                                系统要求：<span class="system">安卓</span>
+                            </div>
+                            <a href="{$apz.addr_url}" target="_blank" class="down_com"></a>
+                            <div class="code_down">
+                                <img src="/public/qrcode/{$apz.addr_code}" alt="">
+                                <p>扫一扫下载</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game_wrap">
+                        <div class="game_tab cf">
+                            <p id="tap_detail" class="active fl">游戏详情</p>
+                            <p id="tap_gift" class="fl">游戏礼包</p>
+                        </div>
+                        <div class="game_detail pr">
+                            <div id="detail_box" class="slide slide-box active">
+                                <ul class="slide-content">
+                                    <li style="background:url(/uploads/{$apz.pic});background-size: 226px 330px;"><a href="javascript:void(0)" target="_blank"></a></li>
+                                    <li style="background:url(/uploads/{$apz.pic});background-size: 226px 330px;"><a href="javascript:void(0)" target="_blank"></a></li>
+                                    <li style="background:url(/uploads/{$apz.pic});background-size: 226px 330px;"><a href="javascript:void(0)" target="_blank"></a></li>
+                                </ul>
+                                <div class="slide-btns">
+                                    <div class="prev-slide"></div>
+                                    <div class="next-slide"></div>
+                                </div>
+                            </div>
+                            <div id="gift_box" class="slide game_gift_box">
+                                <ul class="gift_list cf">
+                                    <?php foreach($gift['gamegift']['info'] as $k=>$gv): ?>
+                                    <li class="fl">
+                                        <h5 id="gift_title">{$gv['0']}</h5>
+                                        <p class="gift_text ofh" title="{$gv['1']}">{$gv['1']}</p>
+                                        <div class="receive_state cf">
+                                            <p class="fl">{$gv['2']}至{$gv['3']}</p>
+                                            <present name="$giftArr">
+                                                <?php
+                                                $color = 'un_received';
+                                                $x = '领取';
+                                                $eventcl = 'cart(this);';
+                                                for($i=0;$i<count($giftArr);$i++){
+                                                    if($giftArr[$i] == $gv['0']){
+                                                        $x = '已领取';
+                                                        $color = 'already_received';
+                                                        $eventcl = '';
+                                                    }
+                                                }
+                                                ?>
+                                                <a class="fr <?=$color?>" href="javascript:void(0);" onclick="<?=$eventcl?>"><?=$x?></a>
+                                            <else />
+                                                <a class='fr un_received' href='javascript:void(0);' onclick='cart(this);'>领取</a>
+                                            </present>
+
+                                        </div>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+
+                                <img class="dib hide" src="<?=IMG_PATH?>/index/common/rank/game_gift.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game_text">
+                        <h1 class="pr"><span></span>游戏详情</h1>
+                        <p>{$apz.info}</p>
+                    </div>
+                </div>
+                
+
+                <!--    游戏排行    -->
+                <include file="common/ranking" />
+            </div>
+
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/jquery.ext.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script src="<?=JS_PATH?>/index/gmct_detail/index.js"></script>
+    <script src="<?=JS_PATH?>/index/common/js_cookie.js"></script>
+</body>
+</html>
+<script>
+    $(function(){
+        load_url();
+        //分页后获取
+        $(document).on('click',".game_tab p",function(){
+            load_url();
+        });
+
+        //tab切换
+        $(".game_tab p").click(function(){
+            var index = $(this).index();
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".game_detail .slide").eq(index).addClass('active').siblings().removeClass('active');
+            if($(this).text() == "游戏详情"){
+                window.location.href = '/detail?type=center&id={$apz.id}#1';
+            }else{
+                window.location.href = '/detail?type=center&id={$apz.id}#2';
+            }
+        });
+    });
+
+    function cart(tag) {
+        if(!getCookie("account")){
+            alert("请先登陆");
+            window.location.href='/index/Login/login';
+        }else{
+            if(tag.innerHTML == '领取'){
+                var user = getCookie("account");
+                var game = "{$apz.title}";
+                var gift = $(tag).parent().prevAll("h5").html();
+                $.get("/index/Index/ajaxgift",{u:user,g:game,f:gift},function(msg){
+                    tag.setAttribute("class","fr already_received");
+                    tag.innerHTML = "已领取";
+                },"json");
+            }
+        }
+    }
+
+    function load_url(){
+        var url = window.location.href;
+        var index = url.substring(url.indexOf("#")+1);
+        if(index == '1'){
+            $("#tap_detail").addClass('active');
+            $("#tap_gift").removeClass('active');
+            $("#detail_box").addClass('active');
+            $("#gift_box").removeClass('active');
+        }else{
+            $("#tap_gift").addClass('active');
+            $("#tap_detail").removeClass('active');
+            $("#gift_box").addClass('active');
+            $("#detail_box").removeClass('active');
+        }
+    }
+</script>

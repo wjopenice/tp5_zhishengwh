@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>搜索</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/search/index.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--   中间主页    -->
+    <div class="content_box">
+        <!--   搜索内容   -->
+        <div class="search_wrap container">
+            <div class="title_box cf">
+                <p class="tit_name fl">游戏分类</p>
+            </div>
+            <div class="classify_box cf" id="classify_box">
+                <volist name="apk" id="vo">
+                    <?php if( !empty($datastr->items()) && ($vo['id'] == $datastr[0]['t_id'])  ): ?>
+                        <span class="fl current">{$vo.type}</span>
+                    <?php else: ?>
+                        <span class="fl">{$vo.type}</span>
+                    <?php endif; ?>
+                </volist>
+            </div>
+            <?php if(!empty($datastr->items())): ?>
+            <ul class="hot_ul cf pr" id="hot_ul" style="min-height: 450px;">
+            <?php else: ?>
+            <ul class="hot_ul cf pr" id="hot_ul" style="min-height: 0px;">
+            <?php endif; ?>
+                <volist name="datastr" id="vo2">
+                <li class="sub_hot_gift cf"> 
+                    <div class="game_img fl"><img src="/uploads/{$vo2.icon}" onclick="location.href='/detail?type=center&id={$vo2.id}'"></div>
+                    <div class="hot_content fl">
+                        <p class="sub_gift_name ofh" onclick="location.href='/detail?type=center&id={$vo2.id}'">{$vo2.title}</p>
+                        <p class="sub_hot_gift_box ofh">新手礼包</p>
+                        <p class="search_btn_box cf">
+                            <a href="{$vo2.addr_code}" class="btn_down_hot fl">下载</a>
+                            <a href="javascript:void(0)" onclick="gift();" class="fl">礼包</a>
+                        </p>
+                    </div>
+                </li>
+                </volist>
+            </ul>
+            <?php if(!empty($datastr->items())): ?>
+                <div id="nothing" class="nothing" hidden>
+                    <img class="dib" src="<?=IMG_PATH?>/index/search/nothing.png" alt="">
+                </div>
+            <?php else: ?>
+                <div id="nothing" class="nothing">
+                    <img class="dib" src="<?=IMG_PATH?>/index/search/nothing.png" alt="">
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+</body>
+</html>
+<script>
+    $(function () {
+        $("#classify_box span").click(function () {
+            var data = $(this).text();
+
+            $.get("/centerajax",{d:data},function (msg) {
+                $("#hot_ul").empty();
+                if(msg.datastr.data.length == 0){
+                    $("#nothing").removeAttr('hidden');
+                    $("#hot_ul").css("min-height","0");
+                }else{
+                    xmlstr ="";
+                    for(var i=0;i<msg.datastr.data.length;i++){
+                        xmlstr +="<li class='sub_hot_gift cf' onclick='window.location.href=\"/detail?type=center&id="+msg.datastr.data[i].id+"\"'>";
+                        xmlstr +="<div class='game_img fl'><img src='/uploads/"+msg.datastr.data[i].icon+"'></div>";
+                        xmlstr +="<div class='hot_content fl'>";
+                        xmlstr +="<p class='sub_gift_name ofh'>"+msg.datastr.data[i].title+"</p>";
+                        xmlstr +="<p class='sub_hot_gift_box ofh'>新手礼包</p>";
+                        xmlstr +="<p class='search_btn_box cf'>";
+                        xmlstr +="<a href='"+msg.datastr.data[i].addr_code+"' class='btn_down_hot fl'>下载</a>";
+                        xmlstr +="<a href='javascript:void(0);' onclick='gift();' class='fl'>礼包</a>";
+                        xmlstr +="</p>";
+                        xmlstr +="</div>";
+                        xmlstr +="</li>";
+                    }
+                    if(msg.page != null){ xmlstr +="<div class='paging'>"+msg.page+"</div>"; }
+                    $("#nothing").attr('hidden','hidden');
+                    $("#hot_ul").css("min-height","450px");
+                    $(xmlstr).appendTo($("#hot_ul"));
+                }
+
+            },"json");
+        });
+
+
+
+    });
+</script>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>客服中心-详情</title>
+    <meta name="description" content="致晟游戏科技">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/base.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/public.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/index/index.css">
+    <link rel="stylesheet" href="<?=CSS_PATH?>/index/customer/index.css">
+    <link rel="icon" href="/favicon.ico">
+</head>
+<body class="homeMain">
+    <!--  公共导航栏   -->
+    <header class="header" id="header">
+        <include file="common/header" />
+    </header>
+
+    <!--    中间主页    -->
+    <div class="content_box">
+
+        <div class="info_wrap container cf">
+            <!-- 客服详情面包屑 -->
+            <div class="customer_crumbs">
+                <span>当前位置&nbsp;</span>
+                <a href="javascript:;">-&nbsp;客服中心&nbsp;-</a>
+                <a href="javascript:;" id="active_problem">&nbsp;密码问题</a>
+            </div>
+
+            <!-- tap切换 -->
+            <ul class="guide_ul dib pr fl">
+                <foreach name="issue_type" item="vo">
+                <li class="pr guide_li_button{$vo.id} on" ext="{$vo.id}">
+                    <div class="dib problem">{$vo.type}</div>
+                    <span class="line dib"></span><span class="circular dib"></span>
+                </li>
+                </foreach>
+                <div class="guide_icon"></div>
+            </ul>
+            <div class="tap dib fl">
+                <div class="tap_box tab_box1 pwd_problem on">
+                    <div class="title_box cf">
+                        <p class="tit_name fl" id="issue_typex">密码问题</p>
+                    </div>
+                    <div class="all_problem">
+                        <foreach name="issue" item="voli">
+                        <div class="problem_text">
+                            <p class="problem_text_title">Q: {$voli.title}</p>
+                            <p class="answer">{$voli.info}</p>
+                        </div>
+                        </foreach>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--   公共底部    -->
+        <div id="footer">
+            <include file="common/footer" />
+        </div>
+
+    </div>
+    <script src="<?=JS_PATH?>/index/common/jquery.js"></script>
+    <script src="<?=JS_PATH?>/index/common/public.js"></script>
+    <script src="<?=JS_PATH?>/index/customerinfo/index.js"></script>
+</body>
+</html>
